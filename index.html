@@ -1,16 +1,21 @@
 <!DOCTYPE html>
-<html lang="en" class="bg-black text-white scroll-smooth selection:bg-orange-600 selection:text-black">
+<html lang="en" class="bg-black text-white scroll-smooth selection:bg-neonYellow selection:text-black">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfolio | Creative Identity & Craft</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+    
     <script>
         tailwind.config = {
             theme: {
                 extend: {
-                    colors: { oled: '#000000', neonOrange: '#FF5F1F' },
-                    fontFamily: { ndot: ['Courier New', 'Courier', 'monospace'] }
+                    colors: { 
+                        oled: '#000000', 
+                        neonYellow: '#CCFF00' /* Neon Yellow */
+                    }, 
                 }
             }
         }
@@ -20,48 +25,44 @@
         ::-webkit-scrollbar { display: none; }
         * { -ms-overflow-style: none; scrollbar-width: none; }
         
+        /* Dot Matrix Font Class */
+        .font-ndot { font-family: 'VT323', monospace; letter-spacing: 0.1em; }
+        
         /* Premium Custom Interactive Cursor */
         .custom-cursor {
-            width: 20px; height: 20px; border: 2px solid #FF5F1F; border-radius: 50%;
+            width: 20px; height: 20px; border: 2px solid #CCFF00; border-radius: 50%;
             position: fixed; transform: translate(-50%, -50%); pointer-events: none; z-index: 9999;
             transition: width 0.2s, height 0.2s, background-color 0.2s;
         }
-        .custom-cursor-grow { width: 50px; height: 50px; background-color: rgba(255, 95, 31, 0.15); border-color: #FF5F1F; }
-        
-        /* Subtle Technical Background Layer */
-        .topo-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; opacity: 0.15; pointer-events: none; }
+        .custom-cursor-grow { width: 50px; height: 50px; background-color: rgba(204, 255, 0, 0.15); border-color: #CCFF00; }
     </style>
 </head>
 <body class="bg-oled text-gray-100 overflow-x-hidden antialiased">
 
-    <!-- Interactive Cursor Dot -->
+    <canvas id="topo-canvas" class="fixed top-0 left-0 w-full h-full z-[-1] opacity-20 pointer-events-none"></canvas>
+
+    <div id="loader" class="fixed inset-0 bg-black z-[100] flex items-center justify-center text-neonYellow font-ndot text-3xl transition-opacity duration-500">
+        LOADING_DATA...
+    </div>
+
     <div class="custom-cursor" id="js-cursor"></div>
 
-    <!-- Ambient Digital Canvas Background -->
-    <svg class="topo-canvas" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
-        <g fill="none" stroke="#FF5F1F" stroke-width="1.5">
-            <path d="M-100,100 C100,120 200,80 300,150 C400,220 250,350 450,400 C650,450 700,300 900,350" class="animate-pulse" style="animation-duration: 4s;"/>
-        </g>
-    </svg>
-
-    <!-- Global Navigation Header -->
     <header class="fixed top-0 left-0 w-full z-50 bg-oled/60 backdrop-blur-md border-b border-white/5 transition-all duration-300">
         <nav class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-            <a href="index.html" class="hover-target font-ndot font-bold text-xl text-white tracking-widest flex items-center gap-2">
-                <span class="text-neonOrange">■</span> PORTFOLIO
+            <a href="index.html" class="hover-target font-ndot font-bold text-xl text-white tracking-widest flex items-center gap-4">
+                <img src="assets/logo.png" alt="Logo" class="h-8 object-contain">
+                PORTFOLIO
             </a>
-            <div class="flex items-center space-x-8 text-sm font-medium tracking-wider uppercase">
-                <a href="index.html" class="hover-target text-neonOrange transition-colors">Home</a>
+            <div class="flex items-center space-x-8 text-sm font-medium tracking-wider uppercase font-ndot">
+                <a href="index.html" class="hover-target text-neonYellow transition-colors">Home</a>
                 <a href="about.html" class="hover-target text-gray-400 hover:text-white transition-colors">About</a>
-                <a href="contact.html" class="hover-target text-gray-400 hover:text-white transition-colors">Contact</a>
             </div>
         </nav>
     </header>
 
-    <!-- Hero Section Area -->
     <section class="min-h-screen flex flex-col justify-center px-6 max-w-7xl mx-auto pt-20">
         <div class="max-w-4xl">
-            <span class="font-ndot text-neonOrange text-xs uppercase tracking-widest block mb-3">POST-PRODUCTION // IMAGERY</span>
+            <span class="font-ndot text-neonYellow text-sm uppercase tracking-widest block mb-3">POST-PRODUCTION // IMAGERY</span>
             <h1 class="text-5xl md:text-8xl font-black uppercase tracking-tight leading-none mb-6">
                 RAW DATA.<br><span class="text-transparent bg-clip-text bg-gradient-to-r from-neutral-200 to-neutral-500">DISRUPTIVE CUTS.</span>
             </h1>
@@ -69,78 +70,60 @@
                 A digital workspace housing uncompromised visual systems, high-fidelity color grading sequences, and custom media edits built for modern branding demands.
             </p>
             <div class="flex items-center gap-6">
-                <a href="#work" class="hover-target inline-block bg-white text-black font-ndot text-xs font-bold uppercase tracking-widest px-8 py-4 border border-white hover:bg-transparent hover:text-white transition-all duration-300">Explore System</a>
-                <a href="contact.html" class="hover-target inline-block text-white font-ndot text-xs uppercase tracking-widest px-4 py-4 hover:text-neonOrange transition-all duration-300">Secure Direct Link</a>
+                <a href="#work" class="hover-target inline-block bg-white text-black font-ndot text-lg font-bold uppercase tracking-widest px-8 py-4 border border-white hover:bg-transparent hover:text-white transition-all duration-300">Explore System</a>
             </div>
         </div>
     </section>
 
-    <!-- Project Systems / Galleries Workspace -->
     <main id="work" class="py-24 border-t border-white/5 bg-neutral-950/40 space-y-32">
 
-        <!-- SECTION 01: PHOTOGRAPHY DISPLAY (1080x1427 Configured) -->
         <section class="max-w-7xl mx-auto px-6">
             <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 gap-4">
                 <div>
-                    <span class="font-ndot text-neonOrange text-xs uppercase tracking-widest block mb-1">DATA_STREAM_01</span>
+                    <span class="font-ndot text-neonYellow text-sm uppercase tracking-widest block mb-1">DATA_STREAM_01</span>
                     <h2 class="text-3xl font-black uppercase tracking-tight">Photography Showcase</h2>
                 </div>
                 <p class="text-neutral-500 text-sm font-ndot max-w-xs">NATIVE ASPECT FRAME LOCK // 1080×1427 VERTICAL GRID</p>
             </div>
 
-            <!-- Optimized Grid Layout -->
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-                
-                <!-- Image Component 1 -->
                 <div class="relative group overflow-hidden bg-neutral-900 border border-white/5 aspect-[1080/1427]">
                     <img src="assets/photography/photo1.jpg" alt="Photography Specimen 01" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
                 </div>
-
-                <!-- Image Component 2 -->
                 <div class="relative group overflow-hidden bg-neutral-900 border border-white/5 aspect-[1080/1427]">
                     <img src="assets/photography/photo2.jpg" alt="Photography Specimen 02" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
                 </div>
-
-                <!-- Image Component 3 -->
                 <div class="relative group overflow-hidden bg-neutral-900 border border-white/5 aspect-[1080/1427]">
                     <img src="assets/photography/photo3.jpg" alt="Photography Specimen 03" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
                 </div>
-
             </div>
         </section>
 
-
-        <!-- SECTION 02: EDITING STUDIO LAB (1080x609 Before/After Slider) -->
         <section class="max-w-7xl mx-auto px-6">
             <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 gap-4">
                 <div>
-                    <span class="font-ndot text-neonOrange text-xs uppercase tracking-widest block mb-1">DATA_STREAM_02</span>
+                    <span class="font-ndot text-neonYellow text-sm uppercase tracking-widest block mb-1">DATA_STREAM_02</span>
                     <h2 class="text-3xl font-black uppercase tracking-tight">Post-Production Lab</h2>
                 </div>
                 <p class="text-neutral-500 text-sm font-ndot max-w-xs">SYS_ENGINE: BEFORE / AFTER INTERACTIVE MATRIX // 1080×609 RECON</p>
             </div>
 
-            <!-- Bulletproof Rigid Canvas Wrapper -->
             <div class="max-w-4xl mx-auto">
                 <div id="before-after-slider" class="relative w-full aspect-[1080/609] overflow-hidden select-none border border-white/5 hover-target cursor-ew-resize">
-                    
-                    <!-- Raw Base Layer (Before) - UPDATED PATH -->
                     <img src="assets/editing/project1-before.jpg" alt="Raw Environment State" class="absolute inset-0 w-full h-full object-cover pointer-events-none">
-                    <div class="absolute top-4 left-4 bg-black/80 backdrop-blur-md text-[10px] font-ndot uppercase tracking-widest px-3 py-1.5 text-neutral-400 border border-white/5">
+                    <div class="absolute top-4 left-4 bg-black/80 backdrop-blur-md text-xs font-ndot uppercase tracking-widest px-3 py-1.5 text-neutral-400 border border-white/5">
                         [SRC] RAW_LOG_DATA
                     </div>
 
-                    <!-- Graded Split Layer Wrapper (After) - UPDATED PATH -->
                     <div id="after-image-wrapper" class="absolute inset-0 w-1/2 overflow-hidden pointer-events-none">
                         <img src="assets/editing/project1-after.jpg" alt="Graded Production State" class="absolute inset-0 w-full h-full object-cover max-w-none pointer-events-none" id="after-img-el">
-                        <div class="absolute top-4 right-4 bg-neonOrange text-[10px] font-ndot uppercase tracking-widest px-3 py-1.5 text-black font-bold shadow-lg">
+                        <div class="absolute top-4 right-4 bg-neonYellow text-xs font-ndot uppercase tracking-widest px-3 py-1.5 text-black font-bold shadow-lg">
                             [OUT] GRADED_RENDER
                         </div>
                     </div>
 
-                    <!-- Mechanical Slider Axis Line & Handle -->
-                    <div id="slider-handle" class="absolute top-0 bottom-0 left-1/2 w-[1px] bg-neonOrange pointer-events-none">
-                        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-8 h-8 bg-black border border-neonOrange/50 rounded-full flex items-center justify-center text-neonOrange text-[10px] font-mono shadow-2xl tracking-tighter">
+                    <div id="slider-handle" class="absolute top-0 bottom-0 left-1/2 w-[1px] bg-neonYellow pointer-events-none">
+                        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-8 h-8 bg-black border border-neonYellow/50 rounded-full flex items-center justify-center text-neonYellow text-[10px] font-mono shadow-2xl tracking-tighter">
                             &lt;&gt;
                         </div>
                     </div>
@@ -148,75 +131,121 @@
             </div>
         </section>
 
-
-        <!-- SECTION 03: VIDEOGRAPHY SEQUENCE ENGINE -->
         <section class="max-w-7xl mx-auto px-6">
             <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 gap-4">
                 <div>
-                    <span class="font-ndot text-neonOrange text-xs uppercase tracking-widest block mb-1">DATA_STREAM_03</span>
+                    <span class="font-ndot text-neonYellow text-sm uppercase tracking-widest block mb-1">DATA_STREAM_03</span>
                     <h2 class="text-3xl font-black uppercase tracking-tight">Videography Reels</h2>
                 </div>
                 <p class="text-neutral-500 text-sm font-ndot max-w-xs">NATIVE COMPRESSION SEQUENCES // H.264 BITRATE CONTROL</p>
             </div>
 
-            <!-- Video Interface Layout -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                
-                <!-- Video Track Unit 1 -->
                 <div class="bg-neutral-950 border border-white/5 p-4 hover-target">
                     <div class="relative w-full aspect-video bg-neutral-900 overflow-hidden mb-4">
-                        <!-- Video 1 - CHECKED PATH -->
                         <video src="assets/videos/video1.mp4" class="w-full h-full object-cover" controls preload="metadata" playsinline></video>
                     </div>
-                    <div class="flex justify-between items-center text-xs font-ndot text-neutral-400 px-1">
+                    <div class="flex justify-between items-center text-sm font-ndot text-neutral-400 px-1">
                         <span>SEQ_TRACK_01.MP4</span>
                         <span class="text-neutral-600">[24_FPS]</span>
                     </div>
                 </div>
 
-                <!-- Video Track Unit 2 -->
                 <div class="bg-neutral-950 border border-white/5 p-4 hover-target">
                     <div class="relative w-full aspect-video bg-neutral-900 overflow-hidden mb-4">
-                        <!-- Video 2 - CHECKED PATH -->
                         <video src="assets/videos/video2.mp4" class="w-full h-full object-cover" controls preload="metadata" playsinline></video>
                     </div>
-                    <div class="flex justify-between items-center text-xs font-ndot text-neutral-400 px-1">
+                    <div class="flex justify-between items-center text-sm font-ndot text-neutral-400 px-1">
                         <span>SEQ_TRACK_02.MP4</span>
                         <span class="text-neutral-600">[24_FPS]</span>
                     </div>
                 </div>
-
             </div>
         </section>
-
     </main>
 
-    <!-- Global Technical Footer System -->
     <footer class="border-t border-white/5 bg-oled py-12 text-sm text-gray-600">
         <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
-            <p class="font-ndot text-xs">&copy; 2026. All rights secured.</p>
-            <div class="flex space-x-6 text-xs uppercase font-medium tracking-widest">
-                <a href="mailto:anmmar.jpg@gmail.com" class="hover-target text-gray-400 hover:text-neonOrange transition-colors">Email</a>
+            <p class="font-ndot text-sm">&copy; 2026. All rights secured.</p>
+            <div class="flex space-x-6 text-sm uppercase font-ndot tracking-widest">
+                <a href="mailto:anmmar.jpg@gmail.com" class="hover-target text-gray-400 hover:text-neonYellow transition-colors">Gmail</a>
                 <a href="#" class="hover-target text-gray-400 hover:text-white transition-colors">Instagram</a>
-                <a href="#" class="hover-target text-gray-400 hover:text-white transition-colors">Vimeo</a>
+                <a href="#" class="hover-target text-gray-400 hover:text-white transition-colors">TikTok</a>
             </div>
         </div>
     </footer>
 
-    <!-- Execution Engine Script Block -->
     <script>
-        // Custom Matrix Cursor Tracking System
-        const cursor = document.getElementById('js-cursor');
-        document.addEventListener('mousemove', (e) => {
-            cursor.style.left = `${e.clientX}px`;
-            cursor.style.top = `${e.clientY}px`;
-        });
-        document.querySelectorAll('.hover-target').forEach(item => {
-            item.addEventListener('mouseenter', () => cursor.classList.add('custom-cursor-grow'));
-            item.addEventListener('mouseleave', () => cursor.classList.remove('custom-cursor-grow'));
+        // --- FLUID TOPOGRAPHIC BACKGROUND ENGINE ---
+        const topoCanvas = document.getElementById('topo-canvas');
+        if (topoCanvas) {
+            const ctx = topoCanvas.getContext('2d');
+            let width, height;
+            let time = 0;
+
+            function resizeCanvas() {
+                width = topoCanvas.width = window.innerWidth;
+                height = topoCanvas.height = window.innerHeight;
+            }
+            window.addEventListener('resize', resizeCanvas);
+            resizeCanvas();
+
+            function drawTopography() {
+                ctx.clearRect(0, 0, width, height);
+                ctx.lineWidth = 1.5;
+                // Neon Yellow line color matching the theme
+                ctx.strokeStyle = 'rgba(204, 255, 0, 0.4)'; 
+
+                const lines = 18; 
+                
+                for (let i = 0; i < lines; i++) {
+                    ctx.beginPath();
+                    for (let x = 0; x <= width; x += 30) {
+                        const yOffset = (height / 2) - 200; 
+                        const wave1 = Math.sin((x * 0.003) + time + (i * 0.15)) * (80 + i * 15);
+                        const wave2 = Math.cos((x * 0.001) - (time * 0.8) + (i * 0.1)) * 60;
+                        
+                        const y = yOffset + wave1 + wave2 + (i * 25);
+                        
+                        if (x === 0) ctx.moveTo(x, y);
+                        else ctx.lineTo(x, y);
+                    }
+                    ctx.stroke();
+                }
+                
+                time += 0.004; 
+                requestAnimationFrame(drawTopography);
+            }
+            drawTopography();
+        }
+
+        // --- LOADING SCREEN LOGIC ---
+        window.addEventListener('load', () => {
+            const loader = document.getElementById('loader');
+            if(loader) {
+                setTimeout(() => {
+                    loader.style.opacity = '0';
+                    setTimeout(() => {
+                        loader.style.display = 'none';
+                    }, 500); 
+                }, 800);
+            }
         });
 
-        // High-Performance Interactive Split-Screen Slider Mechanics
+        // --- CUSTOM CURSOR SYSTEM ---
+        const cursor = document.getElementById('js-cursor');
+        if (cursor) {
+            document.addEventListener('mousemove', (e) => {
+                cursor.style.left = `${e.clientX}px`;
+                cursor.style.top = `${e.clientY}px`;
+            });
+            document.querySelectorAll('.hover-target').forEach(item => {
+                item.addEventListener('mouseenter', () => cursor.classList.add('custom-cursor-grow'));
+                item.addEventListener('mouseleave', () => cursor.classList.remove('custom-cursor-grow'));
+            });
+        }
+
+        // --- INTERACTIVE SPLIT-SCREEN SLIDER ---
         const slider = document.getElementById('before-after-slider');
         const wrapper = document.getElementById('after-image-wrapper');
         const handle = document.getElementById('slider-handle');
@@ -225,42 +254,36 @@
         let isDragging = false;
 
         function setSliderPosition(clientX) {
+            if (!slider || !wrapper || !handle || !imgEl) return;
             const rect = slider.getBoundingClientRect();
-            // Calculate vector delta percentage relative to container boundary
             let position = ((clientX - rect.left) / rect.width) * 100;
             
-            // Constrain slider position safely inside bounds
             if (position < 0) position = 0;
             if (position > 100) position = 100;
 
-            // Direct hardware-accelerated rendering configurations
             handle.style.left = `${position}%`;
             wrapper.style.width = `${position}%`;
-            
-            // Lock image container matrix to block asset layout shifts
             imgEl.style.width = `${rect.width}px`;
         }
 
-        // Active State Mouse Event Triggers
-        slider.addEventListener('mousedown', (e) => { isDragging = true; setSliderPosition(e.clientX); });
-        window.addEventListener('mouseup', () => isDragging = false);
-        window.addEventListener('mousemove', (e) => { if (!isDragging) return; setSliderPosition(e.clientX); });
+        if (slider) {
+            slider.addEventListener('mousedown', (e) => { isDragging = true; setSliderPosition(e.clientX); });
+            window.addEventListener('mouseup', () => isDragging = false);
+            window.addEventListener('mousemove', (e) => { if (!isDragging) return; setSliderPosition(e.clientX); });
 
-        // High-Sensitivity Touch Surface Event Triggers
-        slider.addEventListener('touchstart', (e) => { isDragging = true; setSliderPosition(e.touches[0].clientX); });
-        window.addEventListener('touchend', () => isDragging = false);
-        window.addEventListener('touchmove', (e) => { if (!isDragging) return; setSliderPosition(e.touches[0].clientX); });
+            slider.addEventListener('touchstart', (e) => { isDragging = true; setSliderPosition(e.touches[0].clientX); });
+            window.addEventListener('touchend', () => isDragging = false);
+            window.addEventListener('touchmove', (e) => { if (!isDragging) return; setSliderPosition(e.touches[0].clientX); });
 
-        // Native Window Event Resizing Protection Rule
-        window.addEventListener('resize', () => {
-            const rect = slider.getBoundingClientRect();
-            imgEl.style.width = `${rect.width}px`;
-        });
-        // Initial execution trace configuration call
-        window.addEventListener('load', () => {
-            const rect = slider.getBoundingClientRect();
-            imgEl.style.width = `${rect.width}px`;
-        });
+            window.addEventListener('resize', () => {
+                const rect = slider.getBoundingClientRect();
+                imgEl.style.width = `${rect.width}px`;
+            });
+            window.addEventListener('load', () => {
+                const rect = slider.getBoundingClientRect();
+                imgEl.style.width = `${rect.width}px`;
+            });
+        }
     </script>
 </body>
 </html>
