@@ -1,16 +1,21 @@
 <!DOCTYPE html>
-<html lang="en" class="bg-black text-white scroll-smooth selection:bg-orange-600 selection:text-black">
+<html lang="en" class="bg-black text-white scroll-smooth selection:bg-neonYellow selection:text-black">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About | Creative Identity & Craft</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+    
     <script>
         tailwind.config = {
             theme: {
                 extend: {
-                    colors: { oled: '#000000', neonOrange: '#FF5F1F' },
-                    fontFamily: { ndot: ['Courier New', 'Courier', 'monospace'] }
+                    colors: { 
+                        oled: '#000000', 
+                        neonYellow: '#CCFF00' 
+                    }, 
                 }
             }
         }
@@ -18,159 +23,146 @@
     <style>
         ::-webkit-scrollbar { display: none; }
         * { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        .font-ndot { font-family: 'VT323', monospace; letter-spacing: 0.1em; }
+        
         .custom-cursor {
-            width: 20px; height: 20px; border: 2px solid #FF5F1F; border-radius: 50%;
+            width: 20px; height: 20px; border: 2px solid #CCFF00; border-radius: 50%;
             position: fixed; transform: translate(-50%, -50%); pointer-events: none; z-index: 9999;
             transition: width 0.2s, height 0.2s, background-color 0.2s;
         }
-        .custom-cursor-grow { width: 50px; height: 50px; background-color: rgba(255, 95, 31, 0.15); border-color: #FF5F1F; }
-        .topo-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; opacity: 0.15; pointer-events: none; }
-        
-        /* Flashing terminal cursor effect */
-        .typewriter-cursor::after {
-            content: '█';
-            animation: blink 0.8s infinite;
-            color: #FF5F1F;
-            margin-left: 4px;
-        }
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0; }
-        }
+        .custom-cursor-grow { width: 50px; height: 50px; background-color: rgba(204, 255, 0, 0.15); border-color: #CCFF00; }
     </style>
 </head>
 <body class="bg-oled text-gray-100 overflow-x-hidden antialiased">
 
+    <canvas id="topo-canvas" class="fixed top-0 left-0 w-full h-full z-[-1] opacity-20 pointer-events-none"></canvas>
+
+    <div id="loader" class="fixed inset-0 bg-black z-[100] flex items-center justify-center text-neonYellow font-ndot text-3xl transition-opacity duration-500">
+        LOADING_SYSTEM_PROFILE...
+    </div>
+
     <div class="custom-cursor" id="js-cursor"></div>
 
-    <svg class="topo-canvas" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
-        <g fill="none" stroke="#FF5F1F" stroke-width="1.5">
-            <path d="M-100,100 C100,120 200,80 300,150 C400,220 250,350 450,400 C650,450 700,300 900,350" class="animate-pulse" style="animation-duration: 4s;"/>
-        </g>
-    </svg>
-
-    <!-- Global Identical Header Navigation -->
     <header class="fixed top-0 left-0 w-full z-50 bg-oled/60 backdrop-blur-md border-b border-white/5 transition-all duration-300">
         <nav class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-            <a href="index.html" class="hover-target font-ndot font-bold text-xl text-white tracking-widest flex items-center gap-2">
-                <span class="text-neonOrange">■</span> PORTFOLIO
+            <a href="index.html" class="hover-target font-ndot font-bold text-xl text-white tracking-widest flex items-center gap-4">
+                <img src="assets/logo.png" alt="Logo" class="h-8 object-contain">
+                PORTFOLIO
             </a>
-            <div class="flex items-center space-x-8 text-sm font-medium tracking-wider uppercase">
+            <div class="flex items-center space-x-8 text-sm font-medium tracking-wider uppercase font-ndot">
                 <a href="index.html" class="hover-target text-gray-400 hover:text-white transition-colors">Home</a>
-                <a href="about.html" class="hover-target text-neonOrange transition-colors">About</a>
-                <a href="contact.html" class="hover-target text-gray-400 hover:text-white transition-colors">Contact</a>
+                <a href="about.html" class="hover-target text-neonYellow transition-colors">About</a>
             </div>
         </nav>
     </header>
 
-    <main class="pt-32 min-h-screen px-6 max-w-7xl mx-auto flex items-center">
-        <section class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center py-12 w-full">
-            <div>
-                <span class="font-ndot text-neonOrange text-xs uppercase tracking-widest block mb-2">THE PROFILE</span>
-                <h1 class="text-4xl md:text-6xl font-black uppercase tracking-tight mb-8">Creative Disruption</h1>
-                <p class="text-gray-300 font-light leading-relaxed mb-6">
-                    Operating at the critical crossroads of spatial imagery and strict typographic architecture. I capture uncompromised moments through optics, assemble modern narrative structures on timeline tracking channels, and execute clean graphic patterns.
-                </p>
-                <p class="text-gray-400 font-light leading-relaxed mb-8">
-                    Every project is curated with rigorous focus on extreme frame minimalism, ensuring technical balance optimized heavily across native visual presentation modes.
-                </p>
-
-                <!-- Skill Matrix -->
-                <div class="space-y-4">
-                    <div>
-                        <div class="flex justify-between text-xs font-ndot uppercase mb-1"><span>Optics / Capture Composition</span><span>95%</span></div>
-                        <div class="h-[2px] bg-neutral-900 w-full"><div class="h-full bg-neonOrange w-[95%]"></div></div>
-                    </div>
-                    <div>
-                        <div class="flex justify-between text-xs font-ndot uppercase mb-1"><span>Post Color Grading & Sequence</span><span>90%</span></div>
-                        <div class="h-[2px] bg-neutral-900 w-full"><div class="h-full bg-neonOrange w-[90%]"></div></div>
-                    </div>
-                    <div>
-                        <div class="flex justify-between text-xs font-ndot uppercase mb-1"><span>Vector Branding & Layout Architecture</span><span>85%</span></div>
-                        <div class="h-[2px] bg-neutral-900 w-full"><div class="h-full bg-neonOrange w-[85%]"></div></div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Sleek Interactive Typewriter Terminal Box (Replacing Portrait) -->
-            <div class="bg-neutral-950 p-6 border border-white/5 relative aspect-square flex flex-col justify-between font-ndot hover-target">
-                <div class="flex justify-between items-center border-b border-white/5 pb-4 text-xs text-neutral-500">
-                    <span>SYSTEM_LOG // ABOUT_ME</span>
-                    <span class="text-neonOrange animate-pulse">● ONLINE</span>
+    <section class="min-h-screen flex flex-col justify-center px-6 max-w-7xl mx-auto pt-32 pb-20">
+        <div class="max-w-4xl">
+            <span class="font-ndot text-neonYellow text-sm uppercase tracking-widest block mb-3">BIOGRAPHY // PROFILE</span>
+            <h1 class="text-5xl md:text-7xl font-black uppercase tracking-tight leading-none mb-6">
+                THE MIND BEHIND<br><span class="text-transparent bg-clip-text bg-gradient-to-r from-neutral-200 to-neutral-500">THE SYSTEM.</span>
+            </h1>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mt-12 items-start">
+                <div class="md:col-span-2 space-y-6 text-gray-400 font-light text-base md:text-lg leading-relaxed">
+                    <p>
+                        I am a digital creator specializing in high-end post-production, disruptive visual formats, and high-fidelity media grading operations. 
+                    </p>
+                    <p>
+                        By combining tight editing structures with clean, ultra-modern design frameworks, I build visual workspaces tailored to meet demanding aesthetic standards. Every cut is strategic; every color profile is intentional.
+                    </p>
+                    <h3 class="text-white font-ndot text-xl uppercase pt-4">Core Capabilities //</h3>
+                    <ul class="grid grid-cols-2 gap-2 text-sm font-ndot text-neonYellow">
+                        <li>[■] COLOR GRADING</li>
+                        <li>[■] VIDEO EDITING</li>
+                        <li>[■] DIGITAL IMAGERY</li>
+                        <li>[■] MEDIA ARCHITECTURE</li>
+                    </ul>
                 </div>
                 
-                <!-- The Core Target Container for Typewriter Engine -->
-                <div class="flex-1 py-6 text-sm md:text-base leading-relaxed text-neutral-300 font-mono tracking-wide flex items-start">
-                    <p id="typewriter-text" class="typewriter-cursor" data-text="> INITIALIZING SEQUENCE...&#13;&#10;> LOADING CREATIVE PROTOCOLS...&#13;&#10;> MY SYSTEM CREATES BOLD VISUAL EXPERIENCES BY STRIPPING AWAY THE NOISE. NO FILLER. JUST RAW IMAGERY, ULTRA-SHARP EDITS, AND DISRUPTIVE DESIGN ELEMENTS MIXED SYSTEMATICALLY TO GRAB ATTENTION.&#13;&#10;> STATUS: READY FOR WORK."></p>
-                </div>
-
-                <div class="text-[10px] text-neutral-600 flex justify-between border-t border-white/5 pt-4">
-                    <span>ENCR_SECURE_CHANNEL</span>
-                    <span>LOC: 24.8607° N, 67.0011° E</span>
+                <div class="bg-neutral-900 border border-white/5 aspect-[4/5] overflow-hidden group">
+                    <img src="assets/profile.jpg" alt="Profile Specimen" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" onerror="this.style.display='none'">
                 </div>
             </div>
-        </section>
-    </main>
+        </div>
+    </section>
 
     <footer class="border-t border-white/5 bg-oled py-12 text-sm text-gray-600">
         <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
-            <p class="font-ndot text-xs">&copy; 2026. All rights secured.</p>
-            <div class="flex space-x-6 text-xs uppercase font-medium tracking-widest">
-                <a href="mailto:anmmar.jpg@gmail.com" class="hover-target text-gray-400 hover:text-neonOrange">Email</a>
-                <a href="#" class="hover-target text-gray-400 hover:text-white">Instagram</a>
-                <a href="#" class="hover-target text-gray-400 hover:text-white">Vimeo</a>
+            <p class="font-ndot text-sm">&copy; 2026. All rights secured.</p>
+            <div class="flex space-x-6 text-sm uppercase font-ndot tracking-widest">
+                <a href="mailto:anmmar.jpg@gmail.com" class="hover-target text-gray-400 hover:text-neonYellow transition-colors">Gmail</a>
+                <a href="#" class="hover-target text-gray-400 hover:text-white transition-colors">Instagram</a>
+                <a href="#" class="hover-target text-gray-400 hover:text-white transition-colors">TikTok</a>
             </div>
         </div>
     </footer>
 
     <script>
-        // Custom Cursor Setup
-        const cursor = document.getElementById('js-cursor');
-        document.addEventListener('mousemove', (e) => {
-            cursor.style.left = `${e.clientX}px`;
-            cursor.style.top = `${e.clientY}px`;
-        });
-        document.querySelectorAll('.hover-target').forEach(item => {
-            item.addEventListener('mouseenter', () => cursor.classList.add('custom-cursor-grow'));
-            item.addEventListener('mouseleave', () => cursor.classList.remove('custom-cursor-grow'));
-        });
+        // --- FLUID TOPOGRAPHIC BACKGROUND ENGINE ---
+        const topoCanvas = document.getElementById('topo-canvas');
+        if (topoCanvas) {
+            const ctx = topoCanvas.getContext('2d');
+            let width, height;
+            let time = 0;
 
-        // High-Performance Scroll-Triggered Typewriter Mechanics
-        const typewriterElement = document.getElementById('typewriter-text');
-        const rawText = typewriterElement.getAttribute('data-text');
-        typewriterElement.innerHTML = ''; // Clear out immediately
-
-        let index = 0;
-        let hasStarted = false;
-
-        function typeWriter() {
-            if (index < rawText.length) {
-                // Formatting linebreaks correctly on screen injection
-                if (rawText.substr(index, 2) === '&#13;&#10;' || rawText.substr(index, 1) === '\n') {
-                    typewriterElement.innerHTML += '<br>';
-                    index += (rawText.substr(index, 2) === '&#13;&#10;') ? 2 : 1;
-                } else {
-                    typewriterElement.innerHTML += rawText.charAt(index);
-                    index++;
-                }
-                setTimeout(typeWriter, 25); // Speed adjustments in milliseconds
-            } else {
-                // Drop the cursor blinking accent once it completes typing
-                typewriterElement.classList.remove('typewriter-cursor');
+            function resizeCanvas() {
+                width = topoCanvas.width = window.innerWidth;
+                height = topoCanvas.height = window.innerHeight;
             }
+            window.addEventListener('resize', resizeCanvas);
+            resizeCanvas();
+
+            function drawTopography() {
+                ctx.clearRect(0, 0, width, height);
+                ctx.lineWidth = 1.5;
+                ctx.strokeStyle = 'rgba(204, 255, 0, 0.4)'; 
+
+                const lines = 18; 
+                for (let i = 0; i < lines; i++) {
+                    ctx.beginPath();
+                    for (let x = 0; x <= width; x += 30) {
+                        const yOffset = (height / 2) - 200; 
+                        const wave1 = Math.sin((x * 0.003) + time + (i * 0.15)) * (80 + i * 15);
+                        const wave2 = Math.cos((x * 0.001) - (time * 0.8) + (i * 0.1)) * 60;
+                        const y = yOffset + wave1 + wave2 + (i * 25);
+                        if (x === 0) ctx.moveTo(x, y);
+                        else ctx.lineTo(x, y);
+                    }
+                    ctx.stroke();
+                }
+                time += 0.004; 
+                requestAnimationFrame(drawTopography);
+            }
+            drawTopography();
         }
 
-        // Intercepting intersection state to begin script execution right as it scrolls down 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if(entry.isIntersecting && !hasStarted) {
-                    hasStarted = true;
-                    setTimeout(typeWriter, 300); // Tiny luxury breathing buffer delay
-                }
-            });
-        }, { threshold: 0.2 });
+        // --- LOADING SCREEN LOGIC ---
+        window.addEventListener('load', () => {
+            const loader = document.getElementById('loader');
+            if(loader) {
+                setTimeout(() => {
+                    loader.style.opacity = '0';
+                    setTimeout(() => {
+                        loader.style.display = 'none';
+                    }, 500); 
+                }, 800);
+            }
+        });
 
-        observer.observe(typewriterElement);
+        // --- CUSTOM CURSOR SYSTEM ---
+        const cursor = document.getElementById('js-cursor');
+        if (cursor) {
+            document.addEventListener('mousemove', (e) => {
+                cursor.style.left = `${e.clientX}px`;
+                cursor.style.top = `${e.clientY}px`;
+            });
+            document.querySelectorAll('.hover-target').forEach(item => {
+                item.addEventListener('mouseenter', () => cursor.classList.add('custom-cursor-grow'));
+                item.addEventListener('mouseleave', () => cursor.classList.remove('custom-cursor-grow'));
+            });
+        }
     </script>
 </body>
 </html>
