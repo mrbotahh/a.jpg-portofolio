@@ -5,29 +5,52 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfolio | Creative Identity & Craft</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=DotGothic16&display=swap" rel="stylesheet">
+    
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+    
     <script>
-        tailwind.config = { theme: { extend: { colors: { oled: '#000000', neonYellow: '#CCFF00' } } } }
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { 
+                        oled: '#000000', 
+                        neonYellow: '#CCFF00' /* Neon Yellow */
+                    }, 
+                }
+            }
+        }
     </script>
     <style>
+        /* Modern Scrollbar Stripping */
         ::-webkit-scrollbar { display: none; }
         * { -ms-overflow-style: none; scrollbar-width: none; }
-        .font-ndot { font-family: 'DotGothic16', sans-serif; letter-spacing: 0.1em; }
-        .custom-cursor { width: 20px; height: 20px; border: 2px solid #CCFF00; border-radius: 50%; position: fixed; transform: translate(-50%, -50%); pointer-events: none; z-index: 9999; transition: width 0.2s, height 0.2s, background-color 0.2s; }
+        
+        /* Dot Matrix Font Class */
+        .font-ndot { font-family: 'VT323', monospace; letter-spacing: 0.1em; }
+        
+        /* Premium Custom Interactive Cursor */
+        .custom-cursor {
+            width: 20px; height: 20px; border: 2px solid #CCFF00; border-radius: 50%;
+            position: fixed; transform: translate(-50%, -50%); pointer-events: none; z-index: 9999;
+            transition: width 0.2s, height 0.2s, background-color 0.2s;
+        }
         .custom-cursor-grow { width: 50px; height: 50px; background-color: rgba(204, 255, 0, 0.15); border-color: #CCFF00; }
-        .dot { animation: fade 1.5s infinite; }
-        .dot:nth-child(1) { animation-delay: 0s; } .dot:nth-child(2) { animation-delay: 0.3s; } .dot:nth-child(3) { animation-delay: 0.6s; }
-        @keyframes fade { 0%, 100% { opacity: 0; } 50% { opacity: 1; } }
     </style>
 </head>
 <body class="bg-oled text-gray-100 overflow-x-hidden antialiased">
 
-    <canvas id="topo-canvas" class="fixed top-0 left-0 w-full h-full z-[-1] opacity-40 pointer-events-none"></canvas>
+    <canvas id="topo-canvas" class="fixed top-0 left-0 w-full h-full z-[-1] opacity-20 pointer-events-none"></canvas>
+
+    <div id="loader" class="fixed inset-0 bg-black z-[100] flex items-center justify-center text-neonYellow font-ndot text-3xl transition-opacity duration-500">
+        LOADING_DATA...
+    </div>
+
+    <div class="custom-cursor" id="js-cursor"></div>
 
     <header class="fixed top-0 left-0 w-full z-50 bg-oled/60 backdrop-blur-md border-b border-white/5 transition-all duration-300">
         <nav class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
             <a href="index.html" class="hover-target font-ndot font-bold text-xl text-white tracking-widest flex items-center gap-4">
-                <img src="assets/logo.png" alt="Logo" class="h-8 w-auto object-contain">
+                <img src="assets/logo.png" alt="Logo" class="h-8 object-contain">
                 PORTFOLIO
             </a>
             <div class="flex items-center space-x-8 text-sm font-medium tracking-wider uppercase font-ndot">
@@ -55,48 +78,212 @@
     <main id="work" class="py-24 border-t border-white/5 bg-neutral-950/40 space-y-32">
 
         <section class="max-w-7xl mx-auto px-6">
-            <h2 class="text-3xl font-black uppercase mb-12">Photography Showcase</h2>
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
-                <div class="relative group overflow-hidden bg-neutral-900 border border-white/5 aspect-[3/4]">
-                    <img src="assets/photography/photo1.jpg" class="w-full h-full object-cover">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 gap-4">
+                <div>
+                    <span class="font-ndot text-neonYellow text-sm uppercase tracking-widest block mb-1">DATA_STREAM_01</span>
+                    <h2 class="text-3xl font-black uppercase tracking-tight">Photography Showcase</h2>
                 </div>
-                <div class="relative group overflow-hidden bg-neutral-900 border border-white/5 aspect-[3/4]">
-                    <img src="assets/photography/photo2.jpg" class="w-full h-full object-cover">
+                <p class="text-neutral-500 text-sm font-ndot max-w-xs">NATIVE ASPECT FRAME LOCK // 1080×1427 VERTICAL GRID</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+                <div class="relative group overflow-hidden bg-neutral-900 border border-white/5 aspect-[1080/1427]">
+                    <img src="assets/photography/photo1.jpg" alt="Photography Specimen 01" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
                 </div>
-                <div class="relative group overflow-hidden bg-neutral-900 border border-white/5 aspect-[3/4]">
-                    <img src="assets/photography/photo3.jpg" class="w-full h-full object-cover">
+                <div class="relative group overflow-hidden bg-neutral-900 border border-white/5 aspect-[1080/1427]">
+                    <img src="assets/photography/photo2.jpg" alt="Photography Specimen 02" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
                 </div>
-                <div class="relative group overflow-hidden bg-neutral-900 border border-white/5 aspect-[3/4]">
-                    <img src="assets/photography/photo4.jpg" class="w-full h-full object-cover">
+                <div class="relative group overflow-hidden bg-neutral-900 border border-white/5 aspect-[1080/1427]">
+                    <img src="assets/photography/photo3.jpg" alt="Photography Specimen 03" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
                 </div>
             </div>
         </section>
 
         <section class="max-w-7xl mx-auto px-6">
-            <h2 class="text-3xl font-black uppercase mb-12">Post-Production Lab</h2>
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 gap-4">
+                <div>
+                    <span class="font-ndot text-neonYellow text-sm uppercase tracking-widest block mb-1">DATA_STREAM_02</span>
+                    <h2 class="text-3xl font-black uppercase tracking-tight">Post-Production Lab</h2>
+                </div>
+                <p class="text-neutral-500 text-sm font-ndot max-w-xs">SYS_ENGINE: BEFORE / AFTER INTERACTIVE MATRIX // 1080×609 RECON</p>
+            </div>
+
             <div class="max-w-4xl mx-auto">
-                <div id="before-after-slider" class="relative w-full aspect-video overflow-hidden border border-white/5 cursor-ew-resize">
-                    <img src="assets/editing/before1.jpg" class="absolute inset-0 w-full h-full object-cover">
-                    <div id="after-image-wrapper" class="absolute inset-0 w-1/2 overflow-hidden border-r border-neonYellow">
-                        <img src="assets/editing/after1.jpg" id="after-img-el" class="absolute inset-0 w-full h-full object-cover max-w-none">
+                <div id="before-after-slider" class="relative w-full aspect-[1080/609] overflow-hidden select-none border border-white/5 hover-target cursor-ew-resize">
+                    <img src="assets/editing/project1-before.jpg" alt="Raw Environment State" class="absolute inset-0 w-full h-full object-cover pointer-events-none">
+                    <div class="absolute top-4 left-4 bg-black/80 backdrop-blur-md text-xs font-ndot uppercase tracking-widest px-3 py-1.5 text-neutral-400 border border-white/5">
+                        [SRC] RAW_LOG_DATA
+                    </div>
+
+                    <div id="after-image-wrapper" class="absolute inset-0 w-1/2 overflow-hidden pointer-events-none">
+                        <img src="assets/editing/project1-after.jpg" alt="Graded Production State" class="absolute inset-0 w-full h-full object-cover max-w-none pointer-events-none" id="after-img-el">
+                        <div class="absolute top-4 right-4 bg-neonYellow text-xs font-ndot uppercase tracking-widest px-3 py-1.5 text-black font-bold shadow-lg">
+                            [OUT] GRADED_RENDER
+                        </div>
+                    </div>
+
+                    <div id="slider-handle" class="absolute top-0 bottom-0 left-1/2 w-[1px] bg-neonYellow pointer-events-none">
+                        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-8 h-8 bg-black border border-neonYellow/50 rounded-full flex items-center justify-center text-neonYellow text-[10px] font-mono shadow-2xl tracking-tighter">
+                            &lt;&gt;
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
         <section class="max-w-7xl mx-auto px-6">
-            <h2 class="text-3xl font-black uppercase mb-12">Videography Reels</h2>
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 gap-4">
+                <div>
+                    <span class="font-ndot text-neonYellow text-sm uppercase tracking-widest block mb-1">DATA_STREAM_03</span>
+                    <h2 class="text-3xl font-black uppercase tracking-tight">Videography Reels</h2>
+                </div>
+                <p class="text-neutral-500 text-sm font-ndot max-w-xs">NATIVE COMPRESSION SEQUENCES // H.264 BITRATE CONTROL</p>
+            </div>
+
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div class="bg-neutral-950 border border-white/5 p-4"><video src="assets/videos/video1.mp4" class="w-full aspect-video" controls></video></div>
-                <div class="bg-neutral-950 border border-white/5 p-4"><video src="assets/videos/video2.mp4" class="w-full aspect-video" controls></video></div>
-                <div class="bg-neutral-950 border border-white/5 p-4"><video src="assets/videos/video3.mp4" class="w-full aspect-video" controls></video></div>
-                <div class="bg-neutral-950 border border-white/5 p-4"><video src="assets/videos/video4.mp4" class="w-full aspect-video" controls></video></div>
+                <div class="bg-neutral-950 border border-white/5 p-4 hover-target">
+                    <div class="relative w-full aspect-video bg-neutral-900 overflow-hidden mb-4">
+                        <video src="assets/videos/video1.mp4" class="w-full h-full object-cover" controls preload="metadata" playsinline></video>
+                    </div>
+                    <div class="flex justify-between items-center text-sm font-ndot text-neutral-400 px-1">
+                        <span>SEQ_TRACK_01.MP4</span>
+                        <span class="text-neutral-600">[24_FPS]</span>
+                    </div>
+                </div>
+
+                <div class="bg-neutral-950 border border-white/5 p-4 hover-target">
+                    <div class="relative w-full aspect-video bg-neutral-900 overflow-hidden mb-4">
+                        <video src="assets/videos/video2.mp4" class="w-full h-full object-cover" controls preload="metadata" playsinline></video>
+                    </div>
+                    <div class="flex justify-between items-center text-sm font-ndot text-neutral-400 px-1">
+                        <span>SEQ_TRACK_02.MP4</span>
+                        <span class="text-neutral-600">[24_FPS]</span>
+                    </div>
+                </div>
             </div>
         </section>
     </main>
 
+    <footer class="border-t border-white/5 bg-oled py-12 text-sm text-gray-600">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
+            <p class="font-ndot text-sm">&copy; 2026. All rights secured.</p>
+            <div class="flex space-x-6 text-sm uppercase font-ndot tracking-widest">
+                <a href="mailto:anmmar.jpg@gmail.com" class="hover-target text-gray-400 hover:text-neonYellow transition-colors">Gmail</a>
+                <a href="#" class="hover-target text-gray-400 hover:text-white transition-colors">Instagram</a>
+                <a href="#" class="hover-target text-gray-400 hover:text-white transition-colors">TikTok</a>
+            </div>
+        </div>
+    </footer>
+
     <script>
-        // --- [Your original script functions go here] ---
+        // --- FLUID TOPOGRAPHIC BACKGROUND ENGINE ---
+        const topoCanvas = document.getElementById('topo-canvas');
+        if (topoCanvas) {
+            const ctx = topoCanvas.getContext('2d');
+            let width, height;
+            let time = 0;
+
+            function resizeCanvas() {
+                width = topoCanvas.width = window.innerWidth;
+                height = topoCanvas.height = window.innerHeight;
+            }
+            window.addEventListener('resize', resizeCanvas);
+            resizeCanvas();
+
+            function drawTopography() {
+                ctx.clearRect(0, 0, width, height);
+                ctx.lineWidth = 1.5;
+                // Neon Yellow line color matching the theme
+                ctx.strokeStyle = 'rgba(204, 255, 0, 0.4)'; 
+
+                const lines = 18; 
+                
+                for (let i = 0; i < lines; i++) {
+                    ctx.beginPath();
+                    for (let x = 0; x <= width; x += 30) {
+                        const yOffset = (height / 2) - 200; 
+                        const wave1 = Math.sin((x * 0.003) + time + (i * 0.15)) * (80 + i * 15);
+                        const wave2 = Math.cos((x * 0.001) - (time * 0.8) + (i * 0.1)) * 60;
+                        
+                        const y = yOffset + wave1 + wave2 + (i * 25);
+                        
+                        if (x === 0) ctx.moveTo(x, y);
+                        else ctx.lineTo(x, y);
+                    }
+                    ctx.stroke();
+                }
+                
+                time += 0.004; 
+                requestAnimationFrame(drawTopography);
+            }
+            drawTopography();
+        }
+
+        // --- LOADING SCREEN LOGIC ---
+        window.addEventListener('load', () => {
+            const loader = document.getElementById('loader');
+            if(loader) {
+                setTimeout(() => {
+                    loader.style.opacity = '0';
+                    setTimeout(() => {
+                        loader.style.display = 'none';
+                    }, 500); 
+                }, 800);
+            }
+        });
+
+        // --- CUSTOM CURSOR SYSTEM ---
+        const cursor = document.getElementById('js-cursor');
+        if (cursor) {
+            document.addEventListener('mousemove', (e) => {
+                cursor.style.left = `${e.clientX}px`;
+                cursor.style.top = `${e.clientY}px`;
+            });
+            document.querySelectorAll('.hover-target').forEach(item => {
+                item.addEventListener('mouseenter', () => cursor.classList.add('custom-cursor-grow'));
+                item.addEventListener('mouseleave', () => cursor.classList.remove('custom-cursor-grow'));
+            });
+        }
+
+        // --- INTERACTIVE SPLIT-SCREEN SLIDER ---
+        const slider = document.getElementById('before-after-slider');
+        const wrapper = document.getElementById('after-image-wrapper');
+        const handle = document.getElementById('slider-handle');
+        const imgEl = document.getElementById('after-img-el');
+
+        let isDragging = false;
+
+        function setSliderPosition(clientX) {
+            if (!slider || !wrapper || !handle || !imgEl) return;
+            const rect = slider.getBoundingClientRect();
+            let position = ((clientX - rect.left) / rect.width) * 100;
+            
+            if (position < 0) position = 0;
+            if (position > 100) position = 100;
+
+            handle.style.left = `${position}%`;
+            wrapper.style.width = `${position}%`;
+            imgEl.style.width = `${rect.width}px`;
+        }
+
+        if (slider) {
+            slider.addEventListener('mousedown', (e) => { isDragging = true; setSliderPosition(e.clientX); });
+            window.addEventListener('mouseup', () => isDragging = false);
+            window.addEventListener('mousemove', (e) => { if (!isDragging) return; setSliderPosition(e.clientX); });
+
+            slider.addEventListener('touchstart', (e) => { isDragging = true; setSliderPosition(e.touches[0].clientX); });
+            window.addEventListener('touchend', () => isDragging = false);
+            window.addEventListener('touchmove', (e) => { if (!isDragging) return; setSliderPosition(e.touches[0].clientX); });
+
+            window.addEventListener('resize', () => {
+                const rect = slider.getBoundingClientRect();
+                imgEl.style.width = `${rect.width}px`;
+            });
+            window.addEventListener('load', () => {
+                const rect = slider.getBoundingClientRect();
+                imgEl.style.width = `${rect.width}px`;
+            });
+        }
     </script>
 </body>
 </html>
