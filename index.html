@@ -1,203 +1,38 @@
 <!DOCTYPE html>
-<html lang="en" class="bg-black text-white scroll-smooth selection:bg-neonYellow selection:text-black">
+<html lang="en" class="bg-black text-white scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About | Creative Identity & Craft</title>
+    <title>Portfolio</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.min.js"></script>
-    
-    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
-    
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: { 
-                        oled: '#000000', 
-                        neonYellow: '#CCFF00' 
-                    }, 
-                }
-            }
-        }
-    </script>
     <style>
-        ::-webkit-scrollbar { display: none; }
-        * { -ms-overflow-style: none; scrollbar-width: none; }
-        
-        .font-ndot { font-family: 'VT323', monospace; letter-spacing: 0.1em; }
-        
-        #topo-bg { position: fixed; top: 0; left: 0; z-index: 0; pointer-events: none; }
-
-        .custom-cursor {
-            width: 20px; height: 20px; border: 2px solid #CCFF00; border-radius: 50%;
-            position: fixed; transform: translate(-50%, -50%); pointer-events: none; z-index: 9999;
-            transition: width 0.2s, height 0.2s, background-color 0.2s;
-        }
-        .custom-cursor-grow { width: 50px; height: 50px; background-color: rgba(204, 255, 0, 0.15); border-color: #CCFF00; }
-
-        input[type=range]::-webkit-slider-thumb {
-            appearance: none;
-            width: 40px;
-            height: 40px;
-            cursor: ew-resize;
-        }
+        #loader { transition: opacity 0.5s ease; }
     </style>
 </head>
-<body class="bg-oled text-gray-100 overflow-x-hidden antialiased">
-    <div id="topo-bg"></div>
-
-    <!-- Gaussian Blur Loading Screen -->
-    <div id="loader" class="fixed inset-0 z-[100] bg-black flex items-center justify-center transition-opacity duration-700">
-        <div class="flex space-x-3">
-            <div class="w-4 h-4 bg-neonYellow rounded-full animate-[pulse_1.5s_ease-in-out_infinite]"></div>
-            <div class="w-4 h-4 bg-neonYellow rounded-full animate-[pulse_1.5s_ease-in-out_0.2s_infinite]"></div>
-            <div class="w-4 h-4 bg-neonYellow rounded-full animate-[pulse_1.5s_ease-in-out_0.4s_infinite]"></div>
-        </div>
+<body class="bg-black">
+    <div id="loader" class="fixed inset-0 z-[100] bg-black flex items-center justify-center">
+        <div class="text-neonYellow">LOADING...</div>
     </div>
 
-    <div class="custom-cursor" id="js-cursor"></div>
+    <div id="topo-bg" class="fixed inset-0 z-0 opacity-30"></div>
 
-    <header class="fixed top-0 left-0 w-full z-50 bg-oled/80 backdrop-blur-md border-b border-white/5 transition-all duration-300">
-        <nav class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-            <a href="index.html" class="hover-target font-ndot font-bold text-xl text-white tracking-widest flex items-center gap-4">
-                <img src="assets/logo.png" alt="Logo" class="h-8 object-contain" onerror="this.style.display='none'">
-                PORTFOLIO
-            </a>
-            <div class="flex items-center space-x-8 text-sm font-medium tracking-wider uppercase font-ndot relative z-50">
-                <a href="index.html" class="hover-target text-gray-400 hover:text-white transition-colors">Home</a>
-                <a href="about.html" class="hover-target text-neonYellow transition-colors">About</a>
-            </div>
-        </nav>
-    </header>
-
-    <main class="relative z-10 pt-32 pb-10 space-y-32">
-        <section class="px-6 max-w-7xl mx-auto">
-            <div class="max-w-4xl">
-                <span class="font-ndot text-neonYellow text-sm uppercase tracking-widest block mb-3">BIOGRAPHY // PROFILE</span>
-                <h1 class="text-5xl md:text-7xl font-black uppercase tracking-tight leading-none mb-6">
-                    THE MIND BEHIND<br><span class="text-transparent bg-clip-text bg-gradient-to-r from-neutral-200 to-neutral-500">THE SYSTEM.</span>
-                </h1>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mt-12 items-center">
-                    <div class="md:col-span-2 space-y-6 text-gray-400 font-light text-base md:text-lg leading-relaxed">
-                        <p>I am a digital creator specializing in high-end post-production, disruptive visual formats, and high-fidelity media grading operations.</p>
-                        <p>By combining tight editing structures with clean, ultra-modern design frameworks, I build visual workspaces tailored to meet demanding aesthetic standards. Every cut is strategic; every color profile is intentional.</p>
-                        <h3 class="text-white font-ndot text-xl uppercase pt-4">Core Capabilities //</h3>
-                        <ul class="grid grid-cols-2 gap-2 text-sm font-ndot text-neonYellow">
-                            <li>[■] COLOR GRADING</li>
-                            <li>[■] VIDEO EDITING</li>
-                            <li>[■] AUTOMOTIVE IMAGERY</li>
-                            <li>[■] MEDIA ARCHITECTURE</li>
-                        </ul>
-                    </div>
-                    <div class="flex items-center justify-center p-8 group">
-                        <img src="assets/logo.png" alt="ammar.jpg Logo" class="w-48 md:w-64 object-contain opacity-70 group-hover:opacity-100 transition-opacity duration-500" onerror="this.style.display='none'">
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="px-6 max-w-7xl mx-auto">
-            <span class="font-ndot text-neonYellow text-sm uppercase tracking-widest block mb-6">CURATED SELECTION // 3:4 PORTRAITS</span>
-            <div class="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-8 cursor-grab active:cursor-grabbing">
-                <div class="snap-center shrink-0 w-[85vw] md:w-[400px] aspect-[3/4] bg-neutral-900 border border-white/10 relative overflow-hidden group">
-                    <img src="assets/photography/photo1.jpg" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Photo 1">
-                </div>
-                <div class="snap-center shrink-0 w-[85vw] md:w-[400px] aspect-[3/4] bg-neutral-900 border border-white/10 relative overflow-hidden group">
-                    <img src="assets/photography/photo2.jpg" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Photo 2">
-                </div>
-                <div class="snap-center shrink-0 w-[85vw] md:w-[400px] aspect-[3/4] bg-neutral-900 border border-white/10 relative overflow-hidden group">
-                    <img src="assets/photography/photo3.jpg" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Photo 3">
-                </div>
-                <div class="snap-center shrink-0 w-[85vw] md:w-[400px] aspect-[3/4] bg-neutral-900 border border-white/10 relative overflow-hidden group">
-                    <img src="assets/photography/photo4.jpg" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Photo 4">
-                </div>
-            </div>
-        </section>
-
-        <section class="px-6 max-w-7xl mx-auto">
-            <span class="font-ndot text-neonYellow text-sm uppercase tracking-widest block mb-6">MOTION // VIDEO ARCHIVE</span>
-            <div class="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-8 cursor-grab active:cursor-grabbing">
-                <div class="snap-center shrink-0 w-[85vw] md:w-[400px] aspect-[9/16] bg-neutral-900 border border-white/10 relative overflow-hidden group">
-                    <video src="assets/videos/video1.mp4" class="w-full h-full object-cover" autoplay loop muted playsinline></video>
-                </div>
-                <div class="snap-center shrink-0 w-[85vw] md:w-[400px] aspect-[9/16] bg-neutral-900 border border-white/10 relative overflow-hidden group">
-                    <video src="assets/videos/video2.mp4" class="w-full h-full object-cover" autoplay loop muted playsinline></video>
-                </div>
-                <div class="snap-center shrink-0 w-[85vw] md:w-[400px] aspect-[9/16] bg-neutral-900 border border-white/10 relative overflow-hidden group">
-                    <video src="assets/videos/video3.mp4" class="w-full h-full object-cover" autoplay loop muted playsinline></video>
-                </div>
-                <div class="snap-center shrink-0 w-[85vw] md:w-[400px] aspect-[9/16] bg-neutral-900 border border-white/10 relative overflow-hidden group">
-                    <video src="assets/videos/video4.mp4" class="w-full h-full object-cover" autoplay loop muted playsinline></video>
-                </div>
-            </div>
-        </section>
-
-        <section class="px-6 max-w-7xl mx-auto">
-            <span class="font-ndot text-neonYellow text-sm uppercase tracking-widest block mb-6">COLOR GRADE // RAW VS PROCESSED</span>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div class="relative w-full aspect-video md:aspect-[4/3] overflow-hidden rounded-sm group hover-target border border-white/10">
-                    <img src="assets/editing/after1.jpg" class="absolute inset-0 w-full h-full object-cover" alt="After Grade 1">
-                    <img src="assets/editing/before1.jpg" class="absolute inset-0 w-full h-full object-cover [clip-path:inset(0_50%_0_0)]" id="img-top-1" alt="Raw File 1">
-                    <input type="range" min="0" max="100" value="50" class="absolute inset-0 w-full h-full opacity-0 cursor-ew-resize z-10" oninput="updateSlider(this.value, 'img-top-1', 'line-1')">
-                    <div class="absolute top-0 bottom-0 left-[50%] w-[2px] bg-neonYellow pointer-events-none transform -translate-x-1/2 flex items-center justify-center shadow-[0_0_10px_#CCFF00]" id="line-1">
-                        <div class="w-6 h-6 rounded-full bg-black border-2 border-neonYellow flex items-center justify-center"><div class="w-1 h-3 bg-neonYellow rounded-full"></div></div>
-                    </div>
-                </div>
-                <div class="relative w-full aspect-video md:aspect-[4/3] overflow-hidden rounded-sm group hover-target border border-white/10">
-                    <img src="assets/editing/after2.jpg" class="absolute inset-0 w-full h-full object-cover" alt="After Grade 2">
-                    <img src="assets/editing/before2.jpg" class="absolute inset-0 w-full h-full object-cover [clip-path:inset(0_50%_0_0)]" id="img-top-2" alt="Raw File 2">
-                    <input type="range" min="0" max="100" value="50" class="absolute inset-0 w-full h-full opacity-0 cursor-ew-resize z-10" oninput="updateSlider(this.value, 'img-top-2', 'line-2')">
-                    <div class="absolute top-0 bottom-0 left-[50%] w-[2px] bg-neonYellow pointer-events-none transform -translate-x-1/2 flex items-center justify-center shadow-[0_0_10px_#CCFF00]" id="line-2">
-                        <div class="w-6 h-6 rounded-full bg-black border-2 border-neonYellow flex items-center justify-center"><div class="w-1 h-3 bg-neonYellow rounded-full"></div></div>
-                    </div>
-                </div>
-                <div class="relative w-full aspect-video md:aspect-[4/3] overflow-hidden rounded-sm group hover-target border border-white/10">
-                    <img src="assets/editing/after3.jpg" class="absolute inset-0 w-full h-full object-cover" alt="After Grade 3">
-                    <img src="assets/editing/before3.jpg" class="absolute inset-0 w-full h-full object-cover [clip-path:inset(0_50%_0_0)]" id="img-top-3" alt="Raw File 3">
-                    <input type="range" min="0" max="100" value="50" class="absolute inset-0 w-full h-full opacity-0 cursor-ew-resize z-10" oninput="updateSlider(this.value, 'img-top-3', 'line-3')">
-                    <div class="absolute top-0 bottom-0 left-[50%] w-[2px] bg-neonYellow pointer-events-none transform -translate-x-1/2 flex items-center justify-center shadow-[0_0_10px_#CCFF00]" id="line-3">
-                        <div class="w-6 h-6 rounded-full bg-black border-2 border-neonYellow flex items-center justify-center"><div class="w-1 h-3 bg-neonYellow rounded-full"></div></div>
-                    </div>
-                </div>
-                <div class="relative w-full aspect-video md:aspect-[4/3] overflow-hidden rounded-sm group hover-target border border-white/10">
-                    <img src="assets/editing/after4.jpg" class="absolute inset-0 w-full h-full object-cover" alt="After Grade 4">
-                    <img src="assets/editing/before4.jpg" class="absolute inset-0 w-full h-full object-cover [clip-path:inset(0_50%_0_0)]" id="img-top-4" alt="Raw File 4">
-                    <input type="range" min="0" max="100" value="50" class="absolute inset-0 w-full h-full opacity-0 cursor-ew-resize z-10" oninput="updateSlider(this.value, 'img-top-4', 'line-4')">
-                    <div class="absolute top-0 bottom-0 left-[50%] w-[2px] bg-neonYellow pointer-events-none transform -translate-x-1/2 flex items-center justify-center shadow-[0_0_10px_#CCFF00]" id="line-4">
-                        <div class="w-6 h-6 rounded-full bg-black border-2 border-neonYellow flex items-center justify-center"><div class="w-1 h-3 bg-neonYellow rounded-full"></div></div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="px-6 max-w-7xl mx-auto pt-20 border-t border-white/10">
-            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-12">
-                <div>
-                    <span class="font-ndot text-neonYellow text-sm uppercase tracking-widest block mb-3">CONNECT //</span>
-                    <h2 class="text-4xl md:text-6xl font-black uppercase tracking-tight mb-4">INITIATE<br><span class="text-transparent bg-clip-text bg-gradient-to-r from-neutral-200 to-neutral-500">CONTACT.</span></h2>
-                    <p class="text-gray-400 font-light text-lg">Available for high-end post-production and media operations.</p>
-                </div>
-                <div class="flex flex-col items-start md:items-end gap-6">
-                    <img src="assets/logo.png" alt="Logo" class="h-16 object-contain mb-2" onerror="this.style.display='none'">
-                    <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-8 text-lg uppercase font-ndot tracking-widest text-left md:text-right">
-                        <a href="mailto:ammar.jpg@gmail.com" class="hover-target text-gray-400 hover:text-neonYellow transition-colors">Gmail</a>
-                        <a href="#" class="hover-target text-gray-400 hover:text-white transition-colors">Instagram</a>
-                        <a href="#" class="hover-target text-gray-400 hover:text-white transition-colors">TikTok</a>
-                    </div>
-                </div>
-            </div>
-        </section>
+    <main class="relative z-10 p-10">
+        <h1 class="text-6xl font-bold">THE MIND BEHIND THE SYSTEM.</h1>
+        <p class="mt-4 text-gray-400">Content placeholder...</p>
     </main>
 
-    <footer class="relative z-10 bg-oled py-8 text-sm text-gray-600 mt-12">
-        <div class="max-w-7xl mx-auto px-6 flex justify-center items-center">
-            <p class="font-ndot text-sm">&copy; 2026. All rights secured.</p>
-        </div>
-    </footer>
+    <script>
+        // FAIL-SAFE: Hide loader after 3 seconds no matter what
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                const loader = document.getElementById('loader');
+                loader.style.opacity = '0';
+                setTimeout(() => loader.style.display = 'none', 500);
+            }, 3000);
+        });
 
-    <!-- INTERACTIVE TOPO BACKGROUND ENGINE -->
-  <script>
+        // TOPO BACKGROUND
         new p5((p) => {
             p.setup = () => {
                 let canvas = p.createCanvas(p.windowWidth, p.windowHeight);
@@ -205,27 +40,16 @@
             };
             p.draw = () => {
                 p.clear();
-                p.stroke('#CCFF00'); // Neon Yellow as requested
-                p.strokeWeight(1);
+                p.stroke('#CCFF00');
                 p.noFill();
-                
-                // Topographic line logic
-                for (let y = 50; y < p.height; y += 60) {
+                for (let y = 0; y < p.height; y += 50) {
                     p.beginShape();
-                    for (let x = 0; x <= p.width; x += 20) {
-                        // Creating smooth, layered contour lines
-                        let wave = p.sin((x * 0.005) + (p.frameCount * 0.01)) * 20;
-                        
-                        // Adding subtle mouse interaction
-                        let d = p.dist(p.mouseX, p.mouseY, x, y);
-                        let displacement = p.map(d, 0, 400, 30, 0, true);
-                        
-                        p.vertex(x, y + wave + displacement);
+                    for (let x = 0; x < p.width; x += 20) {
+                        p.vertex(x, y + p.sin(x * 0.01 + p.frameCount * 0.05) * 20);
                     }
                     p.endShape();
                 }
             };
-            p.windowResized = () => p.resizeCanvas(p.windowWidth, p.windowHeight);
         });
     </script>
 </body>
