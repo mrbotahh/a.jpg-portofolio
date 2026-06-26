@@ -48,13 +48,13 @@
     <div id="topo-bg"></div>
 
     <!-- Gaussian Blur Loading Screen -->
-    <div id="loader" class="fixed inset-0 z-[100] bg-black flex items-center justify-center transition-opacity duration-700">
-        <div class="flex space-x-3">
-            <div class="w-4 h-4 bg-neonYellow rounded-full animate-[pulse_1.5s_ease-in-out_infinite]"></div>
-            <div class="w-4 h-4 bg-neonYellow rounded-full animate-[pulse_1.5s_ease-in-out_0.2s_infinite]"></div>
-            <div class="w-4 h-4 bg-neonYellow rounded-full animate-[pulse_1.5s_ease-in-out_0.4s_infinite]"></div>
-        </div>
+<div id="loader" class="fixed inset-0 z-[100] bg-black/80 backdrop-blur-lg flex items-center justify-center transition-opacity duration-700">
+    <div class="flex space-x-3">
+        <div class="w-4 h-4 bg-neonYellow rounded-full animate-[pulse_1.5s_ease-in-out_infinite]"></div>
+        <div class="w-4 h-4 bg-neonYellow rounded-full animate-[pulse_1.5s_ease-in-out_0.2s_infinite]"></div>
+        <div class="w-4 h-4 bg-neonYellow rounded-full animate-[pulse_1.5s_ease-in-out_0.4s_infinite]"></div>
     </div>
+</div>
 
     <div class="custom-cursor" id="js-cursor"></div>
 
@@ -64,10 +64,7 @@
                 <img src="assets/logo.png" alt="Logo" class="h-8 object-contain" onerror="this.style.display='none'">
                 PORTFOLIO
             </a>
-            <div class="flex items-center space-x-8 text-sm font-medium tracking-wider uppercase font-ndot relative z-50">
-                <a href="index.html" class="hover-target text-gray-400 hover:text-white transition-colors">Home</a>
-                <a href="about.html" class="hover-target text-neonYellow transition-colors">About</a>
-            </div>
+            
         </nav>
     </header>
 
@@ -90,9 +87,10 @@
                             <li>[■] MEDIA ARCHITECTURE</li>
                         </ul>
                     </div>
-                    <div class="flex items-center justify-center p-8 group">
-                        <img src="assets/logo.png" alt="ammar.jpg Logo" class="w-48 md:w-64 object-contain opacity-70 group-hover:opacity-100 transition-opacity duration-500" onerror="this.style.display='none'">
-                    </div>
+                   <!-- Move to right (justify-end), move up (mt-[-50px]), and increase size -->
+<div class="flex items-center justify-end p-8 mt-[-50px] group">
+    <img src="assets/logo.png" alt="ammar.jpg Logo" class="w-80 md:w-96 object-contain opacity-70 group-hover:opacity-100 transition-opacity duration-500" onerror="this.style.display='none'">
+</div>
                 </div>
             </div>
         </section>
@@ -171,7 +169,7 @@
             </div>
         </section>
 
-        <section class="px-6 max-w-7xl mx-auto pt-20 border-t border-white/10">
+        <section class="px-6 max-w-7xl mx-auto pt-20">
             <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-12">
                 <div>
                     <span class="font-ndot text-neonYellow text-sm uppercase tracking-widest block mb-3">CONNECT //</span>
@@ -181,9 +179,9 @@
                 <div class="flex flex-col items-start md:items-end gap-6">
                     <img src="assets/logo.png" alt="Logo" class="h-16 object-contain mb-2" onerror="this.style.display='none'">
                     <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-8 text-lg uppercase font-ndot tracking-widest text-left md:text-right">
-                        <a href="mailto:ammar.jpg@gmail.com" class="hover-target text-gray-400 hover:text-neonYellow transition-colors">Gmail</a>
-                        <a href="#" class="hover-target text-gray-400 hover:text-white transition-colors">Instagram</a>
-                        <a href="#" class="hover-target text-gray-400 hover:text-white transition-colors">TikTok</a>
+                        <a href="mailto:anmmar.jpg@gmail.com" class="hover-target text-gray-400 hover:text-neonYellow transition-colors">Gmail</a>
+                        <a href="#" class="hover-target text-gray-400 hover:text-white transition-colors">https://www.instagram.com/ammmar.jpg?igsh=a2pnNXRhbm5pZzgy</a>
+                        <a href="#" class="hover-target text-gray-400 hover:text-white transition-colors">https://www.tiktok.com/@ammmar.jpg?_r=1&_t=ZS-97UJaymfx5u</a>
                     </div>
                 </div>
             </div>
