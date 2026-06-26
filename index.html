@@ -1,31 +1,74 @@
-<section class="max-w-4xl mx-auto px-6">
-    <h2 class="text-3xl font-black uppercase mb-12">Post-Production Lab</h2>
-    
-    <div class="before-after-container relative w-full aspect-[1080/609] overflow-hidden border border-white/5 cursor-ew-resize mb-8">
-        <img src="assets/editing/project1-before.jpg" class="absolute inset-0 w-full h-full object-cover">
-        <div class="after-wrapper absolute inset-0 w-1/2 overflow-hidden border-r-2 border-neonYellow">
-            <img src="assets/editing/project1-after.jpg" class="absolute inset-0 w-full h-full object-cover min-w-[1080px]">
-        </div>
-    </div>
-    
-    <div class="before-after-container relative w-full aspect-[1080/609] overflow-hidden border border-white/5 cursor-ew-resize mb-8">
-        <img src="assets/editing/project2-before.jpg" class="absolute inset-0 w-full h-full object-cover">
-        <div class="after-wrapper absolute inset-0 w-1/2 overflow-hidden border-r-2 border-neonYellow">
-            <img src="assets/editing/project2-after.jpg" class="absolute inset-0 w-full h-full object-cover min-w-[1080px]">
-        </div>
-    </div>
+<!DOCTYPE html>
+<html lang="en" class="bg-black text-white scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Force the canvas to the back */
+        #topo-canvas {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            z-index: -10;
+        }
+        /* Ensure sections don't collapse */
+        section { min-height: 400px; }
+        ::-webkit-scrollbar { display: none; }
+    </style>
+</head>
+<body class="bg-black">
 
-    <div class="before-after-container relative w-full aspect-[1080/609] overflow-hidden border border-white/5 cursor-ew-resize mb-8">
-        <img src="assets/editing/project3-before.jpg" class="absolute inset-0 w-full h-full object-cover">
-        <div class="after-wrapper absolute inset-0 w-1/2 overflow-hidden border-r-2 border-neonYellow">
-            <img src="assets/editing/project3-after.jpg" class="absolute inset-0 w-full h-full object-cover min-w-[1080px]">
-        </div>
-    </div>
+    <canvas id="topo-canvas"></canvas>
 
-    <div class="before-after-container relative w-full aspect-[1080/609] overflow-hidden border border-white/5 cursor-ew-resize mb-8">
-        <img src="assets/editing/project4-before.jpg" class="absolute inset-0 w-full h-full object-cover">
-        <div class="after-wrapper absolute inset-0 w-1/2 overflow-hidden border-r-2 border-neonYellow">
-            <img src="assets/editing/project4-after.jpg" class="absolute inset-0 w-full h-full object-cover min-w-[1080px]">
-        </div>
-    </div>
-</section>
+    <main class="relative z-10 space-y-32 py-24">
+        <section class="max-w-7xl mx-auto px-6">
+            <h2 class="text-3xl font-black mb-10">PHOTOGRAPHY</h2>
+            <div id="photo-carousel" class="flex gap-6 overflow-x-auto">
+                <div class="min-w-[300px] h-[400px] bg-neutral-900 border border-white/20">
+                    <img src="assets/photography/photo1.jpg" class="w-full h-full object-cover">
+                </div>
+                </div>
+        </section>
+
+        <section class="max-w-4xl mx-auto px-6">
+            <h2 class="text-3xl font-black mb-10">EDITING LAB</h2>
+            <div class="before-after-container relative w-full aspect-video border border-white/20 overflow-hidden cursor-ew-resize">
+                <img src="assets/editing/project1-before.jpg" class="absolute inset-0 w-full h-full object-cover">
+                <div class="after-wrapper absolute top-0 left-0 h-full w-1/2 overflow-hidden border-r-2 border-neonYellow">
+                    <img src="assets/editing/project1-after.jpg" class="absolute top-0 left-0 h-full w-full object-cover min-w-[800px]">
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // 1. TOPOGRAPHY (Forced Initialization)
+        const canvas = document.getElementById('topo-canvas');
+        const ctx = canvas.getContext('2d');
+        function draw() {
+            canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.strokeStyle = '#CCFF00';
+            for (let i = 0; i < 10; i++) {
+                ctx.beginPath();
+                for (let x = 0; x <= canvas.width; x += 50) {
+                    let y = (canvas.height/2) + Math.sin(x*0.005 + Date.now()*0.001)*50 + (i*50);
+                    x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+                }
+                ctx.stroke();
+            }
+            requestAnimationFrame(draw);
+        }
+        draw();
+
+        // 2. SLIDER (Simplified)
+        document.querySelector('.before-after-container').addEventListener('mousemove', e => {
+            const rect = e.currentTarget.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            e.currentTarget.querySelector('.after-wrapper').style.width = (x / rect.width) * 100 + '%';
+        });
+    </script>
+</body>
+</html>
