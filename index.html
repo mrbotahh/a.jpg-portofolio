@@ -6,6 +6,9 @@
     <title>About | Creative Identity & Craft</title>
     <script src="https://cdn.tailwindcss.com"></script>
     
+    <!-- Three.js Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    
     <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
     
     <script>
@@ -32,14 +35,28 @@
             transition: width 0.2s, height 0.2s, background-color 0.2s;
         }
         .custom-cursor-grow { width: 50px; height: 50px; background-color: rgba(204, 255, 0, 0.15); border-color: #CCFF00; }
+
+        /* Custom Before/After Slider Styling */
+        input[type=range]::-webkit-slider-thumb {
+            appearance: none;
+            width: 40px;
+            height: 40px;
+            cursor: ew-resize;
+        }
     </style>
 </head>
 <body class="bg-oled text-gray-100 overflow-x-hidden antialiased">
 
-    <canvas id="topo-canvas" class="fixed top-0 left-0 w-full h-full z-[-1] opacity-20 pointer-events-none"></canvas>
+    <!-- 3D Topographic Canvas -->
+    <canvas id="topo-canvas" class="fixed top-0 left-0 w-full h-full z-[-1] opacity-30 pointer-events-none"></canvas>
 
-    <div id="loader" class="fixed inset-0 bg-black z-[100] flex items-center justify-center text-neonYellow font-ndot text-3xl transition-opacity duration-500">
-        LOADING_SYSTEM_PROFILE...
+    <!-- Gaussian Blur Loading Screen -->
+    <div id="loader" class="fixed inset-0 z-[100] bg-black/50 backdrop-blur-xl flex items-center justify-center transition-opacity duration-700">
+        <div class="flex space-x-3">
+            <div class="w-4 h-4 bg-neonYellow rounded-full animate-[pulse_1.5s_ease-in-out_infinite]"></div>
+            <div class="w-4 h-4 bg-neonYellow rounded-full animate-[pulse_1.5s_ease-in-out_0.2s_infinite]"></div>
+            <div class="w-4 h-4 bg-neonYellow rounded-full animate-[pulse_1.5s_ease-in-out_0.4s_infinite]"></div>
+        </div>
     </div>
 
     <div class="custom-cursor" id="js-cursor"></div>
@@ -47,7 +64,6 @@
     <header class="fixed top-0 left-0 w-full z-50 bg-oled/60 backdrop-blur-md border-b border-white/5 transition-all duration-300">
         <nav class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
             <a href="index.html" class="hover-target font-ndot font-bold text-xl text-white tracking-widest flex items-center gap-4">
-                <img src="assets/logo.png" alt="Logo" class="h-8 object-contain">
                 PORTFOLIO
             </a>
             <div class="flex items-center space-x-8 text-sm font-medium tracking-wider uppercase font-ndot">
@@ -57,42 +73,114 @@
         </nav>
     </header>
 
-    <section class="min-h-screen flex flex-col justify-center px-6 max-w-7xl mx-auto pt-32 pb-20">
-        <div class="max-w-4xl">
-            <span class="font-ndot text-neonYellow text-sm uppercase tracking-widest block mb-3">BIOGRAPHY // PROFILE</span>
-            <h1 class="text-5xl md:text-7xl font-black uppercase tracking-tight leading-none mb-6">
-                THE MIND BEHIND<br><span class="text-transparent bg-clip-text bg-gradient-to-r from-neutral-200 to-neutral-500">THE SYSTEM.</span>
-            </h1>
-            
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mt-12 items-start">
-                <div class="md:col-span-2 space-y-6 text-gray-400 font-light text-base md:text-lg leading-relaxed">
-                    <p>
-                        I am a digital creator specializing in high-end post-production, disruptive visual formats, and high-fidelity media grading operations. 
-                    </p>
-                    <p>
-                        By combining tight editing structures with clean, ultra-modern design frameworks, I build visual workspaces tailored to meet demanding aesthetic standards. Every cut is strategic; every color profile is intentional.
-                    </p>
-                    <h3 class="text-white font-ndot text-xl uppercase pt-4">Core Capabilities //</h3>
-                    <ul class="grid grid-cols-2 gap-2 text-sm font-ndot text-neonYellow">
-                        <li>[■] COLOR GRADING</li>
-                        <li>[■] VIDEO EDITING</li>
-                        <li>[■] DIGITAL IMAGERY</li>
-                        <li>[■] MEDIA ARCHITECTURE</li>
-                    </ul>
-                </div>
+    <main class="pt-32 pb-20 space-y-32">
+        
+        <!-- BIOGRAPHY SECTION -->
+        <section class="px-6 max-w-7xl mx-auto">
+            <div class="max-w-4xl">
+                <span class="font-ndot text-neonYellow text-sm uppercase tracking-widest block mb-3">BIOGRAPHY // PROFILE</span>
+                <h1 class="text-5xl md:text-7xl font-black uppercase tracking-tight leading-none mb-6">
+                    THE MIND BEHIND<br><span class="text-transparent bg-clip-text bg-gradient-to-r from-neutral-200 to-neutral-500">THE SYSTEM.</span>
+                </h1>
                 
-                <div class="bg-neutral-900 border border-white/5 aspect-[4/5] overflow-hidden group">
-                    <img src="assets/profile.jpg" alt="Profile Specimen" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" onerror="this.style.display='none'">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mt-12 items-start">
+                    <div class="md:col-span-2 space-y-6 text-gray-400 font-light text-base md:text-lg leading-relaxed">
+                        <p>I am a digital creator specializing in high-end post-production, disruptive visual formats, and high-fidelity media grading operations.</p>
+                        <p>By combining tight editing structures with clean, ultra-modern design frameworks, I build visual workspaces tailored to meet demanding aesthetic standards. Every cut is strategic; every color profile is intentional.</p>
+                        <h3 class="text-white font-ndot text-xl uppercase pt-4">Core Capabilities //</h3>
+                        <ul class="grid grid-cols-2 gap-2 text-sm font-ndot text-neonYellow">
+                            <li>[■] COLOR GRADING</li>
+                            <li>[■] VIDEO EDITING</li>
+                            <li>[■] AUTOMOTIVE IMAGERY</li>
+                            <li>[■] MEDIA ARCHITECTURE</li>
+                        </ul>
+                    </div>
+                    <div class="bg-neutral-900 border border-white/5 aspect-[4/5] overflow-hidden group">
+                        <img src="assets/profile.jpg" alt="Profile" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" onerror="this.style.display='none'">
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+
+        <!-- 3:4 SWIPE GALLERY -->
+        <section class="px-6 max-w-7xl mx-auto">
+            <span class="font-ndot text-neonYellow text-sm uppercase tracking-widest block mb-6">CURATED SELECTION // 3:4 PORTRAITS</span>
+            <div class="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-8 cursor-grab active:cursor-grabbing">
+                <!-- Photo 1 -->
+                <div class="snap-center shrink-0 w-[85vw] md:w-[400px] aspect-[3/4] bg-neutral-900 border border-white/10 relative overflow-hidden group">
+                    <!-- Replace src with your 296 GTB, GT3 RS, etc. shots -->
+                    <img src="https://via.placeholder.com/600x800/111/CCFF00?text=SHOT+01" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                </div>
+                <!-- Photo 2 -->
+                <div class="snap-center shrink-0 w-[85vw] md:w-[400px] aspect-[3/4] bg-neutral-900 border border-white/10 relative overflow-hidden group">
+                    <img src="https://via.placeholder.com/600x800/111/CCFF00?text=SHOT+02" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                </div>
+                <!-- Photo 3 -->
+                <div class="snap-center shrink-0 w-[85vw] md:w-[400px] aspect-[3/4] bg-neutral-900 border border-white/10 relative overflow-hidden group">
+                    <img src="https://via.placeholder.com/600x800/111/CCFF00?text=SHOT+03" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                </div>
+                <!-- Photo 4 -->
+                <div class="snap-center shrink-0 w-[85vw] md:w-[400px] aspect-[3/4] bg-neutral-900 border border-white/10 relative overflow-hidden group">
+                    <img src="https://via.placeholder.com/600x800/111/CCFF00?text=SHOT+04" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                </div>
+            </div>
+        </section>
+
+        <!-- BEFORE / AFTER INTERACTIVE GRID -->
+        <section class="px-6 max-w-7xl mx-auto">
+            <span class="font-ndot text-neonYellow text-sm uppercase tracking-widest block mb-6">COLOR GRADE // RAW VS PROCESSED</span>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                
+                <!-- Slider 1 -->
+                <div class="relative w-full aspect-video md:aspect-[4/3] overflow-hidden rounded-sm group hover-target border border-white/10">
+                    <img src="https://via.placeholder.com/800x600/333/FFF?text=AFTER+GRADE+01" class="absolute inset-0 w-full h-full object-cover">
+                    <img src="https://via.placeholder.com/800x600/111/555?text=RAW+FILE+01" class="absolute inset-0 w-full h-full object-cover [clip-path:inset(0_50%_0_0)]" id="img-top-1">
+                    <input type="range" min="0" max="100" value="50" class="absolute inset-0 w-full h-full opacity-0 cursor-ew-resize z-10" oninput="updateSlider(this.value, 'img-top-1', 'line-1')">
+                    <div class="absolute top-0 bottom-0 left-[50%] w-[2px] bg-neonYellow pointer-events-none transform -translate-x-1/2 flex items-center justify-center shadow-[0_0_10px_#CCFF00]" id="line-1">
+                        <div class="w-6 h-6 rounded-full bg-black border-2 border-neonYellow flex items-center justify-center"><div class="w-1 h-3 bg-neonYellow rounded-full"></div></div>
+                    </div>
+                </div>
+
+                <!-- Slider 2 -->
+                <div class="relative w-full aspect-video md:aspect-[4/3] overflow-hidden rounded-sm group hover-target border border-white/10">
+                    <img src="https://via.placeholder.com/800x600/333/FFF?text=AFTER+GRADE+02" class="absolute inset-0 w-full h-full object-cover">
+                    <img src="https://via.placeholder.com/800x600/111/555?text=RAW+FILE+02" class="absolute inset-0 w-full h-full object-cover [clip-path:inset(0_50%_0_0)]" id="img-top-2">
+                    <input type="range" min="0" max="100" value="50" class="absolute inset-0 w-full h-full opacity-0 cursor-ew-resize z-10" oninput="updateSlider(this.value, 'img-top-2', 'line-2')">
+                    <div class="absolute top-0 bottom-0 left-[50%] w-[2px] bg-neonYellow pointer-events-none transform -translate-x-1/2 flex items-center justify-center shadow-[0_0_10px_#CCFF00]" id="line-2">
+                        <div class="w-6 h-6 rounded-full bg-black border-2 border-neonYellow flex items-center justify-center"><div class="w-1 h-3 bg-neonYellow rounded-full"></div></div>
+                    </div>
+                </div>
+
+                <!-- Slider 3 -->
+                <div class="relative w-full aspect-video md:aspect-[4/3] overflow-hidden rounded-sm group hover-target border border-white/10">
+                    <img src="https://via.placeholder.com/800x600/333/FFF?text=AFTER+GRADE+03" class="absolute inset-0 w-full h-full object-cover">
+                    <img src="https://via.placeholder.com/800x600/111/555?text=RAW+FILE+03" class="absolute inset-0 w-full h-full object-cover [clip-path:inset(0_50%_0_0)]" id="img-top-3">
+                    <input type="range" min="0" max="100" value="50" class="absolute inset-0 w-full h-full opacity-0 cursor-ew-resize z-10" oninput="updateSlider(this.value, 'img-top-3', 'line-3')">
+                    <div class="absolute top-0 bottom-0 left-[50%] w-[2px] bg-neonYellow pointer-events-none transform -translate-x-1/2 flex items-center justify-center shadow-[0_0_10px_#CCFF00]" id="line-3">
+                        <div class="w-6 h-6 rounded-full bg-black border-2 border-neonYellow flex items-center justify-center"><div class="w-1 h-3 bg-neonYellow rounded-full"></div></div>
+                    </div>
+                </div>
+
+                <!-- Slider 4 -->
+                <div class="relative w-full aspect-video md:aspect-[4/3] overflow-hidden rounded-sm group hover-target border border-white/10">
+                    <img src="https://via.placeholder.com/800x600/333/FFF?text=AFTER+GRADE+04" class="absolute inset-0 w-full h-full object-cover">
+                    <img src="https://via.placeholder.com/800x600/111/555?text=RAW+FILE+04" class="absolute inset-0 w-full h-full object-cover [clip-path:inset(0_50%_0_0)]" id="img-top-4">
+                    <input type="range" min="0" max="100" value="50" class="absolute inset-0 w-full h-full opacity-0 cursor-ew-resize z-10" oninput="updateSlider(this.value, 'img-top-4', 'line-4')">
+                    <div class="absolute top-0 bottom-0 left-[50%] w-[2px] bg-neonYellow pointer-events-none transform -translate-x-1/2 flex items-center justify-center shadow-[0_0_10px_#CCFF00]" id="line-4">
+                        <div class="w-6 h-6 rounded-full bg-black border-2 border-neonYellow flex items-center justify-center"><div class="w-1 h-3 bg-neonYellow rounded-full"></div></div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
 
     <footer class="border-t border-white/5 bg-oled py-12 text-sm text-gray-600">
         <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
             <p class="font-ndot text-sm">&copy; 2026. All rights secured.</p>
             <div class="flex space-x-6 text-sm uppercase font-ndot tracking-widest">
-                <a href="mailto:anmmar.jpg@gmail.com" class="hover-target text-gray-400 hover:text-neonYellow transition-colors">Gmail</a>
+                <a href="mailto:ammar.jpg@gmail.com" class="hover-target text-gray-400 hover:text-neonYellow transition-colors">Gmail</a>
                 <a href="#" class="hover-target text-gray-400 hover:text-white transition-colors">Instagram</a>
                 <a href="#" class="hover-target text-gray-400 hover:text-white transition-colors">TikTok</a>
             </div>
@@ -100,69 +188,135 @@
     </footer>
 
     <script>
-        // --- FLUID TOPOGRAPHIC BACKGROUND ENGINE ---
-        const topoCanvas = document.getElementById('topo-canvas');
-        if (topoCanvas) {
-            const ctx = topoCanvas.getContext('2d');
-            let width, height;
-            let time = 0;
-
-            function resizeCanvas() {
-                width = topoCanvas.width = window.innerWidth;
-                height = topoCanvas.height = window.innerHeight;
-            }
-            window.addEventListener('resize', resizeCanvas);
-            resizeCanvas();
-
-            function drawTopography() {
-                ctx.clearRect(0, 0, width, height);
-                ctx.lineWidth = 1.5;
-                ctx.strokeStyle = 'rgba(204, 255, 0, 0.4)'; 
-
-                const lines = 18; 
-                for (let i = 0; i < lines; i++) {
-                    ctx.beginPath();
-                    for (let x = 0; x <= width; x += 30) {
-                        const yOffset = (height / 2) - 200; 
-                        const wave1 = Math.sin((x * 0.003) + time + (i * 0.15)) * (80 + i * 15);
-                        const wave2 = Math.cos((x * 0.001) - (time * 0.8) + (i * 0.1)) * 60;
-                        const y = yOffset + wave1 + wave2 + (i * 25);
-                        if (x === 0) ctx.moveTo(x, y);
-                        else ctx.lineTo(x, y);
-                    }
-                    ctx.stroke();
-                }
-                time += 0.004; 
-                requestAnimationFrame(drawTopography);
-            }
-            drawTopography();
-        }
-
-        // --- LOADING SCREEN LOGIC ---
+        // --- LOADER LOGIC ---
         window.addEventListener('load', () => {
             const loader = document.getElementById('loader');
             if(loader) {
                 setTimeout(() => {
                     loader.style.opacity = '0';
-                    setTimeout(() => {
-                        loader.style.display = 'none';
-                    }, 500); 
-                }, 800);
+                    setTimeout(() => loader.style.display = 'none', 700); 
+                }, 1200); // Give the cool blur a second to show off
             }
         });
 
-        // --- CUSTOM CURSOR SYSTEM ---
+        // --- CUSTOM CURSOR ---
         const cursor = document.getElementById('js-cursor');
         if (cursor) {
             document.addEventListener('mousemove', (e) => {
                 cursor.style.left = `${e.clientX}px`;
                 cursor.style.top = `${e.clientY}px`;
             });
-            document.querySelectorAll('.hover-target').forEach(item => {
+            document.querySelectorAll('.hover-target, input[type="range"]').forEach(item => {
                 item.addEventListener('mouseenter', () => cursor.classList.add('custom-cursor-grow'));
                 item.addEventListener('mouseleave', () => cursor.classList.remove('custom-cursor-grow'));
             });
         }
+
+        // --- BEFORE/AFTER SLIDER LOGIC ---
+        function updateSlider(val, imgId, lineId) {
+            document.getElementById(imgId).style.clipPath = `inset(0 ${100 - val}% 0 0)`;
+            document.getElementById(lineId).style.left = `${val}%`;
+        }
+
+        // --- THREE.JS TOPOGRAPHIC ENGINE ---
+        const canvas = document.getElementById('topo-canvas');
+        const scene = new THREE.Scene();
+        
+        // Setup Camera to look at the plane
+        const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
+        camera.position.set(0, -15, 20);
+        camera.lookAt(0, 0, 0);
+
+        const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+        // Create a dense plane for high-fidelity waves
+        const geometry = new THREE.PlaneGeometry(100, 100, 80, 80);
+
+        // The Shader Material that handles the math
+        const material = new THREE.ShaderMaterial({
+            uniforms: {
+                uTime: { value: 0 },
+                uMouse: { value: new THREE.Vector2(0, 0) }
+            },
+            vertexShader: `
+                uniform float uTime;
+                uniform vec2 uMouse;
+                varying float vElevation;
+                
+                void main() {
+                    vec4 modelPosition = modelMatrix * vec4(position, 1.0);
+                    
+                    // Core topographical sine waves
+                    float elevation = sin(modelPosition.x * 0.2 + uTime) * 
+                                      cos(modelPosition.y * 0.2 + uTime) * 1.5;
+                    
+                    // Mouse interaction math (repels the mesh away from cursor)
+                    float dist = distance(modelPosition.xy, uMouse * 30.0);
+                    float influence = smoothstep(15.0, 0.0, dist);
+                    elevation += influence * 5.0; // Bump height near mouse
+
+                    modelPosition.z += elevation;
+                    vElevation = elevation;
+
+                    vec4 viewPosition = viewMatrix * modelPosition;
+                    gl_Position = projectionMatrix * viewPosition;
+                }
+            `,
+            fragmentShader: `
+                varying float vElevation;
+                void main() {
+                    // Colors the lines Neon Yellow (#CCFF00) and fades them slightly based on depth
+                    float intensity = (vElevation + 2.0) * 0.15;
+                    gl_FragColor = vec4(0.8, 1.0, 0.0, 0.2 + intensity);
+                }
+            `,
+            wireframe: true,
+            transparent: true
+        });
+
+        const plane = new THREE.Mesh(geometry, material);
+        scene.add(plane);
+
+        // Mouse tracking setup
+        let mouseX = 0;
+        let mouseY = 0;
+        let targetX = 0;
+        let targetY = 0;
+
+        window.addEventListener('mousemove', (event) => {
+            // Normalize mouse coordinates from -1 to 1
+            targetX = (event.clientX / window.innerWidth) * 2 - 1;
+            targetY = -(event.clientY / window.innerHeight) * 2 + 1;
+        });
+
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        // Animation Loop
+        const clock = new THREE.Clock();
+        function animate() {
+            const elapsedTime = clock.getElapsedTime();
+            
+            // Lerp the mouse coordinates for that buttery smooth "delay" effect
+            mouseX += (targetX - mouseX) * 0.05;
+            mouseY += (targetY - mouseY) * 0.05;
+
+            material.uniforms.uTime.value = elapsedTime * 0.5;
+            material.uniforms.uMouse.value.set(mouseX, mouseY);
+
+            // Slowly rotate the whole mesh for extra ambient movement
+            plane.rotation.z = elapsedTime * 0.02;
+
+            renderer.render(scene, camera);
+            requestAnimationFrame(animate);
+        }
+        animate();
+
     </script>
 </body>
 </html>
