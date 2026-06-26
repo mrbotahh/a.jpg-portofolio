@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About | Creative Identity & Craft</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.min.js"></script>
     
     <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
     
@@ -26,6 +27,8 @@
         
         .font-ndot { font-family: 'VT323', monospace; letter-spacing: 0.1em; }
         
+        #topo-bg { position: fixed; top: 0; left: 0; z-index: 0; pointer-events: none; }
+
         .custom-cursor {
             width: 20px; height: 20px; border: 2px solid #CCFF00; border-radius: 50%;
             position: fixed; transform: translate(-50%, -50%); pointer-events: none; z-index: 9999;
@@ -42,6 +45,7 @@
     </style>
 </head>
 <body class="bg-oled text-gray-100 overflow-x-hidden antialiased">
+    <div id="topo-bg"></div>
 
     <!-- Gaussian Blur Loading Screen -->
     <div id="loader" class="fixed inset-0 z-[100] bg-black flex items-center justify-center transition-opacity duration-700">
@@ -68,15 +72,12 @@
     </header>
 
     <main class="relative z-10 pt-32 pb-10 space-y-32">
-        
-        <!-- BIOGRAPHY SECTION -->
         <section class="px-6 max-w-7xl mx-auto">
             <div class="max-w-4xl">
                 <span class="font-ndot text-neonYellow text-sm uppercase tracking-widest block mb-3">BIOGRAPHY // PROFILE</span>
                 <h1 class="text-5xl md:text-7xl font-black uppercase tracking-tight leading-none mb-6">
                     THE MIND BEHIND<br><span class="text-transparent bg-clip-text bg-gradient-to-r from-neutral-200 to-neutral-500">THE SYSTEM.</span>
                 </h1>
-                
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mt-12 items-center">
                     <div class="md:col-span-2 space-y-6 text-gray-400 font-light text-base md:text-lg leading-relaxed">
                         <p>I am a digital creator specializing in high-end post-production, disruptive visual formats, and high-fidelity media grading operations.</p>
@@ -89,8 +90,6 @@
                             <li>[■] MEDIA ARCHITECTURE</li>
                         </ul>
                     </div>
-                    
-                    <!-- CENTERED LOGO -->
                     <div class="flex items-center justify-center p-8 group">
                         <img src="assets/logo.png" alt="ammar.jpg Logo" class="w-48 md:w-64 object-contain opacity-70 group-hover:opacity-100 transition-opacity duration-500" onerror="this.style.display='none'">
                     </div>
@@ -98,7 +97,6 @@
             </div>
         </section>
 
-        <!-- 3:4 SWIPE GALLERY (Updated Paths) -->
         <section class="px-6 max-w-7xl mx-auto">
             <span class="font-ndot text-neonYellow text-sm uppercase tracking-widest block mb-6">CURATED SELECTION // 3:4 PORTRAITS</span>
             <div class="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-8 cursor-grab active:cursor-grabbing">
@@ -117,7 +115,6 @@
             </div>
         </section>
 
-        <!-- VIDEO SECTION (Updated Paths) -->
         <section class="px-6 max-w-7xl mx-auto">
             <span class="font-ndot text-neonYellow text-sm uppercase tracking-widest block mb-6">MOTION // VIDEO ARCHIVE</span>
             <div class="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-8 cursor-grab active:cursor-grabbing">
@@ -136,12 +133,9 @@
             </div>
         </section>
 
-        <!-- BEFORE / AFTER INTERACTIVE GRID (Updated Paths) -->
         <section class="px-6 max-w-7xl mx-auto">
             <span class="font-ndot text-neonYellow text-sm uppercase tracking-widest block mb-6">COLOR GRADE // RAW VS PROCESSED</span>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                
-                <!-- Slider 1 -->
                 <div class="relative w-full aspect-video md:aspect-[4/3] overflow-hidden rounded-sm group hover-target border border-white/10">
                     <img src="assets/editing/after1.jpg" class="absolute inset-0 w-full h-full object-cover" alt="After Grade 1">
                     <img src="assets/editing/before1.jpg" class="absolute inset-0 w-full h-full object-cover [clip-path:inset(0_50%_0_0)]" id="img-top-1" alt="Raw File 1">
@@ -150,8 +144,6 @@
                         <div class="w-6 h-6 rounded-full bg-black border-2 border-neonYellow flex items-center justify-center"><div class="w-1 h-3 bg-neonYellow rounded-full"></div></div>
                     </div>
                 </div>
-
-                <!-- Slider 2 -->
                 <div class="relative w-full aspect-video md:aspect-[4/3] overflow-hidden rounded-sm group hover-target border border-white/10">
                     <img src="assets/editing/after2.jpg" class="absolute inset-0 w-full h-full object-cover" alt="After Grade 2">
                     <img src="assets/editing/before2.jpg" class="absolute inset-0 w-full h-full object-cover [clip-path:inset(0_50%_0_0)]" id="img-top-2" alt="Raw File 2">
@@ -160,8 +152,6 @@
                         <div class="w-6 h-6 rounded-full bg-black border-2 border-neonYellow flex items-center justify-center"><div class="w-1 h-3 bg-neonYellow rounded-full"></div></div>
                     </div>
                 </div>
-
-                <!-- Slider 3 -->
                 <div class="relative w-full aspect-video md:aspect-[4/3] overflow-hidden rounded-sm group hover-target border border-white/10">
                     <img src="assets/editing/after3.jpg" class="absolute inset-0 w-full h-full object-cover" alt="After Grade 3">
                     <img src="assets/editing/before3.jpg" class="absolute inset-0 w-full h-full object-cover [clip-path:inset(0_50%_0_0)]" id="img-top-3" alt="Raw File 3">
@@ -170,8 +160,6 @@
                         <div class="w-6 h-6 rounded-full bg-black border-2 border-neonYellow flex items-center justify-center"><div class="w-1 h-3 bg-neonYellow rounded-full"></div></div>
                     </div>
                 </div>
-
-                <!-- Slider 4 -->
                 <div class="relative w-full aspect-video md:aspect-[4/3] overflow-hidden rounded-sm group hover-target border border-white/10">
                     <img src="assets/editing/after4.jpg" class="absolute inset-0 w-full h-full object-cover" alt="After Grade 4">
                     <img src="assets/editing/before4.jpg" class="absolute inset-0 w-full h-full object-cover [clip-path:inset(0_50%_0_0)]" id="img-top-4" alt="Raw File 4">
@@ -180,11 +168,9 @@
                         <div class="w-6 h-6 rounded-full bg-black border-2 border-neonYellow flex items-center justify-center"><div class="w-1 h-3 bg-neonYellow rounded-full"></div></div>
                     </div>
                 </div>
-
             </div>
         </section>
 
-        <!-- DEDICATED CONTACT SECTION -->
         <section class="px-6 max-w-7xl mx-auto pt-20 border-t border-white/10">
             <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-12">
                 <div>
@@ -192,7 +178,6 @@
                     <h2 class="text-4xl md:text-6xl font-black uppercase tracking-tight mb-4">INITIATE<br><span class="text-transparent bg-clip-text bg-gradient-to-r from-neutral-200 to-neutral-500">CONTACT.</span></h2>
                     <p class="text-gray-400 font-light text-lg">Available for high-end post-production and media operations.</p>
                 </div>
-                
                 <div class="flex flex-col items-start md:items-end gap-6">
                     <img src="assets/logo.png" alt="Logo" class="h-16 object-contain mb-2" onerror="this.style.display='none'">
                     <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-8 text-lg uppercase font-ndot tracking-widest text-left md:text-right">
@@ -203,7 +188,6 @@
                 </div>
             </div>
         </section>
-
     </main>
 
     <footer class="relative z-10 bg-oled py-8 text-sm text-gray-600 mt-12">
@@ -212,7 +196,35 @@
         </div>
     </footer>
 
-    <!-- LOADER LOGIC -->
+    <!-- INTERACTIVE TOPO BACKGROUND ENGINE -->
+    <script>
+        new p5((p) => {
+            let noiseOffset = 0;
+            p.setup = () => {
+                let canvas = p.createCanvas(p.windowWidth, p.windowHeight);
+                canvas.parent('topo-bg');
+            };
+            p.draw = () => {
+                p.clear();
+                p.stroke(255, 255, 255, 30);
+                p.noFill();
+                for (let y = 0; y < p.height; y += 40) {
+                    p.beginShape();
+                    for (let x = 0; x < p.width; x += 20) {
+                        let nx = p.map(x, 0, p.width, 0, 5);
+                        let ny = p.map(y, 0, p.height, 0, 5);
+                        let mouseInfluence = p.dist(p.mouseX, p.mouseY, x, y) * 0.005;
+                        let val = p.noise(nx + noiseOffset, ny + noiseOffset, mouseInfluence);
+                        p.vertex(x, y + val * 100);
+                    }
+                    p.endShape();
+                }
+                noiseOffset += 0.002;
+            };
+            p.windowResized = () => p.resizeCanvas(p.windowWidth, p.windowHeight);
+        });
+    </script>
+
     <script>
         window.addEventListener('load', () => {
             const loader = document.getElementById('loader');
@@ -226,10 +238,6 @@
                 }, 1200); 
             }
         });
-    </script>
-
-    <script>
-        // --- CUSTOM CURSOR ---
         const cursor = document.getElementById('js-cursor');
         if (cursor) {
             document.addEventListener('mousemove', (e) => {
@@ -241,8 +249,6 @@
                 item.addEventListener('mouseleave', () => cursor.classList.remove('custom-cursor-grow'));
             });
         }
-
-        // --- BEFORE/AFTER SLIDER LOGIC ---
         function updateSlider(val, imgId, lineId) {
             document.getElementById(imgId).style.clipPath = `inset(0 ${100 - val}% 0 0)`;
             document.getElementById(lineId).style.left = `${val}%`;
