@@ -1,73 +1,107 @@
 <!DOCTYPE html>
-<html lang="en" class="bg-black text-white scroll-smooth">
+<html lang="en" class="bg-black text-white">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio</title>
+    <title>ammmar.jpg | Creative Portfolio</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script type="module" src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.module.min.js"></script>
+    
     <style>
-        /* Force the canvas to the back */
-        #topo-canvas {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100vw; height: 100vh;
-            z-index: -10;
-        }
-        /* Ensure sections don't collapse */
-        section { min-height: 400px; }
-        ::-webkit-scrollbar { display: none; }
+        @import url('https://fonts.googleapis.com/css2?family=Courier+Prime&display=swap');
+        body { font-family: 'Courier Prime', monospace; cursor: crosshair; }
+        .dot-matrix { letter-spacing: 0.1em; text-transform: uppercase; }
+        .gaussian-loader { backdrop-filter: blur(20px); }
     </style>
 </head>
-<body class="bg-black">
+<body class="overflow-x-hidden">
 
-    <canvas id="topo-canvas"></canvas>
+    <div id="loader" class="fixed inset-0 z-50 flex items-center justify-center bg-black gaussian-loader">
+        <div class="flex space-x-4">
+            <div class="w-4 h-4 bg-yellow-400 rounded-full animate-pulse"></div>
+            <div class="w-4 h-4 bg-yellow-400 rounded-full animate-pulse delay-75"></div>
+            <div class="w-4 h-4 bg-yellow-400 rounded-full animate-pulse delay-150"></div>
+        </div>
+    </div>
 
-    <main class="relative z-10 space-y-32 py-24">
-        <section class="max-w-7xl mx-auto px-6">
-            <h2 class="text-3xl font-black mb-10">PHOTOGRAPHY</h2>
-            <div id="photo-carousel" class="flex gap-6 overflow-x-auto">
-                <div class="min-w-[300px] h-[400px] bg-neutral-900 border border-white/20">
-                    <img src="assets/photography/photo1.jpg" class="w-full h-full object-cover">
-                </div>
-                </div>
+    <div class="fixed top-0 right-0 w-full h-2 z-40 bg-gray-900">
+        <div id="progress-bar" class="h-full bg-yellow-400" style="width: 0%;"></div>
+    </div>
+
+    <nav class="fixed top-0 left-0 w-full p-6 flex justify-between z-30 dot-matrix text-sm">
+        <div>AMMMAR.JPG</div>
+        <div class="flex gap-6">
+            <a href="#portfolio" class="hover:text-yellow-400 transition">WORK</a>
+            <a href="#about" class="hover:text-yellow-400 transition">ABOUT</a>
+            <a href="#contact" class="hover:text-yellow-400 transition">CONTACT</a>
+        </div>
+    </nav>
+
+    <canvas id="bg-canvas" class="fixed inset-0 z-0"></canvas>
+
+    <main class="relative z-10">
+        <section class="h-screen flex items-center justify-center">
+            <h1 class="text-6xl md:text-9xl font-bold dot-matrix">CREATIVE<br>DIRECTION</h1>
         </section>
 
-        <section class="max-w-4xl mx-auto px-6">
-            <h2 class="text-3xl font-black mb-10">EDITING LAB</h2>
-            <div class="before-after-container relative w-full aspect-video border border-white/20 overflow-hidden cursor-ew-resize">
-                <img src="assets/editing/project1-before.jpg" class="absolute inset-0 w-full h-full object-cover">
-                <div class="after-wrapper absolute top-0 left-0 h-full w-1/2 overflow-hidden border-r-2 border-neonYellow">
-                    <img src="assets/editing/project1-after.jpg" class="absolute top-0 left-0 h-full w-full object-cover min-w-[800px]">
-                </div>
+        <section id="portfolio" class="py-20 px-10">
+            <h2 class="text-4xl mb-10 dot-matrix">SELECTED WORK</h2>
+            </section>
+
+        <section id="about" class="h-screen flex items-center px-10">
+            <p id="about-text" class="text-2xl md:text-4xl max-w-4xl"></p>
+        </section>
+
+        <section id="contact" class="py-20 px-10">
+            <h2 class="text-4xl mb-10 dot-matrix">FIND ME AT</h2>
+            <div class="flex gap-8 mb-20">
+                <a href="https://www.tiktok.com/@ammmar.jpg?_r=1&_t=ZS-97UJaymfx5u" target="_blank">TIKTOK</a>
+                <a href="https://www.instagram.com/ammmar.jpg?igsh=a2pnNXRhbm5pZzgy" target="_blank">INSTAGRAM</a>
             </div>
+
+            <h2 class="text-4xl mb-10 dot-matrix">CONTACT ME AT</h2>
+            <form action="https://api.web3forms.com/submit" method="POST" class="max-w-md">
+                <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE">
+                <input type="hidden" name="subject" value="New Portfolio Inquiry">
+                <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
+                
+                <input type="email" name="email" value="anmmar.jpg@gmail.com" readonly class="bg-transparent border-b border-yellow-400 w-full py-2 mb-6 outline-none">
+                <textarea name="message" placeholder="YOUR MESSAGE" class="w-full bg-black border border-yellow-400 p-4 mb-6"></textarea>
+                <button type="submit" class="bg-yellow-400 text-black px-8 py-2 dot-matrix font-bold">SEND</button>
+            </form>
         </section>
     </main>
 
     <script>
-        // 1. TOPOGRAPHY (Forced Initialization)
-        const canvas = document.getElementById('topo-canvas');
-        const ctx = canvas.getContext('2d');
-        function draw() {
-            canvas.width = window.innerWidth; canvas.height = window.innerHeight;
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            ctx.strokeStyle = '#CCFF00';
-            for (let i = 0; i < 10; i++) {
-                ctx.beginPath();
-                for (let x = 0; x <= canvas.width; x += 50) {
-                    let y = (canvas.height/2) + Math.sin(x*0.005 + Date.now()*0.001)*50 + (i*50);
-                    x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
-                }
-                ctx.stroke();
+        // GSAP Initialization for Scroll Progress
+        gsap.registerPlugin(ScrollTrigger);
+        
+        // Progress Bar Logic
+        ScrollTrigger.create({
+            trigger: "body",
+            start: "top top",
+            end: "bottom bottom",
+            onUpdate: (self) => {
+                document.getElementById('progress-bar').style.width = (self.progress * 100) + "%";
             }
-            requestAnimationFrame(draw);
-        }
-        draw();
+        });
 
-        // 2. SLIDER (Simplified)
-        document.querySelector('.before-after-container').addEventListener('mousemove', e => {
-            const rect = e.currentTarget.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            e.currentTarget.querySelector('.after-wrapper').style.width = (x / rect.width) * 100 + '%';
+        // Simple Typewriter Effect for About
+        const text = "Visual Architect. Videographer. Editor. Turning chaos into structured, pixel-perfect reality.";
+        const el = document.getElementById('about-text');
+        let i = 0;
+        function type() {
+            if (i < text.length) {
+                el.innerHTML += text.charAt(i);
+                i++;
+                setTimeout(type, 50);
+            }
+        }
+        window.addEventListener('load', () => {
+            document.getElementById('loader').style.display = 'none';
+            type();
         });
     </script>
 </body>
