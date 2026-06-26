@@ -1,69 +1,47 @@
 <!DOCTYPE html>
-<html lang="en" class="bg-black text-white scroll-smooth selection:bg-neonYellow selection:text-black">
+<html lang="en" class="bg-black text-white">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio | Ultimate Edition</title>
+    <title>Portfolio | Ultimate Fixed</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=DotGothic16&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
-    <script>
-        tailwind.config = { theme: { extend: { colors: { oled: '#000000', neonYellow: '#CCFF00' } } } }
-    </script>
     <style>
-        ::-webkit-scrollbar { display: none; }
-        .font-ndot { font-family: 'DotGothic16', sans-serif; letter-spacing: 0.1em; }
-        .swiper-button-next, .swiper-button-prev { color: #CCFF00 !important; }
-        .custom-cursor { width: 20px; height: 20px; border: 2px solid #CCFF00; border-radius: 50%; position: fixed; transform: translate(-50%, -50%); pointer-events: none; z-index: 9999; }
+        /* Force heights so Swiper renders */
+        .swiper { width: 100%; height: 500px; }
+        .swiper-slide img, .swiper-slide video { width: 100%; height: 100%; object-fit: cover; }
+        #topo-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; opacity: 0.3; }
+        /* Fix Header Alignment */
+        .header-fix { display: flex; align-items: center; justify-content: space-between; }
     </style>
 </head>
-<body class="bg-oled text-gray-100 overflow-x-hidden">
+<body class="bg-black">
+    <canvas id="topo-canvas"></canvas>
 
-    <canvas id="topo-canvas" class="fixed top-0 left-0 w-full h-full z-[-1] opacity-40"></canvas>
-    <div class="custom-cursor" id="js-cursor"></div>
-
-    <header class="fixed top-0 w-full z-50 bg-oled/60 backdrop-blur-md border-b border-white/5 h-20">
-        <nav class="max-w-7xl mx-auto px-6 h-full flex items-center justify-between">
-            <a href="index.html" class="flex items-center gap-4 font-ndot font-bold text-xl tracking-widest">
-                <img src="assets/logo.png" class="h-8 w-auto object-contain"> PORTFOLIO
+    <header class="fixed top-0 w-full z-50 bg-black/80 backdrop-blur-md border-b border-white/10 h-20">
+        <nav class="max-w-7xl mx-auto px-6 h-full header-fix">
+            <a href="#" class="flex items-center gap-4 font-bold text-xl tracking-tighter">
+                <img src="assets/logo.png" class="h-8 w-auto"> PORTFOLIO
             </a>
-            <div class="flex items-center space-x-8 text-sm font-medium uppercase font-ndot">
-                <a href="index.html" class="text-neonYellow">Home</a>
-                <a href="about.html" class="text-gray-400">About</a>
-            </div>
         </nav>
     </header>
 
-    <main class="py-32 space-y-32">
+    <main class="pt-32 pb-20 space-y-24">
         <section class="max-w-5xl mx-auto px-6">
-            <h2 class="text-3xl font-black uppercase mb-12">Photography Showcase</h2>
-            <div class="swiper photo-swiper w-full aspect-[4/3] rounded-2xl overflow-hidden border border-white/10">
+            <h2 class="text-3xl font-black mb-8">Photography</h2>
+            <div class="swiper photo-swiper">
                 <div class="swiper-wrapper">
-                    <div class="swiper-slide"><img src="assets/photography/photo1.jpg" class="w-full h-full object-cover"></div>
-                    <div class="swiper-slide"><img src="assets/photography/photo2.jpg" class="w-full h-full object-cover"></div>
-                    <div class="swiper-slide"><img src="assets/photography/photo3.jpg" class="w-full h-full object-cover"></div>
-                    <div class="swiper-slide"><img src="assets/photography/photo4.jpg" class="w-full h-full object-cover"></div>
+                    <div class="swiper-slide"><img src="assets/photography/photo1.jpg"></div>
+                    <div class="swiper-slide"><img src="assets/photography/photo2.jpg"></div>
                 </div>
             </div>
         </section>
 
         <section class="max-w-5xl mx-auto px-6">
-            <h2 class="text-3xl font-black uppercase mb-12">Post-Production Lab</h2>
-            <div class="swiper manual-swiper w-full aspect-video rounded-2xl overflow-hidden border border-white/10">
+            <h2 class="text-3xl font-black mb-8">Post-Production</h2>
+            <div class="swiper manual-swiper">
                 <div class="swiper-wrapper">
-                    <div class="swiper-slide"><img src="assets/editing/before1.jpg" class="w-full h-full object-cover"></div>
-                    <div class="swiper-slide"><img src="assets/editing/after1.jpg" class="w-full h-full object-cover"></div>
-                </div>
-                <div class="swiper-button-next"></div><div class="swiper-button-prev"></div>
-            </div>
-        </section>
-
-        <section class="max-w-5xl mx-auto px-6">
-            <h2 class="text-3xl font-black uppercase mb-12">Videography Reels</h2>
-            <div class="swiper manual-swiper w-full aspect-video rounded-2xl overflow-hidden border border-white/10">
-                <div class="swiper-wrapper">
-                    <div class="swiper-slide"><video src="assets/videos/video1.mp4" controls class="w-full h-full"></video></div>
-                    <div class="swiper-slide"><video src="assets/videos/video2.mp4" controls class="w-full h-full"></video></div>
+                    <div class="swiper-slide"><img src="assets/editing/before1.jpg"></div>
+                    <div class="swiper-slide"><img src="assets/editing/after1.jpg"></div>
                 </div>
                 <div class="swiper-button-next"></div><div class="swiper-button-prev"></div>
             </div>
@@ -72,26 +50,24 @@
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
-        // Swiper Initialization
-        new Swiper('.photo-swiper', { autoplay: { delay: 3000 }, loop: true, effect: 'fade' });
+        // Init Swiper
+        new Swiper('.photo-swiper', { autoplay: { delay: 2000 }, loop: true });
         new Swiper('.manual-swiper', { loop: false, navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' } });
 
-        // Topography Animation
-        const topoCanvas = document.getElementById('topo-canvas');
-        const ctx = topoCanvas.getContext('2d');
-        function draw() {
-            topoCanvas.width = window.innerWidth; topoCanvas.height = window.innerHeight;
-            ctx.strokeStyle = '#CCFF00'; ctx.lineWidth = 1;
-            for(let i=0; i<20; i++) {
-                ctx.beginPath();
-                for(let x=0; x<topoCanvas.width; x+=50) {
-                    ctx.lineTo(x, (topoCanvas.height/2) + Math.sin(x*0.01 + Date.now()*0.002 + i)*100);
-                }
-                ctx.stroke();
+        // Topography
+        const canvas = document.getElementById('topo-canvas');
+        const ctx = canvas.getContext('2d');
+        function animate() {
+            canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+            ctx.strokeStyle = '#CCFF00';
+            ctx.beginPath();
+            for(let i=0; i<canvas.width; i+=20) {
+                ctx.lineTo(i, (canvas.height/2) + Math.sin(i*0.01 + Date.now()*0.002)*50);
             }
-            requestAnimationFrame(draw);
+            ctx.stroke();
+            requestAnimationFrame(animate);
         }
-        draw();
+        animate();
     </script>
 </body>
 </html>
