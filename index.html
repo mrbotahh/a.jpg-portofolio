@@ -1,100 +1,31 @@
-<!DOCTYPE html>
-<html lang="en" class="bg-black text-white scroll-smooth">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio | System</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        body { background: #000; }
-        ::-webkit-scrollbar { display: none; }
-        .canvas-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; opacity: 0.3; }
-        .carousel { display: flex; overflow-x: auto; gap: 1.5rem; scroll-snap-type: x mandatory; scroll-behavior: smooth; }
-        .item { flex: 0 0 300px; scroll-snap-align: start; }
-        .before-after-container { position: relative; width: 100%; aspect-ratio: 16/9; overflow: hidden; cursor: col-resize; }
-        .after-wrapper { position: absolute; top: 0; left: 0; height: 100%; width: 50%; overflow: hidden; border-right: 2px solid #CCFF00; }
-    </style>
-</head>
-<body class="text-white">
+<section class="max-w-4xl mx-auto px-6">
+    <h2 class="text-3xl font-black uppercase mb-12">Post-Production Lab</h2>
+    
+    <div class="before-after-container relative w-full aspect-[1080/609] overflow-hidden border border-white/5 cursor-ew-resize mb-8">
+        <img src="assets/editing/project1-before.jpg" class="absolute inset-0 w-full h-full object-cover">
+        <div class="after-wrapper absolute inset-0 w-1/2 overflow-hidden border-r-2 border-neonYellow">
+            <img src="assets/editing/project1-after.jpg" class="absolute inset-0 w-full h-full object-cover min-w-[1080px]">
+        </div>
+    </div>
+    
+    <div class="before-after-container relative w-full aspect-[1080/609] overflow-hidden border border-white/5 cursor-ew-resize mb-8">
+        <img src="assets/editing/project2-before.jpg" class="absolute inset-0 w-full h-full object-cover">
+        <div class="after-wrapper absolute inset-0 w-1/2 overflow-hidden border-r-2 border-neonYellow">
+            <img src="assets/editing/project2-after.jpg" class="absolute inset-0 w-full h-full object-cover min-w-[1080px]">
+        </div>
+    </div>
 
-    <canvas id="topo-canvas" class="canvas-bg"></canvas>
+    <div class="before-after-container relative w-full aspect-[1080/609] overflow-hidden border border-white/5 cursor-ew-resize mb-8">
+        <img src="assets/editing/project3-before.jpg" class="absolute inset-0 w-full h-full object-cover">
+        <div class="after-wrapper absolute inset-0 w-1/2 overflow-hidden border-r-2 border-neonYellow">
+            <img src="assets/editing/project3-after.jpg" class="absolute inset-0 w-full h-full object-cover min-w-[1080px]">
+        </div>
+    </div>
 
-    <main class="space-y-32 py-20">
-        
-        <section class="max-w-7xl mx-auto px-6">
-            <h2 class="text-3xl font-black mb-10">PHOTOGRAPHY</h2>
-            <div id="photo-carousel" class="carousel">
-                <div class="item"><img src="assets/p1.jpg" class="w-full h-full object-cover"></div>
-                <div class="item"><img src="assets/p2.jpg" class="w-full h-full object-cover"></div>
-                <div class="item"><img src="assets/p3.jpg" class="w-full h-full object-cover"></div>
-                <div class="item"><img src="assets/p4.jpg" class="w-full h-full object-cover"></div>
-            </div>
-        </section>
-
-        <section class="max-w-4xl mx-auto px-6 space-y-12">
-            <h2 class="text-3xl font-black">EDITING LAB</h2>
-            <div class="before-after-container">
-                <img src="assets/before1.jpg" class="absolute inset-0 w-full h-full object-cover">
-                <div class="after-wrapper">
-                    <img src="assets/after1.jpg" class="absolute inset-0 w-full h-full object-cover min-w-[800px]">
-                </div>
-            </div>
-            </section>
-
-        <section class="max-w-7xl mx-auto px-6">
-            <h2 class="text-3xl font-black mb-10">REELS</h2>
-            <div id="video-carousel" class="carousel">
-                <video src="assets/v1.mp4" muted loop class="item h-[400px]"></video>
-                <video src="assets/v2.mp4" muted loop class="item h-[400px]"></video>
-                <video src="assets/v3.mp4" muted loop class="item h-[400px]"></video>
-                <video src="assets/v4.mp4" muted loop class="item h-[400px]"></video>
-            </div>
-        </section>
-    </main>
-
-    <script>
-        // 1. TOPOGRAPHY
-        const canvas = document.getElementById('topo-canvas');
-        const ctx = canvas.getContext('2d');
-        let time = 0;
-        function draw() {
-            canvas.width = window.innerWidth; canvas.height = window.innerHeight;
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            ctx.strokeStyle = '#CCFF00';
-            for (let i = 0; i < 15; i++) {
-                ctx.beginPath();
-                for (let x = 0; x <= canvas.width; x += 40) {
-                    let y = (canvas.height/2) + Math.sin(x*0.005 + time)*50 + (i*30);
-                    x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
-                }
-                ctx.stroke();
-            }
-            time += 0.01; requestAnimationFrame(draw);
-        }
-        draw();
-
-        // 2. AUTO-SCROLL
-        function autoScroll(id) {
-            const el = document.getElementById(id);
-            setInterval(() => {
-                el.scrollLeft + el.clientWidth >= el.scrollWidth ? el.scrollLeft = 0 : el.scrollBy({left: 300, behavior: 'smooth'});
-            }, 3000);
-        }
-        autoScroll('photo-carousel');
-        autoScroll('video-carousel');
-
-        // 3. BEFORE/AFTER SLIDER
-        document.querySelectorAll('.before-after-container').forEach(c => {
-            c.addEventListener('mousemove', e => {
-                c.querySelector('.after-wrapper').style.width = ((e.clientX - c.getBoundingClientRect().left) / c.offsetWidth) * 100 + '%';
-            });
-        });
-        
-        // 4. VIDEO AUTO-PLAY
-        const observer = new IntersectionObserver(entries => {
-            entries.forEach(e => e.isIntersecting ? e.target.play() : e.target.pause());
-        }, { threshold: 0.5 });
-        document.querySelectorAll('video').forEach(v => observer.observe(v));
-    </script>
-</body>
-</html>
+    <div class="before-after-container relative w-full aspect-[1080/609] overflow-hidden border border-white/5 cursor-ew-resize mb-8">
+        <img src="assets/editing/project4-before.jpg" class="absolute inset-0 w-full h-full object-cover">
+        <div class="after-wrapper absolute inset-0 w-1/2 overflow-hidden border-r-2 border-neonYellow">
+            <img src="assets/editing/project4-after.jpg" class="absolute inset-0 w-full h-full object-cover min-w-[1080px]">
+        </div>
+    </div>
+</section>
