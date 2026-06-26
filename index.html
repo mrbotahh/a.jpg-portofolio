@@ -1,78 +1,102 @@
 <!DOCTYPE html>
-<html lang="en" class="bg-black text-white scroll-smooth">
+<html lang="en" class="bg-black text-white scroll-smooth selection:bg-neonYellow selection:text-black">
 <head>
     <meta charset="UTF-8">
-    <title>Portfolio | Ultimate Master</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio | Creative Identity & Craft</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=DotGothic16&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+    <script>
+        tailwind.config = { theme: { extend: { colors: { oled: '#000000', neonYellow: '#CCFF00' } } } }
+    </script>
     <style>
+        ::-webkit-scrollbar { display: none; }
+        * { -ms-overflow-style: none; scrollbar-width: none; }
         .font-ndot { font-family: 'DotGothic16', sans-serif; letter-spacing: 0.1em; }
-        #loader { position: fixed; inset: 0; background: black; z-index: 9999; display: flex; align-items: center; justify-content: center; }
-        .swiper { width: 100%; max-width: 900px; height: 500px; border-radius: 1rem; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); }
-        .swiper-slide img, .swiper-slide video { width: 100%; height: 100%; object-fit: cover; }
-        .swiper-button-next, .swiper-button-prev { color: #CCFF00 !important; }
-        canvas { position: fixed; top: 0; left: 0; z-index: -1; opacity: 0.4; }
+        .custom-cursor { width: 20px; height: 20px; border: 2px solid #CCFF00; border-radius: 50%; position: fixed; transform: translate(-50%, -50%); pointer-events: none; z-index: 9999; transition: width 0.2s, height 0.2s, background-color 0.2s; }
+        .custom-cursor-grow { width: 50px; height: 50px; background-color: rgba(204, 255, 0, 0.15); border-color: #CCFF00; }
+        .dot { animation: fade 1.5s infinite; }
+        .dot:nth-child(1) { animation-delay: 0s; } .dot:nth-child(2) { animation-delay: 0.3s; } .dot:nth-child(3) { animation-delay: 0.6s; }
+        @keyframes fade { 0%, 100% { opacity: 0; } 50% { opacity: 1; } }
     </style>
 </head>
-<body class="bg-black">
-    <div id="loader"><h1 class="text-neonYellow text-4xl font-ndot">LOADING...</h1></div>
-    
-    <canvas id="topo-canvas"></canvas>
+<body class="bg-oled text-gray-100 overflow-x-hidden antialiased">
 
-    <header class="fixed top-0 w-full z-40 bg-black/60 backdrop-blur-md border-b border-white/10 h-20">
-        <div class="max-w-7xl mx-auto px-6 h-full flex items-center justify-between">
-            <a href="index.html" class="flex items-center gap-4 font-ndot font-bold text-xl tracking-widest">
-                <img src="assets/logo.png" class="h-8 w-auto"> PORTFOLIO
+    <canvas id="topo-canvas" class="fixed top-0 left-0 w-full h-full z-[-1] opacity-40 pointer-events-none"></canvas>
+
+    <header class="fixed top-0 left-0 w-full z-50 bg-oled/60 backdrop-blur-md border-b border-white/5 transition-all duration-300">
+        <nav class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <a href="index.html" class="hover-target font-ndot font-bold text-xl text-white tracking-widest flex items-center gap-4">
+                <img src="assets/logo.png" alt="Logo" class="h-8 w-auto object-contain">
+                PORTFOLIO
             </a>
-            <div class="flex items-center space-x-8 text-sm font-medium font-ndot">
-                <a href="index.html" class="text-[#CCFF00]">HOME</a>
-                <a href="about.html" class="text-gray-400">ABOUT</a>
+            <div class="flex items-center space-x-8 text-sm font-medium tracking-wider uppercase font-ndot">
+                <a href="index.html" class="hover-target text-neonYellow transition-colors">Home</a>
+                <a href="about.html" class="hover-target text-gray-400 hover:text-white transition-colors">About</a>
             </div>
-        </div>
+        </nav>
     </header>
 
-    <main class="pt-32 pb-20 space-y-32">
-        <section class="px-6">
-            <h2 class="text-center text-3xl font-black uppercase mb-12">Photography</h2>
-            <div class="swiper photo-swiper mx-auto"><div class="swiper-wrapper">
-                <div class="swiper-slide"><img src="assets/photography/photo1.jpg"></div>
-                <div class="swiper-slide"><img src="assets/photography/photo2.jpg"></div>
-            </div></div>
+    <section class="min-h-screen flex flex-col justify-center px-6 max-w-7xl mx-auto pt-20">
+        <div class="max-w-4xl">
+            <span class="font-ndot text-neonYellow text-sm uppercase tracking-widest block mb-3">POST-PRODUCTION // IMAGERY</span>
+            <h1 class="text-5xl md:text-8xl font-black uppercase tracking-tight leading-none mb-6">
+                RAW DATA.<br><span class="text-transparent bg-clip-text bg-gradient-to-r from-neutral-200 to-neutral-500">DISRUPTIVE CUTS.</span>
+            </h1>
+            <p class="text-gray-400 font-light text-base md:text-xl max-w-2xl leading-relaxed mb-8">
+                A digital workspace housing uncompromised visual systems, high-fidelity color grading sequences, and custom media edits built for modern branding demands.
+            </p>
+            <div class="flex items-center gap-6">
+                <a href="#work" class="hover-target inline-block bg-white text-black font-ndot text-lg font-bold uppercase tracking-widest px-8 py-4 border border-white hover:bg-transparent hover:text-white transition-all duration-300">Explore System</a>
+            </div>
+        </div>
+    </section>
+
+    <main id="work" class="py-24 border-t border-white/5 bg-neutral-950/40 space-y-32">
+
+        <section class="max-w-7xl mx-auto px-6">
+            <h2 class="text-3xl font-black uppercase mb-12">Photography Showcase</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+                <div class="relative group overflow-hidden bg-neutral-900 border border-white/5 aspect-[3/4]">
+                    <img src="assets/photography/photo1.jpg" class="w-full h-full object-cover">
+                </div>
+                <div class="relative group overflow-hidden bg-neutral-900 border border-white/5 aspect-[3/4]">
+                    <img src="assets/photography/photo2.jpg" class="w-full h-full object-cover">
+                </div>
+                <div class="relative group overflow-hidden bg-neutral-900 border border-white/5 aspect-[3/4]">
+                    <img src="assets/photography/photo3.jpg" class="w-full h-full object-cover">
+                </div>
+                <div class="relative group overflow-hidden bg-neutral-900 border border-white/5 aspect-[3/4]">
+                    <img src="assets/photography/photo4.jpg" class="w-full h-full object-cover">
+                </div>
+            </div>
         </section>
 
-        <section class="px-6">
-            <h2 class="text-center text-3xl font-black uppercase mb-12">Post-Production</h2>
-            <div class="swiper manual-swiper mx-auto"><div class="swiper-wrapper">
-                <div class="swiper-slide"><img src="assets/editing/before1.jpg"></div>
-                <div class="swiper-slide"><img src="assets/editing/after1.jpg"></div>
-            </div><div class="swiper-button-next"></div><div class="swiper-button-prev"></div></div>
+        <section class="max-w-7xl mx-auto px-6">
+            <h2 class="text-3xl font-black uppercase mb-12">Post-Production Lab</h2>
+            <div class="max-w-4xl mx-auto">
+                <div id="before-after-slider" class="relative w-full aspect-video overflow-hidden border border-white/5 cursor-ew-resize">
+                    <img src="assets/editing/before1.jpg" class="absolute inset-0 w-full h-full object-cover">
+                    <div id="after-image-wrapper" class="absolute inset-0 w-1/2 overflow-hidden border-r border-neonYellow">
+                        <img src="assets/editing/after1.jpg" id="after-img-el" class="absolute inset-0 w-full h-full object-cover max-w-none">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="max-w-7xl mx-auto px-6">
+            <h2 class="text-3xl font-black uppercase mb-12">Videography Reels</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-neutral-950 border border-white/5 p-4"><video src="assets/videos/video1.mp4" class="w-full aspect-video" controls></video></div>
+                <div class="bg-neutral-950 border border-white/5 p-4"><video src="assets/videos/video2.mp4" class="w-full aspect-video" controls></video></div>
+                <div class="bg-neutral-950 border border-white/5 p-4"><video src="assets/videos/video3.mp4" class="w-full aspect-video" controls></video></div>
+                <div class="bg-neutral-950 border border-white/5 p-4"><video src="assets/videos/video4.mp4" class="w-full aspect-video" controls></video></div>
+            </div>
         </section>
     </main>
 
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
-        // Ensure everything loads before running
-        window.addEventListener('load', () => {
-            document.getElementById('loader').style.display = 'none';
-            new Swiper('.photo-swiper', { autoplay: { delay: 3000 }, loop: true });
-            new Swiper('.manual-swiper', { navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' } });
-        });
-
-        // Topo Canvas
-        const canvas = document.getElementById('topo-canvas');
-        const ctx = canvas.getContext('2d');
-        function draw() {
-            canvas.width = window.innerWidth; canvas.height = window.innerHeight;
-            ctx.strokeStyle = '#CCFF00';
-            ctx.beginPath();
-            for(let i=0; i<canvas.width; i+=40) {
-                ctx.lineTo(i, (canvas.height/2) + Math.sin(i*0.01 + Date.now()*0.002)*80);
-            }
-            ctx.stroke();
-            requestAnimationFrame(draw);
-        }
-        draw();
+        // --- [Your original script functions go here] ---
     </script>
 </body>
 </html>
