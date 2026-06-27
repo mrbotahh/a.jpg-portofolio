@@ -249,52 +249,43 @@
         });
     </script>
 
-    <script>
-        window.addEventListener('load', () => {
-            const loader = document.getElementById('loader');
-            if(loader) {
+<script>
+    // 1. Loading Screen Logic
+    window.addEventListener('load', () => {
+        const loader = document.getElementById('loader');
+        if (loader) {
+            setTimeout(() => {
+                loader.style.opacity = '0';
                 setTimeout(() => {
-                    loader.style.opacity = '0';
-                    setTimeout(() => {
-                        loader.style.display = 'none';
-                        loader.style.pointerEvents = 'none'; 
-                    }, 700); 
-                }, 1200); 
-            }
+                    loader.style.display = 'none';
+                    loader.style.pointerEvents = 'none'; 
+                }, 700); 
+            }, 1200); 
+        }
+    });
+
+    // 2. Custom Cursor Logic
+    const cursor = document.getElementById('js-cursor');
+    if (cursor) {
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = `${e.clientX}px`;
+            cursor.style.top = `${e.clientY}px`;
         });
-        const cursor = document.getElementById('js-cursor');
-        if (cursor) {
-            document.addEventListener('mousemove', (e) => {
-                cursor.style.left = `${e.clientX}px`;
-                cursor.style.top = `${e.clientY}px`;
-            });
-            document.querySelectorAll('.hover-target, input[type="range"], a, button').forEach(item => {
-                item.addEventListener('mouseenter', () => cursor.classList.add('custom-cursor-grow'));
-                item.addEventListener('mouseleave', () => cursor.classList.remove('custom-cursor-grow'));
-            });
-        }
-        function updateSlider(val, imgId, lineId) {
-            document.getElementById(imgId).style.clipPath = `inset(0 ${100 - val}% 0 0)`;
-            document.getElementById(lineId).style.left = `${val}%`;
-        }
-
-        <script>
-function scrollContainer(btn, amount) {
-    // Finds the container that is a sibling of the button's parent
-    const container = btn.parentElement.previousElementSibling;
-    container.scrollBy({ left: amount, behavior: 'smooth' });
-}
-
-window.addEventListener('load', function() {
-    console.log("Page fully loaded!"); // Check your browser console (F12) to see if this logs
-    const loader = document.getElementById('loader');
-    if (loader) {
-        loader.style.opacity = '0';
-        setTimeout(() => {
-            loader.style.display = 'none';
-        }, 700); // Increased to 700ms to match your CSS transition duration
+        document.querySelectorAll('.hover-target, input[type="range"], a, button').forEach(item => {
+            item.addEventListener('mouseenter', () => cursor.classList.add('custom-cursor-grow'));
+            item.addEventListener('mouseleave', () => cursor.classList.remove('custom-cursor-grow'));
+        });
     }
-});
-    </script>
-</body>
+
+    // 3. Utility Functions
+    function updateSlider(val, imgId, lineId) {
+        document.getElementById(imgId).style.clipPath = `inset(0 ${100 - val}% 0 0)`;
+        document.getElementById(lineId).style.left = `${val}%`;
+    }
+
+    function scrollContainer(btn, amount) {
+        const container = btn.parentElement.previousElementSibling;
+        container.scrollBy({ left: amount, behavior: 'smooth' });
+    }
+</script>
 </html>
