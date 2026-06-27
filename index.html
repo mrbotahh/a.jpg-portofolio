@@ -23,6 +23,31 @@
         }
     </script>
     <style>
+        <style>
+        /* 1. Hide default cursor ONLY on desktop/mouse devices */
+        @media (pointer: fine) {
+            html, body, .hover-target, a, button {
+                cursor: none !important;
+            }
+        }
+
+        /* 2. Hide custom yellow ring and reset cursor on mobile/touch devices */
+        @media (pointer: coarse) {
+            #js-cursor {
+                display: none !important;
+            }
+            html, body, .hover-target, a, button {
+                cursor: auto !important;
+            }
+        }
+
+        /* Your existing styling below this line... */
+        .nav-btn {
+            backdrop-filter: blur(10px);
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid #CCFF00;
+            color: #CCFF00;
+            
         .nav-btn {
     backdrop-filter: blur(10px);
     background: rgba(0, 0, 0, 0.4);
