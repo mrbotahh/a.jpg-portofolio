@@ -201,7 +201,7 @@
 <div class="relative group cursor-pointer border border-outline-variant bg-surface-container-low overflow-hidden">
 <div class="aspect-video relative overflow-hidden bg-black flex items-center justify-center">
 <video autoplay="" class="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:opacity-80 transition-opacity" loop="" muted="" playsinline="" preload="auto">
-<source src="assets/stream1" type="video/mp4">
+<source src="assets/stream1.mp4" type="video/mp4">
 </video>
 
 </div>
@@ -217,7 +217,7 @@
 <div class="relative group cursor-pointer border border-outline-variant bg-surface-container-low overflow-hidden">
 <div class="aspect-video relative overflow-hidden bg-black flex items-center justify-center">
 <video autoplay="" class="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:opacity-80 transition-opacity" loop="" muted="" playsinline="" preload="auto">
-<source src="assets/stream2" type="video/mp4">
+<source src="assets/stream2.mp4" type="video/mp4">
 </video>
 
 </div>
@@ -233,7 +233,7 @@
 <div class="relative group cursor-pointer border border-outline-variant bg-surface-container-low overflow-hidden">
 <div class="aspect-video relative overflow-hidden bg-black flex items-center justify-center">
 <video autoplay="" class="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:opacity-80 transition-opacity" loop="" muted="" playsinline="" preload="auto">
-<source src="assets/stream3" type="video/mp4">
+<source src="assets/stream3.mp4" type="video/mp4">
 </video>
 
 </div>
@@ -249,7 +249,7 @@
 <div class="relative group cursor-pointer border border-outline-variant bg-surface-container-low overflow-hidden">
 <div class="aspect-video relative overflow-hidden bg-black flex items-center justify-center">
 <video autoplay="" class="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:opacity-80 transition-opacity" loop="" muted="" playsinline="" preload="auto">
-<source src="assets/stream4" type="video/mp4">
+<source src="assets/stream4.mp4" type="video/mp4">
 </video>
 
 </div>
@@ -363,6 +363,24 @@
 </footer>
 </main>
 <script>
+
+        // Autoplay videos on scroll into view
+const videoObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        const video = entry.target;
+        if (entry.isIntersecting) {
+            video.play().catch(() => {});
+        } else {
+            video.pause();
+        }
+    });
+}, { threshold: 0.3 });
+
+document.querySelectorAll('video').forEach(video => {
+    video.muted = true; // ensure muted for autoplay policy
+    videoObserver.observe(video);
+});
+        
     // Custom Cursor Logic
     const cursor = document.getElementById('cursor');
     const dot = document.getElementById('cursor-dot');
