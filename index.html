@@ -1,586 +1,311 @@
 <!DOCTYPE html>
-
-<html class="dark" lang="en"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<link href="assets/favicon.png" rel="icon" type="image/png"/>
-<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&amp;family=Hanken+Grotesk:wght@300;400;500;700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=block" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@100..900&amp;family=Space+Mono:wght@100..900&amp;display=swap" rel="stylesheet"/>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<script id="tailwind-config">
-        try {
-            tailwind.config = {
-                darkMode: "class",
-                theme: {
-                    extend: {
-                        "colors": {
-                            "on-primary": "#283500",
-                            "tertiary-container": "#e2e2e2",
-                            "outline-variant": "#444933",
-                            "outline": "#8e9379",
-                            "on-primary-fixed": "#161e00",
-                            "on-surface": "#e5e2e1",
-                            "on-secondary-fixed": "#1b1b1b",
-                            "surface-container-high": "#2a2a2a",
-                            "primary": "#ffffff",
-                            "error": "#ffb4ab",
-                            "tertiary-fixed-dim": "#c6c6c7",
-                            "on-background": "#e5e2e1",
-                            "surface-container-highest": "#353535",
-                            "on-tertiary-fixed-variant": "#454747",
-                            "tertiary": "#ffffff",
-                            "on-secondary-fixed-variant": "#474747",
-                            "error-container": "#93000a",
-                            "primary-container": "#c3f400",
-                            "secondary-container": "#474747",
-                            "primary-fixed": "#c3f400",
-                            "on-primary-container": "#556d00",
-                            "inverse-surface": "#e5e2e1",
-                            "secondary-fixed-dim": "#c6c6c6",
-                            "surface": "#131313",
-                            "surface-bright": "#393939",
-                            "secondary": "#c6c6c6",
-                            "surface-tint": "#abd600",
-                            "on-primary-fixed-variant": "#3c4d00",
-                            "inverse-on-surface": "#313030",
-                            "surface-variant": "#353535",
-                            "surface-dim": "#131313",
-                            "on-error-container": "#ffdad6",
-                            "on-tertiary-fixed": "#1a1c1c",
-                            "surface-container": "#20201f",
-                            "tertiary-fixed": "#e2e2e2",
-                            "on-error": "#690005",
-                            "surface-container-lowest": "#0e0e0e",
-                            "on-tertiary-container": "#636565",
-                            "on-surface-variant": "#c4c9ac",
-                            "on-tertiary": "#2f3131",
-                            "secondary-fixed": "#e2e2e2",
-                            "background": "#131313",
-                            "on-secondary-container": "#b5b5b5",
-                            "on-secondary": "#303030",
-                            "inverse-primary": "#506600",
-                            "surface-container-low": "#1c1b1b",
-                            "primary-fixed-dim": "#abd600"
-                        },
-                        "borderRadius": {
-                            "DEFAULT": "0px",
-                            "lg": "0px",
-                            "xl": "0px",
-                            "full": "9999px"
-                        },
-                        "spacing": {
-                            "margin-mobile": "20px",
-                            "margin-desktop": "64px",
-                            "unit": "4px",
-                            "grid-columns": "12",
-                            "gutter": "24px"
-                        },
-                        "fontFamily": {
-                            "display-lg": ["Space Mono"],
-                            "headline-md": ["Space Mono"],
-                            "label-caps": ["Space Mono"],
-                            "body-md": ["Hanken Grotesk"],
-                            "body-lg": ["Hanken Grotesk"],
-                            "mono-data": ["Space Mono"]
-                        }
-                    }
+<html lang="en" class="bg-black text-white scroll-smooth selection:bg-neonYellow selection:text-black">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ammmar.jpg | portofolio </title>
+    <link rel="icon" type="image/png" href="assets/favicon.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.min.js"></script>
+    
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { 
+                        oled: '#000000', 
+                        neonYellow: '#CCFF00' 
+                    }, 
                 }
             }
-        } catch (_e) {}
+        }
     </script>
-<style>
-        .squircle {
-            width: 12px;
-            height: 12px;
-            background-color: #c3f400;
-            clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+    <style>
+        <style>
+        /* 1. Hide default cursor ONLY on desktop/mouse devices */
+        @media (pointer: fine) {
+            html, body, .hover-target, a, button {
+                cursor: none !important;
+            }
         }
-        @keyframes pulse-loader {
-            0%, 100% { opacity: 0.3; transform: scale(1); }
-            50% { opacity: 1; transform: scale(1.1); }
+
+        /* 2. Hide custom yellow ring and reset cursor on mobile/touch devices */
+        @media (pointer: coarse) {
+            #js-cursor {
+                display: none !important;
+            }
+            html, body, .hover-target, a, button {
+                cursor: auto !important;
+            }
         }
-        .animate-pulse-loader {
-            animation: pulse-loader 1.5s infinite ease-in-out;
-        }
+
+        /* Your existing styling below this line... */
+        .nav-btn {
+    backdrop-filter: blur(10px);
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid #CCFF00;
+    color: #CCFF00;
+    cursor: pointer;
+    padding: 15px 25px;
+    border-radius: 50px;
+    font-size: 20px;
+    transition: all 0.3s;
+}
+.nav-btn:hover { background: #CCFF00; color: black; }
+        ::-webkit-scrollbar { display: none; }
+        * { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        .font-ndot { font-family: 'VT323', monospace; letter-spacing: 0.1em; }
+        
+        #topo-bg { position: fixed; top: 0; left: 0; z-index: 0; pointer-events: none; }
+
         .custom-cursor {
-            width: 24px;
-            height: 24px;
-            border: 1px solid #c3f400;
-            border-radius: 50%;
-            position: fixed;
-            pointer-events: none;
-            z-index: 9999;
-            transform: translate(-50%, -50%);
-            transition: width 0.3s, height 0.3s, background-color 0.3s;
+            width: 20px; height: 20px; border: 2px solid #CCFF00; border-radius: 50%;
+            position: fixed; transform: translate(-50%, -50%); pointer-events: none; z-index: 9999;
+            transition: width 0.2s, height 0.2s, background-color 0.2s;
         }
-        .custom-cursor-dot {
-            width: 4px;
-            height: 4px;
-            background-color: #c3f400;
-            border-radius: 50%;
-            position: fixed;
-            pointer-events: none;
-            z-index: 9999;
-            transform: translate(-50%, -50%);
+        .custom-cursor-grow { width: 50px; height: 50px; background-color: rgba(204, 255, 0, 0.15); border-color: #CCFF00; }
+
+        input[type=range]::-webkit-slider-thumb {
+            appearance: none;
+            width: 40px;
+            height: 40px;
+            cursor: ew-resize;
         }
     </style>
 </head>
-<body class="text-on-surface selection:bg-primary-fixed selection:text-on-primary-fixed overflow-x-hidden">
-<!-- Background Shader -->
-<div class="fixed inset-0 z-0 pointer-events-none">
-<canvas class="fixed inset-0 w-full h-full -z-10" id="shader-canvas-ANIMATION_1"></canvas>
-<div class="absolute inset-0 grid-line opacity-20"></div>
-</div>
-<!-- Loading Screen -->
-<div class="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-black transition-opacity duration-1000" id="loading">
-<div class="flex flex-col items-center gap-6 text-center">
-<div class="flex flex-col items-center">
-<span class="font-display-lg text-display-lg text-primary-fixed tracking-tighter leading-none mb-2 animate-pulse-loader">AMMAR.JPG</span>
-<span class="font-mono-data text-label-caps text-primary-fixed-dim tracking-[0.3em] uppercase">System Initializing...</span>
-</div>
-<div class="flex gap-4">
-<div class="squircle animate-pulse-loader" style="animation-delay: 0s;"></div>
-<div class="squircle animate-pulse-loader" style="animation-delay: 0.2s;"></div>
-<div class="squircle animate-pulse-loader" style="animation-delay: 0.4s;"></div>
-</div>
-</div>
-</div>
-<!-- Custom Cursor -->
-<div class="custom-cursor" id="cursor"></div>
-<div class="custom-cursor-dot" id="cursor-dot"></div>
-<!-- Top Navigation Shell -->
-<header class="fixed top-0 w-full z-50 glass-header border-b border-outline-variant px-margin-mobile md:px-margin-desktop py-4 flex justify-between items-center backdrop-blur-md bg-black/40">
-<div class="flex flex-col">
-<span class="font-headline-md text-headline-md text-primary-fixed tracking-tighter leading-none">AMMAR.JPG</span>
-<span class="font-mono-data text-[10px] text-on-surface-variant uppercase tracking-widest mt-1">PORTFOLIO // SYSTEM V 2.0.4</span>
-</div>
-</header>
-<main class="relative z-10 pt-32 pb-24 px-margin-mobile md:px-margin-desktop max-w-[1920px] mx-auto">
-<!-- Hero / Biography Section -->
-<section class="grid grid-cols-1 md:grid-cols-12 gap-gutter mb-32 transition-all duration-1000" id="bio">
-<div class="md:col-span-8 flex flex-col justify-center">
-<div class="inline-flex items-center gap-2 mb-6">
-<div class="w-2 h-2 bg-primary-fixed"></div>
-<span class="font-mono-data text-label-caps text-primary-fixed">THE MIND BEHIND THE SYSTEM</span>
-</div>
-<h1 class="font-display-lg text-[48px] md:text-display-lg leading-[0.9] tracking-tighter mb-8 uppercase">
-                    Architecting <br/>
-                    Visual <br/>
-<span class="text-primary-fixed">Dimensions.</span>
-</h1>
-<div class="max-w-xl">
-<p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed">
-                        Ammar is a multidisciplinary visual director focused on the intersection of technical precision and creative expression. Operating at the edge of contemporary motion design and high-end cinematography, his work is a synthesis of raw data and cinematic texture.
-                    </p>
-</div>
-</div>
-<div class="relative aspect-square border border-outline-variant p-4 group max-w-sm mx-auto md:col-span-4 mt-12 md:mt-0">
-<div class="absolute -top-1 -left-1 w-4 h-4 border-t-2 border-l-2 border-primary-fixed"></div>
-<div class="absolute -bottom-1 -right-1 w-4 h-4 border-b-2 border-r-2 border-primary-fixed"></div>
-<div class="w-full h-full bg-surface-container relative overflow-hidden flex items-center justify-center">
-<img alt="Ammar Logo" class="w-full h-full object-contain p-8" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAspH7oqFQ3pSVlwPG1PjtjZE3j9OQw5S5pmxTt9dewwDVdpo0mACN2NW96vRsTMWxgwkPNRD3VE_iDlS-PENsfZcqMC-_1sqRAIur0RhGIP_Ax7V7ezFsJ1tTSHBvjkvmvJ51yr_Dc8KubtmdPhbaMvXdL4vjN3zE_U3rvPWga3sNoVsagm1kvjz_Gd9zPiBDAbMo3poiCX4Q_OrBzxSOffROcXD6YbPrIMeFS9bBsZ24HXze7pczWuaO4-nK3sIwJAtz_xXC1wwc"/>
-</div>
-</div>
-</section>
-<!-- Photography Carousel (Stills Section) -->
-<section class="mb-32 transition-all duration-1000" id="archive">
-<div class="flex justify-between items-end mb-12">
-<div>
-<span class="font-mono-data text-label-caps text-on-surface-variant block mb-2 uppercase">Category: Stills</span>
-<h2 class="font-headline-md text-headline-md tracking-tighter uppercase">Curated Selection // 3:4 Portraits</h2>
-</div>
-<div class="flex gap-4">
-<button class="w-12 h-12 border border-outline-variant flex items-center justify-center hover:border-primary-fixed group transition-all">
-<span class="material-symbols-outlined text-on-surface group-hover:text-primary-fixed">chevron_left</span>
-</button>
-<button class="w-12 h-12 border border-outline-variant flex items-center justify-center hover:border-primary-fixed group transition-all">
-<span class="material-symbols-outlined text-on-surface group-hover:text-primary-fixed">chevron_right</span>
-</button>
-</div>
-</div>
-<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-gutter pb-8">
-<div class="flex-none">
-<div class="aspect-[3/4] border border-outline-variant bg-surface-container overflow-hidden group mb-4 flex items-center justify-center">
-<img alt="Portrait 1" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBUD6gxxc5YQJyU1awF3gd3vDNPaqBh_Z2qfTiES3tbVIGTJAHGejx_hCeHQzaTXtzkuHVAWWRGWsttuTpEwahrKGESyKpjBvHb17Qnb3Sh5RnxXO3dHOJFUfQWs_kY2ZPD1AbKIVYrFpNGOlz7enjgVTi_ofgekGl3FRwmeWlgGGI__pbeblkF6rE9RoWdnZ_nFHE87oX2zZZIifzxQD9G2ZVjPmwHM7tjs0tV8_QupnzklS5jqO24mbreDYSFmQeLGGc28dpthno"/>
-</div>
-<div class="flex justify-between font-mono-data text-[10px] text-on-surface-variant uppercase">
-<span>P_001.JPG</span>
-<span class="text-primary-fixed">ISO 400</span>
-</div>
-</div>
-<div class="flex-none">
-<div class="aspect-[3/4] border border-outline-variant bg-surface-container overflow-hidden group mb-4 flex items-center justify-center">
-<img alt="Portrait 2" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDT60QsMs8POX4jP8katOK28dzXhcObZxywkTaT8wT3oXPRVbaW9TC8SsT3o9h75sVyjsHBsMxkawfZSRvdBZvnDau9ZC6aP38sV7wZoS2Y5M0qsaBy-9lqYypWKNLykSaUXwCVtz-MFB7HwcpPdA-AOpjT5E7ZZdJvmlU3vRsvrVYR1aTGmrPcrN6BYn5W5Gwi0zqLaGzehMfd1uaIWqpCDkm4zPIe0Ki8u4Z0wD5bTk3dvm36K8tRP1D-idt6BCojW0Hhu28Qjx8"/>
-</div>
-<div class="flex justify-between font-mono-data text-[10px] text-on-surface-variant uppercase">
-<span>P_002.JPG</span>
-<span class="text-primary-fixed">F/1.8</span>
-</div>
-</div>
-<div class="flex-none">
-<div class="aspect-[3/4] border border-outline-variant bg-surface-container overflow-hidden group mb-4 flex items-center justify-center">
-<img alt="Portrait 3" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCsRvwXBLbzsLNnAfhIwi0f-3UR-m7KQ0H8AMNOCRS3SVDVr6fCZl_ww4v56bwnUsHa4ah_mmsvkquuAcIXRYXvpvVC1qKz7e3Gzna-d6Nj82-HnSALXxShVQmEeKiFzfkXOcY45vh6JsF8fSixb0w8oUS-ZF9Ms-uukg-PnwU3O7rem-9yZQsh_qbqxh2sgBFRgd3Zlso0cX85A-GKkdh3YGD9qywqpKA13kciD6SuYNmAePOGjtz3BgpgBmYshQJkV_vQC3g-1Es"/>
-</div>
-<div class="flex justify-between font-mono-data text-[10px] text-on-surface-variant uppercase">
-<span>P_003.JPG</span>
-<span class="text-primary-fixed">1/200s</span>
-</div>
-</div>
-<div class="flex-none">
-<div class="aspect-[3/4] border border-outline-variant bg-surface-container overflow-hidden group mb-4 flex items-center justify-center">
-<img alt="Portrait 4" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCJ1S6jay6FXJ6XbRW2tnbeMBPM4xj3CUzIyL2wGeZJK7JPgUqrAmDNKHa5vCWhhkwSANzeB6WBTH1RaCHa4Oa5GEPurZtUtdLE6lXmwLEfFSAi_AqEty28sEfShTzbsA2u_D8MrH12QDOEDuZf75v7aXwXHbI8mIoRDBK3ZuR_SfN1XuibYbxTRwRwu8yiGJc62kXZKt1BrIcYoABTRpKkFxGmfkFTo9cVbs6RoLUS-u--42XsrfuFpnYqF2CtMg0DwoMowlaAv0s"/>
-</div>
-<div class="flex justify-between font-mono-data text-[10px] text-on-surface-variant uppercase">
-<span>P_004.JPG</span>
-<span class="text-primary-fixed">RAW</span>
-</div>
-</div>
-</div>
-</section>
-<!-- Motion Archive Carousel (Video Slots) -->
-<section class="mb-32 transition-all duration-1000">
-<div class="mb-12">
-<span class="font-mono-data text-label-caps text-primary-fixed block mb-2 uppercase">Status: Decoding Stream</span>
-<h2 class="font-headline-md text-headline-md tracking-tighter uppercase">Motion // Video Archive</h2>
-</div>
-<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
-<!-- Slot 1 -->
-<div class="relative group cursor-pointer border border-outline-variant bg-surface-container-low overflow-hidden">
-<div class="aspect-video relative overflow-hidden bg-black flex items-center justify-center">
-<video autoplay="" class="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:opacity-80 transition-opacity" loop="" muted="" playsinline="">
-<source src="assets/stream1.mp4" type="video/mp4"/>
-</video>
-<div class="absolute inset-0 flex items-center justify-center z-10">
-<div class="w-16 h-16 rounded-full border border-primary-fixed flex items-center justify-center bg-black/40 backdrop-blur-sm group-hover:bg-primary-fixed group-hover:text-black transition-all">
-<span class="material-symbols-outlined">play_arrow</span>
-</div>
-</div>
-</div>
-<div class="p-6 border-t border-outline-variant flex justify-between items-center relative z-20 bg-surface-container-low">
-<div>
-<h3 class="font-display-lg text-body-lg uppercase tracking-tight">System_Breach.mp4</h3>
-<p class="font-mono-data text-[10px] text-on-surface-variant mt-1">DUR: 00:45 // RES: 4K</p>
-</div>
-<span class="font-mono-data text-label-caps text-primary-fixed">01</span>
-</div>
-</div>
-<!-- Slot 2 -->
-<div class="relative group cursor-pointer border border-outline-variant bg-surface-container-low overflow-hidden">
-<div class="aspect-video relative overflow-hidden bg-black flex items-center justify-center">
-<video autoplay="" class="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:opacity-80 transition-opacity" loop="" muted="" playsinline="">
-<source src="assets/stream2.mp4" type="video/mp4"/>
-</video>
-<div class="absolute inset-0 flex items-center justify-center z-10">
-<div class="w-16 h-16 rounded-full border border-primary-fixed flex items-center justify-center bg-black/40 backdrop-blur-sm group-hover:bg-primary-fixed group-hover:text-black transition-all">
-<span class="material-symbols-outlined">play_arrow</span>
-</div>
-</div>
-</div>
-<div class="p-6 border-t border-outline-variant flex justify-between items-center relative z-20 bg-surface-container-low">
-<div>
-<h3 class="font-display-lg text-body-lg uppercase tracking-tight">Kinetic_Flow.mov</h3>
-<p class="font-mono-data text-[10px] text-on-surface-variant mt-1">DUR: 01:20 // RES: 8K</p>
-</div>
-<span class="font-mono-data text-label-caps text-primary-fixed">02</span>
-</div>
-</div>
-<!-- Slot 3 -->
-<div class="relative group cursor-pointer border border-outline-variant bg-surface-container-low overflow-hidden">
-<div class="aspect-video relative overflow-hidden bg-black flex items-center justify-center">
-<video autoplay="" class="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:opacity-80 transition-opacity" loop="" muted="" playsinline="">
-<source src="assets/stream3.mp4" type="video/mp4"/>
-</video>
-<div class="absolute inset-0 flex items-center justify-center z-10">
-<div class="w-16 h-16 rounded-full border border-primary-fixed flex items-center justify-center bg-black/40 backdrop-blur-sm group-hover:bg-primary-fixed group-hover:text-black transition-all">
-<span class="material-symbols-outlined">play_arrow</span>
-</div>
-</div>
-</div>
-<div class="p-6 border-t border-outline-variant flex justify-between items-center relative z-20 bg-surface-container-low">
-<div>
-<h3 class="font-display-lg text-body-lg uppercase tracking-tight">Sub_Data_03.mp4</h3>
-<p class="font-mono-data text-[10px] text-on-surface-variant mt-1">DUR: 00:30 // RES: 4K</p>
-</div>
-<span class="font-mono-data text-label-caps text-primary-fixed">03</span>
-</div>
-</div>
-<!-- Slot 4 -->
-<div class="relative group cursor-pointer border border-outline-variant bg-surface-container-low overflow-hidden">
-<div class="aspect-video relative overflow-hidden bg-black flex items-center justify-center">
-<video autoplay="" class="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:opacity-80 transition-opacity" loop="" muted="" playsinline="">
-<source src="assets/stream4.mp4" type="video/mp4"/>
-</video>
-<div class="absolute inset-0 flex items-center justify-center z-10">
-<div class="w-16 h-16 rounded-full border border-primary-fixed flex items-center justify-center bg-black/40 backdrop-blur-sm group-hover:bg-primary-fixed group-hover:text-black transition-all">
-<span class="material-symbols-outlined">play_arrow</span>
-</div>
-</div>
-</div>
-<div class="p-6 border-t border-outline-variant flex justify-between items-center relative z-20 bg-surface-container-low">
-<div>
-<h3 class="font-display-lg text-body-lg uppercase tracking-tight">Sub_Data_04.mov</h3>
-<p class="font-mono-data text-[10px] text-on-surface-variant mt-1">DUR: 00:15 // RES: 4K</p>
-</div>
-<span class="font-mono-data text-label-caps text-primary-fixed">04</span>
-</div>
-</div>
-</div>
-</section>
-<!-- Color Grade Comparison Section (Laboratory) -->
-<section class="mb-32 transition-all duration-1000" id="grades">
-<div class="mb-12 text-center">
-<span class="font-mono-data text-label-caps text-on-surface-variant block mb-2 uppercase">Laboratory</span>
-<h2 class="font-headline-md text-headline-md tracking-tighter uppercase">Color Grade // Raw vs Processed</h2>
-</div>
-<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
-<!-- Comparison 1 -->
-<div class="relative w-full aspect-video border border-outline-variant overflow-hidden group">
-<div class="absolute inset-0 bg-surface-container"><img alt="Processed 1" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCrINgtPk9XudL3UVWWPGmIYi18ImkYmx0792ZRKTNvrt1fb-LBthJ4Js52nauQdD60P3-jGp46iDxJVkKOaAnxaE5lxB2RsUNyu7_rt_2k-HNxvxvnfSDvJOJxjfCVU_IE9bezmXOJz-fPCO0nTjaAVF7tK7I5LSwqwCCn8snMs2DYWmJgOJeMr01quKmigS-9M8cmP62_y7SXPaISV8d_tGm6kRS67ItuDrKp7B_5PWRNnwKdKxwbIRASnJixSHtKV8DGiJWoKwU"/></div>
-<div class="absolute inset-0 overflow-hidden bg-surface-container-highest" id="before-image-1" style="width: 50%;"><img alt="Raw 1" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDYnp1hNWNkQUJh6Zuew__IkYEQ14kHyE51358ze73unGrsrj3_ZfcqOl-VpChBcZUQtuYQpKq5xPDXIyeU2DT_1VxxozaBdSAcM0uTm__13gh4uycVnw9GwUtkyDgBzZTOROt2w1f9KC8NALJeFcKse3IBy_ArT3MZcvveRwSDgPrSmNOl5SA5L25nyDNopOaXbpC_CKshk6_LixkbWFokQBmZnfYbbPjYpMR4uKqdLS1kkAdI6bCQj_wV5zDo-9b2GyXSfrQlb70"/></div>
-<input class="absolute inset-0 w-full h-full opacity-0 cursor-ew-resize z-30 comparison-slider" data-target="1" max="100" min="0" type="range" value="50"/>
-<div class="absolute top-0 bottom-0 w-0.5 bg-primary-fixed z-20 pointer-events-none" id="slider-line-1" style="left: 50%;">
-<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-8 h-8 bg-black border border-primary-fixed flex items-center justify-center">
-<span class="material-symbols-outlined text-primary-fixed text-sm">unfold_more</span>
-</div>
-</div>
-</div>
-<!-- Comparison 2 -->
-<div class="relative w-full aspect-video border border-outline-variant overflow-hidden group">
-<div class="absolute inset-0 bg-surface-container"><img alt="Processed 2" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAlIXQpLVNjM_wkEVLOzDhQhueoCYLOaKSf3vy9cyOprxsy2ttB7ObMYoirOVYuZFXvoWKi4k6zxQZXjL_OnojsMYELdW7F2Q7SxcVKhD0iqrgWP971EWUhJbauMPwrPfxuoe7ZfHItR55dct0Uh3mAwsG1h5XyHWu2MkL_zbm1IeXIyVz9nUl5Ubk_oU4DyfZLtlKCizjWJJbqpoujMdUJCTkbjctCbwJe1ajDn6la8XjNUdyiG6cFbHc2jCp2B_6LVaom8fhX3mY"/></div>
-<div class="absolute inset-0 overflow-hidden bg-surface-container-highest" id="before-image-2" style="width: 50%;"><img alt="Raw 2" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAR8no6wwTo_pUxImFMZAv0Md19sQVf-cMA6GQmY2ID1bSQNs3GSDlOz70gHRO538dz6MnXBlYtQA9xva9TQ92P84-wad64SnsZWyZrlojYxhp4pjgcFyR24Ld-gotk5FtCKDqWMsS42Qe_eaEUJdijXFQlJr8z17UlD6mNdEz37yRHn6Vi34RiabkI8o3YDkuF1DxVHJTTG73eDhAumNfdEtI1R2eUpeLa_3vuwoETL_FQtls0MT9HQjNeLYzCCkcsdRTu36Py5k0"/></div>
-<input class="absolute inset-0 w-full h-full opacity-0 cursor-ew-resize z-30 comparison-slider" data-target="2" max="100" min="0" type="range" value="50"/>
-<div class="absolute top-0 bottom-0 w-0.5 bg-primary-fixed z-20 pointer-events-none" id="slider-line-2" style="left: 50%;">
-<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-8 h-8 bg-black border border-primary-fixed flex items-center justify-center">
-<span class="material-symbols-outlined text-primary-fixed text-sm">unfold_more</span>
-</div>
-</div>
-</div>
-<!-- Comparison 3 -->
-<div class="relative w-full aspect-video border border-outline-variant overflow-hidden group">
-<div class="absolute inset-0 bg-surface-container"><img alt="Processed 3" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAeFqV1KvIUpWbZ4bskCc3SYNL4EaMehkBRCD7GRtmrEvgKu7v-xEQq2D6lnV2Hd7H51m4SHGvvPPRJ1MtsCwRrfUK3CcHDpYmcMx7QhZR_aRjGwjQEJoL5n3kCt7gW4tzTHOMES_2Y3LhWNXCaBdKt-j7iryKYlJts1TomYbST_Ly93lyxHdoOWFv5hebDAwhThlDP1lPyTJeAVp7n_iLpnZIZd9nGawbp4kcNup6JHKt7lhUBe6h7MOo5UCNTszxmbw0yr52jl4U"/></div>
-<div class="absolute inset-0 overflow-hidden bg-surface-container-highest" id="before-image-3" style="width: 50%;"><img alt="Raw 3" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB_39FESC3E9yqhZx_dKffFP-RBO9K3srQn8cyM9Xc5bb_HVWV7YGZuBePyvtg_wj6NXABSVWo7cM4EnV6yz08JTMI-zQ0FAtIXUvrsrDVRUWfH4X_Y_OOMeLbWE4mOAXcG2ekZremn7Tadaa0G5qooJaRm3j_9MFXgcpK4mHOCqvo0A07PMDF7k0KVVc4rQgmXbxEXMQKwK7CsSq8qVHDc7O4_I_g9nac4RCozStGxvadJrrUo1LITxfEKDmgD7yjtGqqyOAxsK88"/></div>
-<input class="absolute inset-0 w-full h-full opacity-0 cursor-ew-resize z-30 comparison-slider" data-target="3" max="100" min="0" type="range" value="50"/>
-<div class="absolute top-0 bottom-0 w-0.5 bg-primary-fixed z-20 pointer-events-none" id="slider-line-3" style="left: 50%;">
-<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-8 h-8 bg-black border border-primary-fixed flex items-center justify-center">
-<span class="material-symbols-outlined text-primary-fixed text-sm">unfold_more</span>
-</div>
-</div>
-</div>
-<!-- Comparison 4 -->
-<div class="relative w-full aspect-video border border-outline-variant overflow-hidden group">
-<div class="absolute inset-0 bg-surface-container"><img alt="Processed 4" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAVpElUFbxytvfJ7BjZZlt5WVpXscShcgjUsLBqJyeehf30V0umRUNHp9273zhvZ5CZkaEDYt2VASPiqt7llPyKsbMbJKrcdzt1P8q6cMj-kr_gay5ocCBBLuRFW8CmqMOFtN6lPjKVk-6bSwm-fr5NmOwEoE_tV45y0KZmAUxXMh_7HdmJXDMH2ta0DYR38gEqBM40o9Z59MoM5x4XUYe0oKCDfHMQZ9SdnXrQRQBJpLY0OGZLs30aA1k3XntKV-UUdwS9kNwW8B4"/></div>
-<div class="absolute inset-0 overflow-hidden bg-surface-container-highest" id="before-image-4" style="width: 50%;"><img alt="Raw 4" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAZffY5hXEouVNjHm5XnrC4SXWg-DKjSFQEsmUr23Uctqpy6z0ODeDRjd4w4_camdsMiIROpRHZmKUxtX6wxiWadF5ZFBP-34FT9TjmdK1cR1R15KW0d089e62WkdEudt585WUenKAIZM6vNGxmJ6n_sz58PCFTueY9NJ7auvopIfgVvtHoGAoFwNquPg9OgsuRx8HBYJdFevvbRhqR-nYGUbbswLRI4oUr5Ss1Ah7KOVKl__GERf7RUFZTvIXVhDAf33VhbpcKtRU"/></div>
-<input class="absolute inset-0 w-full h-full opacity-0 cursor-ew-resize z-30 comparison-slider" data-target="4" max="100" min="0" type="range" value="50"/>
-<div class="absolute top-0 bottom-0 w-0.5 bg-primary-fixed z-20 pointer-events-none" id="slider-line-4" style="left: 50%;">
-<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-8 h-8 bg-black border border-primary-fixed flex items-center justify-center">
-<span class="material-symbols-outlined text-primary-fixed text-sm">unfold_more</span>
-</div>
-</div>
-</div>
-</div>
-</section>
-<!-- Connectivity Footer -->
-<footer class="border-t border-outline-variant pt-24 pb-12" id="contact">
-<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter mb-24">
-<div>
-<h2 class="font-display-lg text-[40px] md:text-headline-md tracking-tighter uppercase mb-8">Direct <br/> Links //</h2>
-<p class="font-body-md text-on-surface-variant max-w-sm mb-8">
-                        Operating at the intersection of raw data and cinematic texture. Explore the network.
-                    </p>
-</div>
-<div class="flex flex-col md:items-end justify-end gap-6 mt-12 md:mt-0">
-<a class="font-mono-data text-mono-data hover:text-primary-fixed transition-colors flex items-center gap-3" href="#">
-<span class="text-[10px] opacity-50">01</span> INSTAGRAM
-                    </a>
-<a class="font-mono-data text-mono-data hover:text-primary-fixed transition-colors flex items-center gap-3" href="#">
-<span class="text-[10px] opacity-50">02</span> TIKTOK
-                    </a>
-<a class="font-mono-data text-mono-data hover:text-primary-fixed transition-colors flex items-center gap-3" href="mailto:ammmar.jpg@gmail.com">
-<span class="text-[10px] opacity-50">03</span> GMAIL
-                    </a>
-</div>
-</div>
-<div class="flex flex-col md:flex-row justify-between items-center pt-12 border-t border-outline-variant/30 gap-6">
-<span class="font-mono-data text-[10px] text-on-surface-variant uppercase tracking-widest">© 2024 AMMAR.JPG — ALL RIGHTS RESERVED</span>
-</div>
-</footer>
-</main>
-<script>
-        // Custom Cursor Logic
-        const cursor = document.getElementById('cursor');
-        const dot = document.getElementById('cursor-dot');
-        
-        document.addEventListener('mousemove', (e) => {
-            cursor.style.left = e.clientX + 'px';
-            cursor.style.top = e.clientY + 'px';
-            dot.style.left = e.clientX + 'px';
-            dot.style.top = e.clientY + 'px';
-        });
+<body class="bg-oled text-gray-100 overflow-x-hidden antialiased">
+    <div id="topo-bg"></div>
 
-        document.querySelectorAll('a, button, input, [role="button"]').forEach(el => {
-            el.addEventListener('mouseenter', () => {
-                cursor.style.width = '48px';
-                cursor.style.height = '48px';
-                cursor.style.backgroundColor = 'rgba(195, 244, 0, 0.1)';
-            });
-            el.addEventListener('mouseleave', () => {
-                cursor.style.width = '24px';
-                cursor.style.height = '24px';
-                cursor.style.backgroundColor = 'transparent';
-            });
-        });
+    <!-- Gaussian Blur Loading Screen -->
+<div id="loader" class="fixed inset-0 z-[100] bg-black/80 backdrop-blur-lg flex items-center justify-center transition-opacity duration-700">
+    <div class="flex space-x-3">
+        <div class="w-4 h-4 bg-neonYellow rounded-full animate-[pulse_1.5s_ease-in-out_infinite]"></div>
+        <div class="w-4 h-4 bg-neonYellow rounded-full animate-[pulse_1.5s_ease-in-out_0.2s_infinite]"></div>
+        <div class="w-4 h-4 bg-neonYellow rounded-full animate-[pulse_1.5s_ease-in-out_0.4s_infinite]"></div>
+    </div>
+</div>
 
-        // Loading Screen Logic
-        window.addEventListener('load', () => {
-            setTimeout(() => {
-                const loading = document.getElementById('loading');
-                if(loading) {
-                    loading.style.opacity = '0';
-                    setTimeout(() => {
-                        loading.style.display = 'none';
-                    }, 1000);
-                }
-            }, 2500); 
-        });
+    <div class="custom-cursor" id="js-cursor"></div>
 
-        // Grade Slider Logic
-        document.querySelectorAll('.comparison-slider').forEach(slider => {
-            slider.addEventListener('input', (e) => {
-                const value = e.target.value;
-                const targetId = e.target.getAttribute('data-target');
-                const beforeImage = document.getElementById(`before-image-${targetId}`);
-                const sliderLine = document.getElementById(`slider-line-${targetId}`);
-                
-                if (beforeImage) beforeImage.style.width = value + '%';
-                if (sliderLine) sliderLine.style.left = value + '%';
-            });
-        });
-
-        // Micro-interactions for scrolling
-        const observerOptions = { threshold: 0.1 };
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('opacity-100', 'translate-y-0');
-                    entry.target.classList.remove('opacity-0', 'translate-y-8');
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('section').forEach(section => {
-            section.classList.add('transition-all', 'duration-1000', 'opacity-0', 'translate-y-8');
-            observer.observe(section);
-        });
-
-        // Background Shader Logic
-        (function() {
-          const canvas = document.getElementById('shader-canvas-ANIMATION_1');
-          if (!canvas) return;
-
-          function syncSize() {
-            canvas.width  = window.innerWidth;
-            canvas.height = window.innerHeight;
-          }
-          window.addEventListener('resize', syncSize);
-          syncSize();
-
-          const gl = canvas.getContext('webgl');
-          if (!gl) return;
-          
-          const vs = `attribute vec2 a_position;
-            varying vec2 v_texCoord;
-            void main() {
-              v_texCoord = a_position * 0.5 + 0.5;
-              gl_Position = vec4(a_position, 0.0, 1.0);
-            }`;
+    <header class="fixed top-0 left-0 w-full z-50 bg-oled/80 backdrop-blur-md border-b border-white/5 transition-all duration-300">
+        <nav class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <a href="index.html" class="hover-target font-ndot font-bold text-xl text-white tracking-widest flex items-center gap-4">
+                <img src="assets/logo.png" alt="Logo" class="h-8 object-contain" onerror="this.style.display='none'">
+                PORTFOLIO
+            </a>
             
-          const fs = `precision highp float;
-            varying vec2 v_texCoord;
-            uniform float u_time;
-            uniform vec2 u_resolution;
-            uniform vec2 u_mouse;
+        </nav>
+    </header>
 
-            vec3 mod289(vec3 x) { return x - floor(x * (1.0 / 289.0)) * 289.0; }
-            vec2 mod289(vec2 x) { return x - floor(x * (1.0 / 289.0)) * 289.0; }
-            vec3 permute(vec3 x) { return mod289(((x*34.0)+1.0)*x); }
+    <main class="relative z-10 pt-32 pb-10 space-y-32">
+        <section class="px-6 max-w-7xl mx-auto">
+         <section class="px-6 max-w-7xl mx-auto">
+    <div class="flex flex-col md:flex-row items-start gap-12 mt-12">
+        
+        <!-- Text Column -->
+        <div class="flex-1 max-w-4xl space-y-6 text-gray-400 font-light text-base md:text-lg leading-relaxed">
+            <span class="font-ndot text-neonYellow text-sm uppercase tracking-widest block mb-3">BIOGRAPHY // PROFILE</span>
+            <h1 class="text-5xl md:text-7xl font-black uppercase tracking-tight leading-none mb-6 text-white">
+                THE MIND BEHIND<br><span class="text-transparent bg-clip-text bg-gradient-to-r from-neutral-200 to-neutral-500">THE SYSTEM.</span>
+            </h1>
+            <p>I am a digital creator specializing in high-end post-production, disruptive visual formats, and high-fidelity media grading operations.</p>
+            <p>By combining tight editing structures with clean, ultra-modern design frameworks, I build visual workspaces tailored to meet demanding aesthetic standards. Every cut is strategic; every color profile is intentional.</p>
+            <h3 class="text-white font-ndot text-xl uppercase pt-4">Core Capabilities //</h3>
+            <ul class="grid grid-cols-2 gap-2 text-sm font-ndot text-neonYellow">
+                <li>[■] COLOR GRADING</li>
+                <li>[■] VIDEO EDITING</li>
+                <li>[■] AUTOMOTIVE IMAGERY</li>
+                <li>[■] MEDIA ARCHITECTURE</li>
+            </ul>
+        </div>
 
-            float snoise(vec2 v) {
-                const vec4 C = vec4(0.211324865405187, 0.366025403784439, -0.577350269189626, 0.024390243902439);
-                vec2 i  = floor(v + dot(v, C.yy));
-                vec2 x0 = v -   i + dot(i, C.xx);
-                vec2 i1 = (x0.x > x0.y) ? vec2(1.0, 0.0) : vec2(0.0, 1.0);
-                vec4 x12 = x0.xyxy + C.xxzz;
-                x12.xy -= i1;
-                i = mod289(i);
-                vec3 p = permute(permute(i.y + vec3(0.0, i1.y, 1.0)) + i.x + vec3(0.0, i1.x, 1.0));
-                vec3 m = max(0.5 - vec3(dot(x0,x0), dot(x12.xy,x12.xy), dot(x12.zw,x12.zw)), 0.0);
-                m = m*m; m = m*m;
-                vec3 x = 2.0 * fract(p * C.www) - 1.0;
-                vec3 h = abs(x) - 0.5;
-                vec3 ox = floor(x + 0.5);
-                vec3 a0 = x - ox;
-                m *= 1.79284291400159 - 0.85373472095314 * (a0*a0 + h*h);
-                vec3 g;
-                g.x  = a0.x  * x0.x  + h.x  * x0.y;
-                g.yz = a0.yz * x12.xz + h.yz * x12.yw;
-                return 130.0 * dot(m, g);
-            }
+        <!-- Logo Column -->
+        <div class="flex-none pt-4">
+            <img src="assets/logo.png" alt="ammar.jpg Logo" class="w-40 md:w-60 object-contain opacity-70 hover:opacity-100 transition-opacity duration-500">
+        </div>
 
-            void main() {
-                vec2 uv = v_texCoord;
-                vec2 m = u_mouse / u_resolution;
-                float n = snoise(uv * 3.0 + u_time * 0.05);
-                n += snoise(uv * 6.0 - u_time * 0.02) * 0.5;
-                
-                float dist = distance(uv, m);
-                float force = smoothstep(0.4, 0.0, dist) * 0.3;
-                n += force;
+    </div>
 
-                float line = sin(n * 25.0);
-                line = smoothstep(0.0, 0.1, abs(line) - 0.015);
-                
-                vec3 color = mix(vec3(0.76, 0.96, 0.0), vec3(0.0), line);
-                gl_FragColor = vec4(color * 0.12, 1.0);
-            }`;
+        </section>
 
-          function cs(type, src) {
-            const s = gl.createShader(type);
-            gl.shaderSource(s, src);
-            gl.compileShader(s);
-            return s;
-          }
-          const prog = gl.createProgram();
-          gl.attachShader(prog, cs(gl.VERTEX_SHADER, vs));
-          gl.attachShader(prog, cs(gl.FRAGMENT_SHADER, fs));
-          gl.linkProgram(prog);
-          gl.useProgram(prog);
+        <section class="px-6 max-w-7xl mx-auto">
+            <span class="font-ndot text-neonYellow text-sm uppercase tracking-widest block mb-6">CURATED SELECTION // 3:4 PORTRAITS</span>
+            <div class="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-8 cursor-grab active:cursor-grabbing">
+                <div class="snap-center shrink-0 w-[85vw] md:w-[400px] aspect-[3/4] bg-neutral-900 border border-white/10 relative overflow-hidden group">
+                    <img src="assets/photography/portrait1.jpg" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Photo 1">
+                </div>
+                <div class="snap-center shrink-0 w-[85vw] md:w-[400px] aspect-[3/4] bg-neutral-900 border border-white/10 relative overflow-hidden group">
+                    <img src="assets/photography/portrait2.jpg" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Photo 2">
+                </div>
+                <div class="snap-center shrink-0 w-[85vw] md:w-[400px] aspect-[3/4] bg-neutral-900 border border-white/10 relative overflow-hidden group">
+                    <img src="assets/photography/portrait3.jpg" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Photo 3">
+                </div>
+                <div class="snap-center shrink-0 w-[85vw] md:w-[400px] aspect-[3/4] bg-neutral-900 border border-white/10 relative overflow-hidden group">
+                    <img src="assets/photography/portrait4.jpg" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Photo 4">
+                </div>
+            </div>
+            <!-- Carousel Navigation Buttons -->
+<div class="flex justify-center gap-4 py-8">
+    <button onclick="scrollContainer(this, -400)" class="nav-btn">←</button>
+    <button onclick="scrollContainer(this, 400)" class="nav-btn">→</button>
+</div>
+        </section>
 
-          const buf = gl.createBuffer();
-          gl.bindBuffer(gl.ARRAY_BUFFER, buf);
-          gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 1,-1, -1,1, 1,1]), gl.STATIC_DRAW);
-          const pos = gl.getAttribLocation(prog, 'a_position');
-          gl.enableVertexAttribArray(pos);
-          gl.vertexAttribPointer(pos, 2, gl.FLOAT, false, 0, 0);
+        <section class="px-6 max-w-7xl mx-auto">
+            <span class="font-ndot text-neonYellow text-sm uppercase tracking-widest block mb-6">MOTION // VIDEO ARCHIVE</span>
+            <div class="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-8 cursor-grab active:cursor-grabbing">
+                <div class="snap-center shrink-0 w-[85vw] md:w-[400px] aspect-[9/16] bg-neutral-900 border border-white/10 relative overflow-hidden group">
+                    <video src="assets/videos/stream1.mp4" class="w-full h-full object-cover" autoplay loop muted playsinline></video>
+                </div>
+                <div class="snap-center shrink-0 w-[85vw] md:w-[400px] aspect-[9/16] bg-neutral-900 border border-white/10 relative overflow-hidden group">
+                    <video src="assets/videos/stream2.mp4" class="w-full h-full object-cover" autoplay loop muted playsinline></video>
+                </div>
+                <div class="snap-center shrink-0 w-[85vw] md:w-[400px] aspect-[9/16] bg-neutral-900 border border-white/10 relative overflow-hidden group">
+                    <video src="assets/videos/stream3.mp4" class="w-full h-full object-cover" autoplay loop muted playsinline></video>
+                </div>
+                <div class="snap-center shrink-0 w-[85vw] md:w-[400px] aspect-[9/16] bg-neutral-900 border border-white/10 relative overflow-hidden group">
+                    <video src="assets/videos/stream4.mp4" class="w-full h-full object-cover" autoplay loop muted playsinline></video>
+                </div>
+            </div>
+            <!-- Carousel Navigation Buttons -->
+<div class="flex justify-center gap-4 py-8">
+    <button onclick="scrollContainer(this, -400)" class="nav-btn">←</button>
+    <button onclick="scrollContainer(this, 400)" class="nav-btn">→</button>
+</div>
+        </section>
 
-          const uTime = gl.getUniformLocation(prog, 'u_time');
-          const uRes = gl.getUniformLocation(prog, 'u_resolution');
-          const uMouse = gl.getUniformLocation(prog, 'u_mouse');
+        <section class="px-6 max-w-7xl mx-auto">
+            <span class="font-ndot text-neonYellow text-sm uppercase tracking-widest block mb-6">COLOR GRADE // RAW VS PROCESSED</span>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="relative w-full aspect-video md:aspect-[4/3] overflow-hidden rounded-sm group hover-target border border-white/10">
+                    <img src="assets/editing/processed1.jpg" class="absolute inset-0 w-full h-full object-cover" alt="After Grade 1">
+                    <img src="assets/editing/raw1.jpg" class="absolute inset-0 w-full h-full object-cover [clip-path:inset(0_50%_0_0)]" id="img-top-1" alt="Raw File 1">
+                    <input type="range" min="0" max="100" value="50" class="absolute inset-0 w-full h-full opacity-0 cursor-ew-resize z-10" oninput="updateSlider(this.value, 'img-top-1', 'line-1')">
+                    <div class="absolute top-0 bottom-0 left-[50%] w-[2px] bg-neonYellow pointer-events-none transform -translate-x-1/2 flex items-center justify-center shadow-[0_0_10px_#CCFF00]" id="line-1">
+                        <div class="w-6 h-6 rounded-full bg-black border-2 border-neonYellow flex items-center justify-center"><div class="w-1 h-3 bg-neonYellow rounded-full"></div></div>
+                    </div>
+                </div>
+                <div class="relative w-full aspect-video md:aspect-[4/3] overflow-hidden rounded-sm group hover-target border border-white/10">
+                    <img src="assets/editing/processed2.jpg" class="absolute inset-0 w-full h-full object-cover" alt="After Grade 2">
+                    <img src="assets/editing/raw2.jpg" class="absolute inset-0 w-full h-full object-cover [clip-path:inset(0_50%_0_0)]" id="img-top-2" alt="Raw File 2">
+                    <input type="range" min="0" max="100" value="50" class="absolute inset-0 w-full h-full opacity-0 cursor-ew-resize z-10" oninput="updateSlider(this.value, 'img-top-2', 'line-2')">
+                    <div class="absolute top-0 bottom-0 left-[50%] w-[2px] bg-neonYellow pointer-events-none transform -translate-x-1/2 flex items-center justify-center shadow-[0_0_10px_#CCFF00]" id="line-2">
+                        <div class="w-6 h-6 rounded-full bg-black border-2 border-neonYellow flex items-center justify-center"><div class="w-1 h-3 bg-neonYellow rounded-full"></div></div>
+                    </div>
+                </div>
+                <div class="relative w-full aspect-video md:aspect-[4/3] overflow-hidden rounded-sm group hover-target border border-white/10">
+                    <img src="assets/editing/processed3.jpg" class="absolute inset-0 w-full h-full object-cover" alt="After Grade 3">
+                    <img src="assets/editing/raw3.jpg" class="absolute inset-0 w-full h-full object-cover [clip-path:inset(0_50%_0_0)]" id="img-top-3" alt="Raw File 3">
+                    <input type="range" min="0" max="100" value="50" class="absolute inset-0 w-full h-full opacity-0 cursor-ew-resize z-10" oninput="updateSlider(this.value, 'img-top-3', 'line-3')">
+                    <div class="absolute top-0 bottom0 left-[50%] w-[2px] bg-neonYellow pointer-events-none transform -translate-x-1/2 flex items-center justify-center shadow-[0_0_10px_#CCFF00]" id="line-3">
+                        <div class="w-6 h-6 rounded-full bg-black border-2 border-neonYellow flex items-center justify-center"><div class="w-1 h-3 bg-neonYellow rounded-full"></div></div>
+                    </div>
+                </div>
+                <div class="relative w-full aspect-video md:aspect-[4/3] overflow-hidden rounded-sm group hover-target border border-white/10">
+                    <img src="assets/editing/processed4.jpg" class="absolute inset-0 w-full h-full object-cover" alt="After Grade 4">
+                    <img src="assets/editing/raw4.jpg" class="absolute inset-0 w-full h-full object-cover [clip-path:inset(0_50%_0_0)]" id="img-top-4" alt="Raw File 4">
+                    <input type="range" min="0" max="100" value="50" class="absolute inset-0 w-full h-full opacity-0 cursor-ew-resize z-10" oninput="updateSlider(this.value, 'img-top-4', 'line-4')">
+                    <div class="absolute top-0 bottom-0 left-[50%] w-[2px] bg-neonYellow pointer-events-none transform -translate-x-1/2 flex items-center justify-center shadow-[0_0_10px_#CCFF00]" id="line-4">
+                        <div class="w-6 h-6 rounded-full bg-black border-2 border-neonYellow flex items-center justify-center"><div class="w-1 h-3 bg-neonYellow rounded-full"></div></div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-          let mouse = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
-          window.addEventListener('mousemove', (e) => {
-              mouse.x = e.clientX;
-              mouse.y = window.innerHeight - e.clientY;
-          });
+        <section class="px-6 max-w-7xl mx-auto pt-20">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-12">
+                <div>
+                    <span class="font-ndot text-neonYellow text-sm uppercase tracking-widest block mb-3">CONNECT //</span>
+                    <h2 class="text-4xl md:text-6xl font-black uppercase tracking-tight mb-4">INITIATE<br><span class="text-transparent bg-clip-text bg-gradient-to-r from-neutral-200 to-neutral-500">CONTACT.</span></h2>
+                    <p class="text-gray-400 font-light text-lg">Available for high-end post-production and media operations.</p>
+                </div>
+                <div class="flex flex-col items-start md:items-end gap-6">
+                    <img src="assets/logo.png" alt="Logo" class="h-16 object-contain mb-2" onerror="this.style.display='none'">
+                    <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-8 text-lg uppercase font-ndot tracking-widest text-left md:text-right">
+    <a href="mailto:ammmar.jpg@gmail.com" class="hover-target text-gray-400 hover:text-neonYellow transition-colors">Gmail</a>
+    <a href="https://www.instagram.com/ammmar.jpg" target="_blank" class="hover-target text-gray-400 hover:text-neonYellow transition-colors">Instagram</a>
+    <a href="https://www.tiktok.com/@ammmar.jpg" target="_blank" class="hover-target text-gray-400 hover:text-neonYellow transition-colors">TikTok</a>
+</div>
+                </div>
+            </div>
+        </section>
+    </main>
 
-          function render(t) {
-            gl.viewport(0, 0, canvas.width, canvas.height);
-            gl.uniform1f(uTime, t * 0.001);
-            gl.uniform2f(uRes, canvas.width, canvas.height);
-            gl.uniform2f(uMouse, mouse.x, mouse.y);
-            gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
-            requestAnimationFrame(render);
-          }
-          render(0);
-        })();
+    <footer class="relative z-10 bg-oled py-8 text-sm text-gray-600 mt-12">
+        <div class="max-w-7xl mx-auto px-6 flex justify-center items-center">
+            <p class="font-ndot text-sm">&copy; 2026. All rights secured.</p>
+        </div>
+    </footer>
+
+    <!-- INTERACTIVE TOPO BACKGROUND ENGINE -->
+    <script>
+        new p5((p) => {
+            let noiseOffset = 0;
+            p.setup = () => {
+                let canvas = p.createCanvas(p.windowWidth, p.windowHeight);
+                canvas.parent('topo-bg');
+            };
+            p.draw = () => {
+                p.clear();
+                p.stroke('#CCFF00'); 
+                p.noFill();
+                for (let y = 0; y < p.height; y += 40) {
+                    p.beginShape();
+                    for (let x = 0; x < p.width; x += 20) {
+                        let nx = p.map(x, 0, p.width, 0, 5);
+                        let ny = p.map(y, 0, p.height, 0, 5);
+                        let mouseInfluence = p.dist(p.mouseX, p.mouseY, x, y) * 0.005;
+                        let val = p.noise(nx + noiseOffset, ny + noiseOffset, mouseInfluence);
+                        p.vertex(x, y + val * 100);
+                    }
+                    p.endShape();
+                }
+                noiseOffset += 0.002;
+            };
+            p.windowResized = () => p.resizeCanvas(p.windowWidth, p.windowHeight);
+        });
     </script>
-</body></html>
+
+<script>
+    // 1. Loading Screen Logic
+    window.addEventListener('load', () => {
+        const loader = document.getElementById('loader');
+        if (loader) {
+            setTimeout(() => {
+                loader.style.opacity = '0';
+                setTimeout(() => {
+                    loader.style.display = 'none';
+                    loader.style.pointerEvents = 'none'; 
+                }, 700); 
+            }, 1200); 
+        }
+    });
+
+    // 2. Custom Cursor Logic
+    const cursor = document.getElementById('js-cursor');
+    if (cursor) {
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = `${e.clientX}px`;
+            cursor.style.top = `${e.clientY}px`;
+        });
+        document.querySelectorAll('.hover-target, input[type="range"], a, button').forEach(item => {
+            item.addEventListener('mouseenter', () => cursor.classList.add('custom-cursor-grow'));
+            item.addEventListener('mouseleave', () => cursor.classList.remove('custom-cursor-grow'));
+        });
+    }
+
+    // 3. Utility Functions
+    function updateSlider(val, imgId, lineId) {
+        document.getElementById(imgId).style.clipPath = `inset(0 ${100 - val}% 0 0)`;
+        document.getElementById(lineId).style.left = `${val}%`;
+    }
+
+    function scrollContainer(btn, amount) {
+        const container = btn.parentElement.previousElementSibling;
+        container.scrollBy({ left: amount, behavior: 'smooth' });
+    }
+</script>
+</html>
