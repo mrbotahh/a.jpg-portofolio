@@ -112,6 +112,8 @@
                 position: fixed;
                 z-index: 9999;
                 transform: translate(-50%, -50%);
+                    opacity: 0; 
+        transition: opacity 0.2s ease, width 0.2s ease, height 0.2s ease, background-color 0.2s ease;
             }
         }
         #shader-canvas-ANIMATION_1 {
@@ -398,37 +400,46 @@
 </footer>
 </main>
 <script>
-        // Custom Cursor Logic
-        const cursor = document.getElementById('cursor');
-        const dot = document.getElementById('cursor-dot');
-        const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+      // Custom Cursor Logic
+const cursor = document.getElementById('cursor');
+const dot = document.getElementById('cursor-dot');
+const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
 
-        if (!isTouchDevice && window.innerWidth > 768) {
-            document.addEventListener('mousemove', (e) => {
-                const x = e.clientX;
-                const y = e.clientY;
-                requestAnimationFrame(() => {
-                    cursor.style.left = x + 'px';
-                    cursor.style.top = y + 'px';
-                    dot.style.left = x + 'px';
-                    dot.style.top = y + 'px';
-                });
-            });
+if (!isTouchDevice && window.innerWidth > 768) {
+    let hasMoved = false; // Track if the mouse has moved yet
 
-            document.querySelectorAll('a, button, input, [role="button"], .comparison-slider-input').forEach(el => {
-                el.addEventListener('mouseenter', () => {
-                    cursor.style.width = '48px';
-                    cursor.style.height = '48px';
-                    cursor.style.backgroundColor = 'rgba(204, 255, 0, 0.1)';
-                });
-                el.addEventListener('mouseleave', () => {
-                    cursor.style.width = '24px';
-                    cursor.style.height = '24px';
-                    cursor.style.backgroundColor = 'transparent';
-                });
-            });
-        }
+    document.addEventListener('mousemove', (e) => {
+        const x = e.clientX;
+        const y = e.clientY;
+        
+        requestAnimationFrame(() => {
+            cursor.style.left = x + 'px';
+            cursor.style.top = y + 'px';
+            dot.style.left = x + 'px';
+            dot.style.top = y + 'px';
+            
+            // If this is the first movement, reveal the cursor elements
+            if (!hasMoved) {
+                cursor.style.opacity = '1';
+                dot.style.opacity = '1';
+                hasMoved = true;
+            }
+        });
+    });
 
+    document.querySelectorAll('a, button, input, [role="button"], .comparison-slider-input').forEach(el => {
+        el.addEventListener('mouseenter', () => {
+            cursor.style.width = '48px';
+            cursor.style.height = '48px';
+            cursor.style.backgroundColor = 'rgba(204, 255, 0, 0.1)';
+        });
+        el.addEventListener('mouseleave', () => {
+            cursor.style.width = '24px';
+            cursor.style.height = '24px';
+            cursor.style.backgroundColor = 'transparent';
+        });
+    });
+}
         // Comparison Slider Logic
         document.querySelectorAll('.comparison-slider-input').forEach(slider => {
             const updateSlider = () => {
