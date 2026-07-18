@@ -151,7 +151,7 @@
                 }
             }
         } catch (_e) {}
-    }catch(_e){}</script></head><body class="text-on-surface selection:bg-primary-fixed selection:text-on-primary-fixed bg-background">
+    }catch(_e){}</script></head><body class="text-on-surface selection:bg-primary-fixed selection:text-on-primary-fixed bg-background"><div class="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-black/80 backdrop-blur-[40px] transition-opacity duration-700 pointer-events-auto" id="site-loader"><div class="relative mb-8"><img alt="Loading Wheel" class="w-24 h-24 animate-[spin_0.8s_linear_infinite]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCtp7EgfiLdt3TM8q959rP3j8PdNDNQFjeEpKf2qpRCMPRRtEc52yoOnw9BR9rqwX2dsgpsQh393bAeXuhU8aWqoU4QpsD5vHyXPOE9cCPTFyEzp_0imJqCoodaAJq21hR_m5hhC7dR9kdxNtHzbXTFCX1Y8Q1ZqgmAqAsMStxdi4Q93SwriZLc1nZouH0e92komZSrPjxOVy5pb_XsNscnLH5UCvR0L7PvwuWxYID8VgvtfeYUYB25FQ23YVZabjWSRJVIrhKisXs" style="filter: drop-shadow(0 0 10px #ccff00);"/></div><div class="flex flex-col items-center gap-2"><span class="font-display-lg text-[48px] md:text-[80px] text-primary-fixed tracking-tighter leading-none" id="loader-counter">00</span><span class="font-mono-data text-label-caps text-primary-fixed/50 tracking-[0.2em] uppercase">Initializing System</span></div></div>
 <!-- Background Shader - Fixed and behind content -->
 <div class="fixed inset-0 z-0 pointer-events-none">
 <canvas class="absolute inset-0 w-full h-full" id="shader-canvas-ANIMATION_1"></canvas>
@@ -179,7 +179,7 @@
 </h1>
 <div class="max-w-xl">
 <p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed">
-                        Ammar is a multidisciplinary visual director focused on the intersection of technical precision and creative expression. Operating at the edge of contemporary motion design and high-end cinematography, his work is a synthesis of raw data and cinematic texture.
+                        I'm a multidisciplinary visual director focused on the intersection of technical precision and creative expression. Operating at the edge of contemporary motion design and high-end cinematography, his work is a synthesis of raw data and cinematic texture.
                     </p>
 </div>
 </div>
@@ -408,7 +408,7 @@
 </div>
 </div>
 <div class="flex flex-col md:flex-row justify-between items-center pt-12 border-t border-outline-variant/30 gap-6">
-<span class="font-mono-data text-[10px] text-on-surface-variant uppercase tracking-widest">© 2024 AMMAR.JPG — ALL RIGHTS RESERVED</span>
+<span class="font-mono-data text-[10px] text-on-surface-variant uppercase tracking-widest">© 2026 AMMAR.JPG — this website was made by me, myself and i</span>
 </div>
 </footer>
 </main>
@@ -557,4 +557,49 @@
             }
             requestAnimationFrame(render);
         })();
-    </script></body></html>
+    </script><script>
+(function() {
+    const loader = document.getElementById('site-loader');
+    const counter = document.getElementById('loader-counter');
+    const videos = Array.from(document.querySelectorAll('video'));
+    let progress = 0;
+    let targetProgress = 0;
+    let isWindowLoaded = false;
+
+    const updateCounter = () => {
+        if (progress < targetProgress) {
+            progress += 1;
+            counter.textContent = progress.toString().padStart(2, '0');
+        }
+        if (progress < 100) {
+            requestAnimationFrame(updateCounter);
+        } else {
+            setTimeout(() => {
+                loader.classList.add('opacity-0');
+                loader.style.pointerEvents = 'none';
+            }, 500);
+        }
+    };
+
+    const checkProgress = () => {
+        const videoReadyCount = videos.filter(v => v.readyState >= 4).length;
+        const videoProgress = videos.length > 0 ? (videoReadyCount / videos.length) * 80 : 80;
+        const windowProgress = isWindowLoaded ? 20 : 0;
+        targetProgress = Math.round(videoProgress + windowProgress);
+    };
+
+    window.addEventListener('load', () => {
+        isWindowLoaded = true;
+        checkProgress();
+    });
+
+    videos.forEach(video => {
+        video.addEventListener('canplaythrough', checkProgress);
+        if (video.readyState >= 4) checkProgress();
+    });
+
+    if (videos.length === 0) targetProgress = 100;
+
+    requestAnimationFrame(updateCounter);
+})();
+</script></body></html>
