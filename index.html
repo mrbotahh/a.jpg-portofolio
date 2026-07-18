@@ -3,7 +3,6 @@
 <html class="dark" lang="en"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-
 <link href="https://lh3.googleusercontent.com/aida-public/AB6AXuB0DIzIX0KUwI-ctaKfAyigYBEmX0DXqCQ1PzUYglzsA6Drhon3oQaJ2Xr9M9y_5qcQIWIA7yl17E2Q4zjygSaMszkgXYkwVsGBibVwLZjscGwGr-LwlLIj0GiNQzO0SaKbewb2qD_PbuMUhexlK2hV_hAMnjefaMN-qzzgcZkqsqWcQX8XxGF3xlDs7AqAUw-brkPOHYBKsxm9DZuy3OBbGVVIrI4e1i-0J0o3_onePId2LbtsSjGWm1_q48ryxXL8ha6nVuCE3PM" rel="icon" type="image/png"/>
 <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&amp;family=Hanken+Grotesk:wght@300;400;500;700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=block" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@100..900&amp;family=Space+Mono:wght@100..900&amp;display=swap" rel="stylesheet"/>
@@ -73,7 +72,7 @@
                         "spacing": {
                             "margin-mobile": "20px",
                             "margin-desktop": "64px",
-                            "margin-slot": "4px",
+                            "unit": "4px",
                             "grid-columns": "12",
                             "gutter": "24px"
                         },
@@ -102,6 +101,7 @@
             color: #ccff00;
             text-shadow: 0 0 10px rgba(204, 255, 0, 0.4);
         }
+        /* Hide custom cursor by default for mobile/touch */
         .custom-cursor, .custom-cursor-dot {
             display: none;
         }
@@ -111,18 +111,18 @@
             }
         }
         #shader-canvas-ANIMATION_1 {
-            filter: blur(1px);
+            filter: blur(1px); /* Slight softening for smoother transitions */
         }
     </style>
 </head>
 <body class="text-on-surface selection:bg-primary-fixed selection:text-on-primary-fixed overflow-x-hidden">
 <!-- Background Shader -->
 <div class="fixed inset-0 z-0 pointer-events-none overflow-hidden">
-<canvas class="fixed inset-0 w-full h-full -z-10" id="shader-canvas-ANIMATION_1" style="background-color: #000000;"></canvas>
-        <div class="absolute inset-0 grid-line opacity-20"></div>
+<canvas class="fixed inset-0 w-full h-full -z-10" id="shader-canvas-ANIMATION_1"></canvas>
+<div class="absolute inset-0 grid-line opacity-20"></div>
 </div>
 <!-- High-Intensity Loader Overlay -->
-<div class="fixed inset-0 z-[200] flex flex-col items-center justify-center bg-black transition-all duration-1000 ease-in-out" id="loader-overlay">
+<div class="fixed inset-0 z-[200] flex flex-col items-center justify-center bg-black/40 backdrop-blur-[40px] transition-all duration-1000 ease-in-out" id="loader-overlay">
 <div class="flex flex-col items-center gap-8 text-center">
 <div class="relative w-32 h-32 md:w-48 md:h-48 flex items-center justify-center">
 <img alt="Loading Wheel" class="w-full h-full object-contain wheel-animate" id="loader-wheel" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCdHkqvc6L8TAB6L_GE41lIziSQ6n9DNSFL5d7w07RfEH5Uhyv70UyhuXU6d07UYd4F3hxGqiQu1jfRh0k1Ci8mgJNLwMYCTd1Nl8qRsNFLkD1Nmz05AIPc_eatM8DVfmJR12H_seSzxEVhVUDrBBKq41i1XjZBvwOQX2nOo8JKvgH2oLHN-HMiCQ2Kge1bGIbP2-lRFbsY-M55e7FFb62Z8aIwABWGJpIYQMT3esFyXGJgmiRV89UCNfr6rXBdw33dx_vv7Qsz6PI" style="--spin-duration: 2s;"/>
@@ -137,7 +137,7 @@
 <div class="custom-cursor" id="cursor" style="width: 24px; height: 24px; background-color: transparent;"></div>
 <div class="custom-cursor-dot" id="cursor-dot"></div>
 <!-- Top Navigation Shell -->
-<header class="fixed top-0 w-full z-50 glass-header px-margin-mobile md:px-margin-desktop py-4 flex justify-between items-center backdrop-blur-md bg-black/40">
+<header class="fixed top-0 w-full z-50 glass-header border-b border-outline-variant px-margin-mobile md:px-margin-desktop py-4 flex justify-between items-center backdrop-blur-md bg-black/40">
 <div class="flex flex-col">
 <span class="font-headline-md text-headline-md text-primary-fixed tracking-tighter leading-none">AMMAR.JPG</span>
 <span class="font-mono-data text-[10px] text-on-surface-variant uppercase tracking-widest mt-1">PORTFOLIO // SYSTEM V 2.0.4</span>
@@ -219,80 +219,88 @@
 </section>
 <!-- Motion Archive Carousel (Video Slots) -->
 <section class="mb-32">
-    <div class="mb-12">
-        <span class="font-mono-data text-label-caps text-primary-fixed block mb-2 uppercase">Status: Decoding Stream</span>
-        <h2 class="font-headline-md text-headline-md tracking-tighter uppercase">Motion // Video Archive</h2>
-    </div>
-    
-    <!-- The grid container starts here and wraps ALL 4 slots -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
-        
-        <!-- Slot 1 -->
-        <div class="relative group cursor-pointer border border-outline-variant bg-surface-container-low overflow-hidden">
-            <div class="aspect-video relative overflow-hidden bg-black flex items-center justify-center">
-                <video autoplay class="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:opacity-80 transition-opacity" loop muted playsinline preload="auto">
-                    <source src="./assets/videos/video1.mp4" type="video/mp4"/>
-                </video>
-            </div>
-            <div class="p-6 border-t border-outline-variant flex justify-between items-center relative z-20 bg-surface-container-low">
-                <div>
-                    <h3 class="font-display-lg text-body-lg uppercase tracking-tight">Stream_01.mp4</h3>
-                    <p class="font-mono-data text-[10px] text-on-surface-variant mt-1">RES: 4K</p>
-                </div>
-                <span class="font-mono-data text-label-caps text-primary-fixed">01</span>
-            </div>
-        </div>
-
-        <!-- Slot 2 -->
-        <div class="relative group cursor-pointer border border-outline-variant bg-surface-container-low overflow-hidden">
-            <div class="aspect-video relative overflow-hidden bg-black flex items-center justify-center">
-                <video autoplay class="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:opacity-80 transition-opacity" loop muted playsinline preload="auto">
-                    <source src="./assets/videos/video2.mp4" type="video/mp4"/>
-                </video>
-            </div>
-            <div class="p-6 border-t border-outline-variant flex justify-between items-center relative z-20 bg-surface-container-low">
-                <div>
-                    <h3 class="font-display-lg text-body-lg uppercase tracking-tight">Stream_02.mp4</h3>
-                    <p class="font-mono-data text-[10px] text-on-surface-variant mt-1">RES: 4K</p>
-                </div>
-                <span class="font-mono-data text-label-caps text-primary-fixed">02</span>
-            </div>
-        </div>
-
-        <!-- Slot 3 -->
-        <div class="relative group cursor-pointer border border-outline-variant bg-surface-container-low overflow-hidden">
-            <div class="aspect-video relative overflow-hidden bg-black flex items-center justify-center">
-                <video autoplay class="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:opacity-80 transition-opacity" loop muted playsinline preload="auto">
-                    <source src="./assets/videos/video3.mp4" type="video/mp4"/>
-                </video>
-            </div>
-            <div class="p-6 border-t border-outline-variant flex justify-between items-center relative z-20 bg-surface-container-low">
-                <div>
-                    <h3 class="font-display-lg text-body-lg uppercase tracking-tight">Stream_03.mp4</h3>
-                    <p class="font-mono-data text-[10px] text-on-surface-variant mt-1">RES: 4K</p>
-                </div>
-                <span class="font-mono-data text-label-caps text-primary-fixed">03</span>
-            </div>
-        </div>
-
-        <!-- Slot 4 -->
-        <div class="relative group cursor-pointer border border-outline-variant bg-surface-container-low overflow-hidden">
-            <div class="aspect-video relative overflow-hidden bg-black flex items-center justify-center">
-                <video autoplay class="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:opacity-80 transition-opacity" loop muted playsinline preload="auto">
-                    <!-- Fixed missing .mp4 below -->
-                    <source src="./assets/videos/video4.mp4" type="video/mp4"/> 
-                </video>
-            </div>
-            <div class="p-6 border-t border-outline-variant flex justify-between items-center relative z-20 bg-surface-container-low">
-                <div>
-                    <h3 class="font-display-lg text-body-lg uppercase tracking-tight">Stream_04.mp4</h3>
-                    <p class="font-mono-data text-[10px] text-on-surface-variant mt-1">RES: 4K</p>
-                </div>
-                <span class="font-mono-data text-label-caps text-primary-fixed">04</span>
-            </div>
-        </div>
-
-    </div> <!-- This single closing tag now correctly closes the grid wrapper -->
+<div class="mb-12">
+<span class="font-mono-data text-label-caps text-primary-fixed block mb-2 uppercase">Status: Decoding Stream</span>
+<h2 class="font-headline-md text-headline-md tracking-tighter uppercase">Motion // Video Archive</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+<!-- Slot 1 -->
+<div class="relative group cursor-pointer border border-outline-variant bg-surface-container-low overflow-hidden">
+<div class="aspect-video relative overflow-hidden bg-black flex items-center justify-center">
+<video autoplay="" class="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:opacity-80 transition-opacity" loop="" muted="" playsinline="" preload="auto">
+<source src="./assets/videos/video1.mp4" type="video/mp4"/>
+</video>
+<div class="absolute inset-0 flex items-center justify-center z-10">
+<div class="w-16 h-16 rounded-full border border-primary-fixed flex items-center justify-center bg-black/40 backdrop-blur-sm group-hover:bg-primary-fixed group-hover:text-black transition-all">
+</div>
+</div>
+</div>
+<div class="p-6 border-t border-outline-variant flex justify-between items-center relative z-20 bg-surface-container-low">
+<div>
+<h3 class="font-display-lg text-body-lg uppercase tracking-tight">Stream_01.mp4</h3>
+<p class="font-mono-data text-[10px] text-on-surface-variant mt-1">RES: 4K</p>
+</div>
+<span class="font-mono-data text-label-caps text-primary-fixed">01</span>
+</div>
+</div>
+<!-- Slot 2 -->
+<div class="relative group cursor-pointer border border-outline-variant bg-surface-container-low overflow-hidden">
+<div class="aspect-video relative overflow-hidden bg-black flex items-center justify-center">
+<video autoplay="" class="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:opacity-80 transition-opacity" loop="" muted="" playsinline="" preload="auto">
+<source src="./assets/videos/video2.mp4" type="video/mp4"/>
+</video>
+<div class="absolute inset-0 flex items-center justify-center z-10">
+<div class="w-16 h-16 rounded-full border border-primary-fixed flex items-center justify-center bg-black/40 backdrop-blur-sm group-hover:bg-primary-fixed group-hover:text-black transition-all">
+</div>
+</div>
+</div>
+<div class="p-6 border-t border-outline-variant flex justify-between items-center relative z-20 bg-surface-container-low">
+<div>
+<h3 class="font-display-lg text-body-lg uppercase tracking-tight">Stream_02.mp4</h3>
+<p class="font-mono-data text-[10px] text-on-surface-variant mt-1">RES: 4K</p>
+</div>
+<span class="font-mono-data text-label-caps text-primary-fixed">02</span>
+</div>
+</div>
+<!-- Slot 3 -->
+<div class="relative group cursor-pointer border border-outline-variant bg-surface-container-low overflow-hidden">
+<div class="aspect-video relative overflow-hidden bg-black flex items-center justify-center">
+<video autoplay="" class="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:opacity-80 transition-opacity" loop="" muted="" playsinline="" preload="auto">
+<source src="./assets/videos/video3.mp4" type="video/mp4"/>
+</video>
+<div class="absolute inset-0 flex items-center justify-center z-10">
+<div class="w-16 h-16 rounded-full border border-primary-fixed flex items-center justify-center bg-black/40 backdrop-blur-sm group-hover:bg-primary-fixed group-hover:text-black transition-all">
+</div>
+</div>
+</div>
+<div class="p-6 border-t border-outline-variant flex justify-between items-center relative z-20 bg-surface-container-low">
+<div>
+<h3 class="font-display-lg text-body-lg uppercase tracking-tight">Stream_03.mp4</h3>
+<p class="font-mono-data text-[10px] text-on-surface-variant mt-1">RES: 4K</p>
+</div>
+<span class="font-mono-data text-label-caps text-primary-fixed">03</span>
+</div>
+</div>
+<!-- Slot 4 -->
+<div class="relative group cursor-pointer border border-outline-variant bg-surface-container-low overflow-hidden">
+<div class="aspect-video relative overflow-hidden bg-black flex items-center justify-center">
+<video autoplay="" class="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:opacity-80 transition-opacity" loop="" muted="" playsinline="" preload="auto">
+<source src="./assets/videos/video4.mp4" type="video/mp4"/>
+</video>
+<div class="absolute inset-0 flex items-center justify-center z-10">
+<div class="w-16 h-16 rounded-full border border-primary-fixed flex items-center justify-center bg-black/40 backdrop-blur-sm group-hover:bg-primary-fixed group-hover:text-black transition-all">
+</div>
+</div>
+</div>
+<div class="p-6 border-t border-outline-variant flex justify-between items-center relative z-20 bg-surface-container-low">
+<div>
+<h3 class="font-display-lg text-body-lg uppercase tracking-tight">Stream_04.mp4</h3>
+<p class="font-mono-data text-[10px] text-on-surface-variant mt-1">RES: 4K</p>
+</div>
+<span class="font-mono-data text-label-caps text-primary-fixed">04</span>
+</div>
+</div>
+</div>
 </section>
 <!-- Color Grade Comparison Section (Laboratory) -->
 <section class="mb-32" id="laboratory">
@@ -390,277 +398,235 @@
 </footer>
 </main>
 <script>
-        // Custom Cursor Logic
-        const cursor = document.getElementById('cursor');
-        const dot = document.getElementById('cursor-dot');
-        const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+        // Custom Cursor Logic
+        const cursor = document.getElementById('cursor');
+        const dot = document.getElementById('cursor-dot');
+        const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
 
-        if (!isTouchDevice && window.innerWidth > 768) {
-            document.addEventListener('mousemove', (e) => {
-                const x = e.clientX;
-                const y = e.clientY;
-                requestAnimationFrame(() => {
-                    cursor.style.left = x + 'px';
-                    cursor.style.top = y + 'px';
-                    dot.style.left = x + 'px';
-                    dot.style.top = y + 'px';
-                });
-            });
+        if (!isTouchDevice && window.innerWidth > 768) {
+            document.addEventListener('mousemove', (e) => {
+                const x = e.clientX;
+                const y = e.clientY;
+                requestAnimationFrame(() => {
+                    cursor.style.left = x + 'px';
+                    cursor.style.top = y + 'px';
+                    dot.style.left = x + 'px';
+                    dot.style.top = y + 'px';
+                });
+            });
 
-            document.querySelectorAll('a, button, input, [role="button"]').forEach(el => {
-                el.addEventListener('mouseenter', () => {
-                    cursor.style.width = '48px';
-                    cursor.style.height = '48px';
-                    cursor.style.backgroundColor = 'rgba(204, 255, 0, 0.1)';
-                });
-                el.addEventListener('mouseleave', () => {
-                    cursor.style.width = '24px';
-                    cursor.style.height = '24px';
-                    cursor.style.backgroundColor = 'transparent';
-                });
-            });
-        }
+            document.querySelectorAll('a, button, input, [role="button"]').forEach(el => {
+                el.addEventListener('mouseenter', () => {
+                    cursor.style.width = '48px';
+                    cursor.style.height = '48px';
+                    cursor.style.backgroundColor = 'rgba(204, 255, 0, 0.1)';
+                });
+                el.addEventListener('mouseleave', () => {
+                    cursor.style.width = '24px';
+                    cursor.style.height = '24px';
+                    cursor.style.backgroundColor = 'transparent';
+                });
+            });
+        }
 
-        // Full-screen Loading Sequence Logic
-       document.addEventListener('DOMContentLoaded', () => {
-    const loaderOverlay = document.getElementById('loader-overlay');
-    const loaderCounter = document.getElementById('loader-counter');
-    const loaderWheel = document.getElementById('loader-wheel');
-    const videos = document.querySelectorAll('video');
-    
-    let currentCount = 0;
-    let targetCount = 0;
-    let totalVideos = videos.length;
-    let loadedVideos = 0;
+        // Full-screen Loading Sequence Logic
+        document.addEventListener('DOMContentLoaded', () => {
+            const loaderOverlay = document.getElementById('loader-overlay');
+            const loaderCounter = document.getElementById('loader-counter');
+            const loaderWheel = document.getElementById('loader-wheel');
+            let count = 0;
+            
+            document.body.style.overflow = 'hidden';
 
-    document.body.style.overflow = 'hidden';
+            const interval = setInterval(() => {
+                count += Math.floor(Math.random() * 3) + 1;
+                if (count > 100) count = 100;
+                
+                loaderCounter.textContent = count;
+                const duration = 2 - (count / 100) * 1.6;
+                loaderWheel.style.setProperty('--spin-duration', `${duration}s`);
 
-    // 1. Instantly jump up to 25% on a quick interval so the page doesn't look stuck
-    const initialFakeProgress = setInterval(() => {
-        if (targetCount < 25) {
-            targetCount += Math.floor(Math.random() * 4) + 2;
-        } else {
-            clearInterval(initialFakeProgress);
-        }
-    }, 30);
+                if (count === 100) {
+                    clearInterval(interval);
+                    setTimeout(() => {
+                        loaderOverlay.style.opacity = '0';
+                        loaderOverlay.style.pointerEvents = 'none';
+                        document.body.style.overflow = 'auto';
+                        setTimeout(() => {
+                            loaderOverlay.remove();
+                        }, 1000);
+                    }, 500);
+                }
+            }, 40);
+        });
 
-    // 2. Monitor real-time video buffer status
-    if (totalVideos === 0) {
-        targetCount = 100;
-    } else {
-        videos.forEach(video => {
-            const handleVideoLoaded = () => {
-                if (video.dataset.hasLoadedTrue) return; // Prevent duplicate counts
-                video.dataset.hasLoadedTrue = "true";
-                loadedVideos++;
-                
-                // Distribute the remaining 75% across your total video count
-                targetCount = Math.floor(25 + ((loadedVideos / totalVideos) * 75));
-            };
+        // Comparison Slider Logic
+        document.querySelectorAll('.comparison-slider-input').forEach(slider => {
+            const updateSlider = () => {
+                const val = slider.value;
+                const targetId = slider.getAttribute('data-target');
+                const overlay = document.getElementById(`overlay-${targetId}`);
+                const sliderLine = document.getElementById(`slider-line-${targetId}`);
+                
+                if (overlay) {
+                    overlay.style.clipPath = `inset(0 0 0 ${val}%)`;
+                }
+                if (sliderLine) {
+                    sliderLine.style.left = val + '%';
+                }
+            };
 
-            // If the browser already has enough cached data, trigger immediately
-            if (video.readyState >= 3) {
-                handleVideoLoaded();
-            } else {
-                // Otherwise, wait until it can play cleanly through without hitching
-                video.addEventListener('canplaythrough', handleVideoLoaded);
-                video.addEventListener('loadeddata', handleVideoLoaded); // Secondary fallback
-            }
-        });
-    }
+            slider.addEventListener('input', updateSlider);
+            updateSlider();
+        });
 
-    // 3. Smooth frame counter to make numbers fluidly tick up to the target value
-    const checkProgressLoop = setInterval(() => {
-        if (currentCount < targetCount) {
-            currentCount++;
-            loaderCounter.textContent = currentCount;
-            
-            // Sync your custom spinning wheel speed to progress updates
-            const duration = 2 - (currentCount / 100) * 1.6;
-            loaderWheel.style.setProperty('--spin-duration', `${duration}s`);
-        }
+        // Micro-interactions for scrolling
+        const observerOptions = { threshold: 0.1 };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('opacity-100', 'translate-y-0');
+                    entry.target.classList.remove('opacity-0', 'translate-y-8');
+                }
+            });
+        }, observerOptions);
 
-        // 4. Once it safely clocks 100%, execute the clean fade out sequence
-        if (currentCount === 100) {
-            clearInterval(checkProgressLoop);
-            setTimeout(() => {
-                loaderOverlay.style.opacity = '0';
-                loaderOverlay.style.pointerEvents = 'none';
-                document.body.style.overflow = 'auto';
-                setTimeout(() => {
-                    loaderOverlay.remove();
-                }, 1000);
-            }, 500);
-        }
-    }, 25);
-});
-        // Comparison Slider Logic
-        document.querySelectorAll('.comparison-slider-input').forEach(slider => {
-            const updateSlider = () => {
-                const val = slider.value;
-                const targetId = slider.getAttribute('data-target');
-                const overlay = document.getElementById(`overlay-${targetId}`);
-                const sliderLine = document.getElementById(`slider-line-${targetId}`);
-                
-                if (overlay) {
-                    overlay.style.clipPath = `inset(0 0 0 ${val}%)`;
-                }
-                if (sliderLine) {
-                    sliderLine.style.left = val + '%';
-                }
-            };
+        document.querySelectorAll('section').forEach(section => {
+            section.classList.add('transition-all', 'duration-1000', 'opacity-0', 'translate-y-8');
+            observer.observe(section);
+        });
 
-            slider.addEventListener('input', updateSlider);
-            updateSlider();
-        });
+        // Optimized Background Shader Logic
+        (function() {
+            const canvas = document.getElementById('shader-canvas-ANIMATION_1');
+            if (!canvas) return;
 
-        // Micro-interactions for scrolling
-        const observerOptions = { threshold: 0.1 };
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('opacity-100', 'translate-y-0');
-                    entry.target.classList.remove('opacity-0', 'translate-y-8');
-                }
-            });
-        }, observerOptions);
+            function syncSize() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            }
+            window.addEventListener('resize', syncSize);
+            syncSize();
 
-        document.querySelectorAll('section').forEach(section => {
-            section.classList.add('transition-all', 'duration-1000', 'opacity-0', 'translate-y-8');
-            observer.observe(section);
-        });
+            const gl = canvas.getContext('webgl', { antialias: true, alpha: false });
+            if (!gl) return;
+            
+            const vs = `
+                attribute vec2 a_position;
+                varying vec2 v_texCoord;
+                void main() {
+                    v_texCoord = a_position * 0.5 + 0.5;
+                    gl_Position = vec4(a_position, 0.0, 1.0);
+                }
+            `;
+                
+            const fs = `
+                precision highp float;
+                varying vec2 v_texCoord;
+                uniform float u_time;
+                uniform vec2 u_resolution;
+                uniform vec2 u_mouse;
 
-        // Optimized Background Shader Logic
-        (function() {
-            const canvas = document.getElementById('shader-canvas-ANIMATION_1');
-            if (!canvas) return;
+                vec3 mod289(vec3 x) { return x - floor(x * (1.0 / 289.0)) * 289.0; }
+                vec2 mod289(vec2 x) { return x - floor(x * (1.0 / 289.0)) * 289.0; }
+                vec3 permute(vec3 x) { return mod289(((x*34.0)+1.0)*x); }
 
-            function syncSize() {
-                canvas.width = window.innerWidth;
-                canvas.height = window.innerHeight;
-            }
-            window.addEventListener('resize', syncSize);
-            syncSize();
+                float snoise(vec2 v) {
+                    const vec4 C = vec4(0.211324865405187, 0.366025403784439, -0.577350269189626, 0.024390243902439);
+                    vec2 i  = floor(v + dot(v, C.yy));
+                    vec2 x0 = v -   i + dot(i, C.xx);
+                    vec2 i1 = (x0.x > x0.y) ? vec2(1.0, 0.0) : vec2(0.0, 1.0);
+                    vec4 x12 = x0.xyxy + C.xxzz;
+                    x12.xy -= i1;
+                    i = mod289(i);
+                    vec3 p = permute(permute(i.y + vec3(0.0, i1.y, 1.0)) + i.x + vec3(0.0, i1.x, 1.0));
+                    vec3 m = max(0.5 - vec3(dot(x0,x0), dot(x12.xy,x12.xy), dot(x12.zw,x12.zw)), 0.0);
+                    m = m*m; m = m*m;
+                    vec3 x = 2.0 * fract(p * C.www) - 1.0;
+                    vec3 h = abs(x) - 0.5;
+                    vec3 ox = floor(x + 0.5);
+                    vec3 a0 = x - ox;
+                    m *= 1.79284291400159 - 0.85373472095314 * (a0*a0 + h*h);
+                    vec3 g;
+                    g.x  = a0.x  * x0.x  + h.x  * x0.y;
+                    g.yz = a0.yz * x12.xz + h.yz * x12.yw;
+                    return 130.0 * dot(m, g);
+                }
 
-            const gl = canvas.getContext('webgl', { antialias: true, alpha: false });
-            if (!gl) return;
-            
-            const vs = `
-                attribute vec2 a_position;
-                varying vec2 v_texCoord;
-                void main() {
-                    v_texCoord = a_position * 0.5 + 0.5;
-                    gl_Position = vec4(a_position, 0.0, 1.0);
-                }
-            `;
-                
-            const fs = `
-                precision highp float;
-                varying vec2 v_texCoord;
-                uniform float u_time;
-                uniform vec2 u_resolution;
-                uniform vec2 u_mouse;
+                void main() {
+                    vec2 uv = v_texCoord;
+                    vec2 m = u_mouse / u_resolution;
+                    
+                    // Larger scale for expansive topographic lines
+                    float scale = 1.2; 
+                    float n = snoise(uv * scale + u_time * 0.03);
+                    n += snoise(uv * (scale * 2.1) - u_time * 0.01) * 0.5;
+                    
+                    float dist = distance(uv, m);
+                    float force = smoothstep(0.6, 0.0, dist) * 0.25;
+                    n += force;
 
-                vec3 mod289(vec3 x) { return x - floor(x * (1.0 / 289.0)) * 289.0; }
-                vec2 mod289(vec2 x) { return x - floor(x * (1.0 / 289.0)) * 289.0; }
-                vec3 permute(vec3 x) { return mod289(((x*34.0)+1.0)*x); }
+                    // Neon lines with wider spacing for "expansive" feel
+                    float line = sin(n * 18.0);
+                    // Ultra-sharp contrast for surgical clarity
+                    line = smoothstep(0.0, 0.02, abs(line) - 0.005); 
+                    
+                    vec3 neonColor = vec3(0.8, 1.0, 0.0); 
+                    vec3 color = mix(neonColor, vec3(0.0), line);
+                    
+                    // Subdued but high-contrast brightness
+                    gl_FragColor = vec4(color * 0.25, 1.0);
+                }
+            `;
 
-                float snoise(vec2 v) {
-                    const vec4 C = vec4(0.211324865405187, 0.366025403784439, -0.577350269189626, 0.024390243902439);
-                    vec2 i  = floor(v + dot(v, C.yy));
-                    vec2 x0 = v -   i + dot(i, C.xx);
-                    vec2 i1 = (x0.x > x0.y) ? vec2(1.0, 0.0) : vec2(0.0, 1.0);
-                    vec4 x12 = x0.xyxy + C.xxzz;
-                    x12.xy -= i1;
-                    i = mod289(i);
-                    vec3 p = permute(permute(i.y + vec3(0.0, i1.y, 1.0)) + i.x + vec3(0.0, i1.x, 1.0));
-                    vec3 m = max(0.5 - vec3(dot(x0,x0), dot(x12.xy,x12.xy), dot(x12.zw,x12.zw)), 0.0);
-                    m = m*m; m = m*m;
-                    vec3 x = 2.0 * fract(p * C.www) - 1.0;
-                    vec3 h = abs(x) - 0.5;
-                    vec3 ox = floor(x + 0.5);
-                    vec3 a0 = x - ox;
-                    m *= 1.79284291400159 - 0.85373472095314 * (a0*a0 + h*h);
-                    vec3 g;
-                    g.x  = a0.x  * x0.x  + h.x  * x0.y;
-                    g.yz = a0.yz * x12.xz + h.yz * x12.yw;
-                    return 130.0 * dot(m, g);
-                }
+            function createShader(type, src) {
+                const s = gl.createShader(type);
+                gl.shaderSource(s, src);
+                gl.compileShader(s);
+                if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) {
+                    console.error(gl.getShaderInfoLog(s));
+                }
+                return s;
+            }
 
-                void main() {
-                    vec2 uv = v_texCoord;
-                    vec2 m = u_mouse / u_resolution;
-                    
-                    // Larger scale for expansive topographic lines
-                    float scale = 1.2; 
-                    float n = snoise(uv * scale + u_time * 0.03);
-                    n += snoise(uv * (scale * 2.1) - u_time * 0.01) * 0.5;
-                    
-                    float dist = distance(uv, m);
-                    float force = smoothstep(0.6, 0.0, dist) * 0.25;
-                    n += force;
+            const prog = gl.createProgram();
+            gl.attachShader(prog, createShader(gl.VERTEX_SHADER, vs));
+            gl.attachShader(prog, createShader(gl.FRAGMENT_SHADER, fs));
+            gl.linkProgram(prog);
+            gl.useProgram(prog);
 
-                    // Neon lines with wider spacing for "expansive" feel
-                    float line = sin(n * 18.0);
-                    // Ultra-sharp contrast for surgical clarity
-                    line = smoothstep(0.0, 0.02, abs(line) - 0.005); 
-                    
-                    vec3 neonColor = vec3(0.8, 1.0, 0.0); 
-                    vec3 color = mix(neonColor, vec3(0.0), line);
-                    
-                    // Subdued but high-contrast brightness
-                    gl_FragColor = vec4(color * 0.25, 1.0);
-                }
-            `;
+            const buf = gl.createBuffer();
+            gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+            gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 1,-1, -1,1, 1,1]), gl.STATIC_DRAW);
+            const pos = gl.getAttribLocation(prog, 'a_position');
+            gl.enableVertexAttribArray(pos);
+            gl.vertexAttribPointer(pos, 2, gl.FLOAT, false, 0, 0);
 
-            function createShader(type, src) {
-                const s = gl.createShader(type);
-                gl.shaderSource(s, src);
-                gl.compileShader(s);
-                if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) {
-                    console.error(gl.getShaderInfoLog(s));
-                }
-                return s;
-            }
+            const uTime = gl.getUniformLocation(prog, 'u_time');
+            const uRes = gl.getUniformLocation(prog, 'u_resolution');
+            const uMouse = gl.getUniformLocation(prog, 'u_mouse');
 
-            const prog = gl.createProgram();
-            gl.attachShader(prog, createShader(gl.VERTEX_SHADER, vs));
-            gl.attachShader(prog, createShader(gl.FRAGMENT_SHADER, fs));
-            gl.linkProgram(prog);
-            gl.useProgram(prog);
+            let mouse = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
+            let targetMouse = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
+            
+            window.addEventListener('mousemove', (e) => {
+                targetMouse.x = e.clientX;
+                targetMouse.y = window.innerHeight - e.clientY;
+            });
 
-            const buf = gl.createBuffer();
-            gl.bindBuffer(gl.ARRAY_BUFFER, buf);
-            gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 1,-1, -1,1, 1,1]), gl.STATIC_DRAW);
-            const pos = gl.getAttribLocation(prog, 'a_position');
-            gl.enableVertexAttribArray(pos);
-            gl.vertexAttribPointer(pos, 2, gl.FLOAT, false, 0, 0);
+            function render(t) {
+                // Smooth mouse interpolation to eliminate jitter
+                mouse.x += (targetMouse.x - mouse.x) * 0.05;
+                mouse.y += (targetMouse.y - mouse.y) * 0.05;
 
-            const uTime = gl.getUniformLocation(prog, 'u_time');
-            const uRes = gl.getUniformLocation(prog, 'u_resolution');
-            const uMouse = gl.getUniformLocation(prog, 'u_mouse');
-
-            let mouse = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
-            let targetMouse = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
-            
-            window.addEventListener('mousemove', (e) => {
-                targetMouse.x = e.clientX;
-                targetMouse.y = window.innerHeight - e.clientY;
-            });
-
-            function render(t) {
-                // Smooth mouse interpolation to eliminate jitter
-                mouse.x += (targetMouse.x - mouse.x) * 0.05;
-                mouse.y += (targetMouse.y - mouse.y) * 0.05;
-
-                gl.viewport(0, 0, canvas.width, canvas.height);
-                gl.uniform1f(uTime, t * 0.001);
-                gl.uniform2f(uRes, canvas.width, canvas.height);
-                gl.uniform2f(uMouse, mouse.x, mouse.y);
-                gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
-                requestAnimationFrame(render);
-            }
-            requestAnimationFrame(render);
-        })();
-    </script>
+                gl.viewport(0, 0, canvas.width, canvas.height);
+                gl.uniform1f(uTime, t * 0.001);
+                gl.uniform2f(uRes, canvas.width, canvas.height);
+                gl.uniform2f(uMouse, mouse.x, mouse.y);
+                gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+                requestAnimationFrame(render);
+            }
+            requestAnimationFrame(render);
+        })();
+    </script>
 </body></html>
