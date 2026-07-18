@@ -422,78 +422,69 @@
         }
 
         // Full-screen Loading Sequence Logic
-       document.addEventListener('DOMContentLoaded', () => {
-    const loaderOverlay = document.getElementById('loader-overlay');
-    const loaderCounter = document.getElementById('loader-counter');
-    const loaderWheel = document.getElementById('loader-wheel');
-    const videos = document.querySelectorAll('video');
-    
-    let currentCount = 0;
-    let targetCount = 0;
-    let totalVideos = videos.length;
-    let loadedVideos = 0;
-
-    document.body.style.overflow = 'hidden';
-
-    // 1. Instantly jump up to 25% on a quick interval so the page doesn't look stuck
-    const initialFakeProgress = setInterval(() => {
-        if (targetCount < 25) {
-            targetCount += Math.floor(Math.random() * 4) + 2;
-        } else {
-            clearInterval(initialFakeProgress);
-        }
-    }, 30);
-
-    // 2. Monitor real-time video buffer status
-    if (totalVideos === 0) {
-        targetCount = 100;
-    } else {
-        videos.forEach(video => {
-            const handleVideoLoaded = () => {
-                if (video.dataset.hasLoadedTrue) return; // Prevent duplicate counts
-                video.dataset.hasLoadedTrue = "true";
-                loadedVideos++;
-                
-                // Distribute the remaining 75% across your total video count
-                targetCount = Math.floor(25 + ((loadedVideos / totalVideos) * 75));
-            };
-
-            // If the browser already has enough cached data, trigger immediately
-            if (video.readyState >= 3) {
-                handleVideoLoaded();
-            } else {
-                // Otherwise, wait until it can play cleanly through without hitching
-                video.addEventListener('canplaythrough', handleVideoLoaded);
-                video.addEventListener('loadeddata', handleVideoLoaded); // Secondary fallback
-            }
-        });
-    }
-
-    // 3. Smooth frame counter to make numbers fluidly tick up to the target value
-    const checkProgressLoop = setInterval(() => {
-        if (currentCount < targetCount) {
-            currentCount++;
-            loaderCounter.textContent = currentCount;
+        document.addEventListener('DOMContentLoaded', () => {
+            const loaderOverlay = document.getElementById('loader-overlay');
+            const loaderCounter = document.getElementById('loader-counter');
+            const loaderWheel = document.getElementById('loader-wheel');
+            const videos = document.querySelectorAll('video');
             
-            // Sync your custom spinning wheel speed to progress updates
-            const duration = 2 - (currentCount / 100) * 1.6;
-            loaderWheel.style.setProperty('--spin-duration', `${duration}s`);
-        }
+            let currentCount = 0;
+            let targetCount = 0;
+            let totalVideos = videos.length;
+            let loadedVideos = 0;
 
-        // 4. Once it safely clocks 100%, execute the clean fade out sequence
-        if (currentCount === 100) {
-            clearInterval(checkProgressLoop);
-            setTimeout(() => {
-                loaderOverlay.style.opacity = '0';
-                loaderOverlay.style.pointerEvents = 'none';
-                document.body.style.overflow = 'auto';
-                setTimeout(() => {
-                    loaderOverlay.remove();
-                }, 1000);
-            }, 500);
-        }
-    }, 25);
-});
+            document.body.style.overflow = 'hidden';
+
+            const initialFakeProgress = setInterval(() => {
+                if (targetCount < 25) {
+                    targetCount += Math.floor(Math.random() * 4) + 2;
+                } else {
+                    clearInterval(initialFakeProgress);
+                }
+            }, 30);
+
+            if (totalVideos === 0) {
+                targetCount = 100;
+            } else {
+                videos.forEach(video => {
+                    const handleVideoLoaded = () => {
+                        if (video.dataset.hasLoadedTrue) return;
+                        video.dataset.hasLoadedTrue = "true";
+                        loadedVideos++;
+                        targetCount = Math.floor(25 + ((loadedVideos / totalVideos) * 75));
+                    };
+
+                    if (video.readyState >= 3) {
+                        handleVideoLoaded();
+                    } else {
+                        video.addEventListener('canplaythrough', handleVideoLoaded);
+                        video.addEventListener('loadeddata', handleVideoLoaded);
+                    }
+                });
+            }
+
+            const checkProgressLoop = setInterval(() => {
+                if (currentCount < targetCount) {
+                    currentCount++;
+                    loaderCounter.textContent = currentCount;
+                    const duration = 2 - (currentCount / 100) * 1.6;
+                    loaderWheel.style.setProperty('--spin-duration', `${duration}s`);
+                }
+
+                if (currentCount === 100) {
+                    clearInterval(checkProgressLoop);
+                    setTimeout(() => {
+                        loaderOverlay.style.opacity = '0';
+                        loaderOverlay.style.pointerEvents = 'none';
+                        document.body.style.overflow = 'auto';
+                        setTimeout(() => {
+                            loaderOverlay.remove();
+                        }, 1000);
+                    }, 500);
+                }
+            }, 25);
+        });
+
         // Comparison Slider Logic
         document.querySelectorAll('.comparison-slider-input').forEach(slider => {
             const updateSlider = () => {
@@ -535,6 +526,9 @@
             const canvas = document.getElementById('shader-canvas-ANIMATION_1');
             if (!canvas) return;
 
+            // Enforce strong CSS styling fallback directly onto the element via script
+            canvas.style.backgroundColor = '#000000';
+
             function syncSize() {
                 canvas.width = window.innerWidth;
                 canvas.height = window.innerHeight;
@@ -542,7 +536,8 @@
             window.addEventListener('resize', syncSize);
             syncSize();
 
-            const gl = canvas.getContext('webgl', { antialias: true, alpha: false });
+            // FIXED: alpha: false explicitly blocks mobile browser transparency leakage
+            const gl = canvas.getContext('webgl', { antialias: true, alpha: false, premultipliedAlpha: false });
             if (!gl) return;
             
             const vs = `
@@ -572,6 +567,7 @@
                     vec2 i1 = (x0.x > x0.y) ? vec2(1.0, 0.0) : vec2(0.0, 1.0);
                     vec4 x12 = x0.xyxy + C.xxzz;
                     x12.xy -= i1;
+                    x12.zw -= vec2(1.0, 1.0); // Safe mathematical fix for noise structures
                     i = mod289(i);
                     vec3 p = permute(permute(i.y + vec3(0.0, i1.y, 1.0)) + i.x + vec3(0.0, i1.x, 1.0));
                     vec3 m = max(0.5 - vec3(dot(x0,x0), dot(x12.xy,x12.xy), dot(x12.zw,x12.zw)), 0.0);
@@ -591,7 +587,6 @@
                     vec2 uv = v_texCoord;
                     vec2 m = u_mouse / u_resolution;
                     
-                    // Larger scale for expansive topographic lines
                     float scale = 1.2; 
                     float n = snoise(uv * scale + u_time * 0.03);
                     n += snoise(uv * (scale * 2.1) - u_time * 0.01) * 0.5;
@@ -600,15 +595,12 @@
                     float force = smoothstep(0.6, 0.0, dist) * 0.25;
                     n += force;
 
-                    // Neon lines with wider spacing for "expansive" feel
                     float line = sin(n * 18.0);
-                    // Ultra-sharp contrast for surgical clarity
                     line = smoothstep(0.0, 0.02, abs(line) - 0.005); 
                     
                     vec3 neonColor = vec3(0.8, 1.0, 0.0); 
                     vec3 color = mix(neonColor, vec3(0.0), line);
                     
-                    // Subdued but high-contrast brightness
                     gl_FragColor = vec4(color * 0.25, 1.0);
                 }
             `;
@@ -643,13 +635,21 @@
             let mouse = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
             let targetMouse = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
             
+            // Handle standard mouse moving
             window.addEventListener('mousemove', (e) => {
                 targetMouse.x = e.clientX;
                 targetMouse.y = window.innerHeight - e.clientY;
             });
 
+            // FIXED: Handle mobile finger swipe coordinates
+            window.addEventListener('touchmove', (e) => {
+                if (e.touches && e.touches.length > 0) {
+                    targetMouse.x = e.touches[0].clientX;
+                    targetMouse.y = window.innerHeight - e.touches[0].clientY;
+                }
+            }, { passive: true });
+
             function render(t) {
-                // Smooth mouse interpolation to eliminate jitter
                 mouse.x += (targetMouse.x - mouse.x) * 0.05;
                 mouse.y += (targetMouse.y - mouse.y) * 0.05;
 
@@ -662,5 +662,4 @@
             }
             requestAnimationFrame(render);
         })();
-    </script>
-</body></html>
+</script>
