@@ -240,84 +240,82 @@
 </section>
 <!-- Motion Archive Carousel (Video Slots) -->
 <section class="mb-32">
-<div class="mb-12">
-<span class="font-mono-data text-label-caps text-primary-fixed block mb-2 uppercase">Status: Decoding Stream</span>
-<h2 class="font-headline-md text-headline-md tracking-tighter uppercase">Motion // Video Archive</h2>
-</div>
-<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
-<!-- Slot 1 -->
-<div class="relative group cursor-pointer border border-outline-variant bg-surface-container-low overflow-hidden">
-<div class="aspect-video relative overflow-hidden bg-black flex items-center justify-center">
-<video autoplay="" class="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:opacity-80 transition-opacity" loop="" muted="" playsinline="" preload="auto">
-<source src="./assets/videos/video1.mp4" type="video/mp4"/>
-</video>
-<div class="absolute inset-0 flex items-center justify-center z-10">
-</div>
-</div>
-</div>
-<div class="p-6 border-t border-outline-variant flex justify-between items-center relative z-20 bg-surface-container-low">
-<div>
-<h3 class="font-display-lg text-body-lg uppercase tracking-tight">Stream_01.mp4</h3>
-<p class="font-mono-data text-[10px] text-on-surface-variant mt-1">DUR: 00:45 // RES: 4K</p>
-</div>
-<span class="font-mono-data text-label-caps text-primary-fixed">01</span>
-</div>
-</div>
-<!-- Slot-->
-<div class="relative group cursor-pointer border border-outline-variant bg-surface-container-low overflow-hidden">
-<div class="aspect-video relative overflow-hidden bg-black flex items-center justify-center">
-<video autoplay="" class="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:opacity-80 transition-opacity" loop="" muted="" playsinline="" preload="auto">
-<source src="./assets/videos/video2.mp4" type="video/mp4"/>
-</video>
-<div class="absolute inset-0 flex items-center justify-center z-10">
-</div>
-</div>
-</div>
-<div class="p-6 border-t border-outline-variant flex justify-between items-center relative z-20 bg-surface-container-low">
-<div>
-<h3 class="font-display-lg text-body-lg uppercase tracking-tight">Stream_02.mp4</h3>
-<p class="font-mono-data text-[10px] text-on-surface-variant mt-1">DUR: 01:20 // RES: 4K</p>
-</div>
-<span class="font-mono-data text-label-caps text-primary-fixed">02</span>
-</div>
-</div>
-<!-- Slot 3 -->
-<div class="relative group cursor-pointer border border-outline-variant bg-surface-container-low overflow-hidden">
-<div class="aspect-video relative overflow-hidden bg-black flex items-center justify-center">
-<video autoplay="" class="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:opacity-80 transition-opacity" loop="" muted="" playsinline="" preload="auto">
-<source src="./assets/videos/video3.mp4" type="video/mp4"/>
-</video>
-<div class="absolute inset-0 flex items-center justify-center z-10">
-</div>
-</div>
-</div>
-<div class="p-6 border-t border-outline-variant flex justify-between items-center relative z-20 bg-surface-container-low">
-<div>
-<h3 class="font-display-lg text-body-lg uppercase tracking-tight">Stream_03.mp4</h3>
-<p class="font-mono-data text-[10px] text-on-surface-variant mt-1">DUR: 00:30 // RES: 4K</p>
-</div>
-<span class="font-mono-data text-label-caps text-primary-fixed">03</span>
-</div>
-</div>
-<!-- Slot 4 -->
-<div class="relative group cursor-pointer border border-outline-variant bg-surface-container-low overflow-hidden">
-<div class="aspect-video relative overflow-hidden bg-black flex items-center justify-center">
-<video autoplay="" class="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:opacity-80 transition-opacity" loop="" muted="" playsinline="" preload="auto">
-<source src="./assets/videos/video4.mp4" type="video/mp4"/>
-</video>
-<div class="absolute inset-0 flex items-center justify-center z-10">
-</div>
-</div>
-</div>
-<div class="p-6 border-t border-outline-variant flex justify-between items-center relative z-20 bg-surface-container-low">
-<div>
-<h3 class="font-display-lg text-body-lg uppercase tracking-tight">Stream_04.mp4</h3>
-<p class="font-mono-data text-[10px] text-on-surface-variant mt-1">DUR: 00:15 // RES: 4K</p>
-</div>
-<span class="font-mono-data text-label-caps text-primary-fixed">04</span>
-</div>
-</div>
-</div>
+    <div class="mb-12">
+        <span class="font-mono-data text-label-caps text-primary-fixed block mb-2 uppercase">Status: Decoding Stream</span>
+        <h2 class="font-headline-md text-headline-md tracking-tighter uppercase">Motion // Video Archive</h2>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+        
+        <!-- Slot 1 -->
+        <div class="flex flex-col border border-outline-variant bg-surface-container-low overflow-hidden group cursor-pointer">
+            <div class="aspect-video relative overflow-hidden bg-black flex items-center justify-center">
+                <video autoplay="" class="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:opacity-80 transition-opacity" loop="" muted="" playsinline="" preload="auto">
+                    <source src="./assets/videos/video1.mp4" type="video/mp4"/>
+                </video>
+                <div class="absolute inset-0 flex items-center justify-center z-10"></div>
+            </div>
+            <div class="p-6 border-t border-outline-variant flex justify-between items-center relative z-20 bg-surface-container-low mt-auto">
+                <div>
+                    <h3 class="font-display-lg text-body-lg uppercase tracking-tight">Stream_01.mp4</h3>
+                    <p class="font-mono-data text-[10px] text-on-surface-variant mt-1">DUR: 00:45 // RES: 4K</p>
+                </div>
+                <span class="font-mono-data text-label-caps text-primary-fixed">01</span>
+            </div>
+        </div>
+
+        <!-- Slot 2 -->
+        <div class="flex flex-col border border-outline-variant bg-surface-container-low overflow-hidden group cursor-pointer">
+            <div class="aspect-video relative overflow-hidden bg-black flex items-center justify-center">
+                <video autoplay="" class="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:opacity-80 transition-opacity" loop="" muted="" playsinline="" preload="auto">
+                    <source src="./assets/videos/video2.mp4" type="video/mp4"/>
+                </video>
+                <div class="absolute inset-0 flex items-center justify-center z-10"></div>
+            </div>
+            <div class="p-6 border-t border-outline-variant flex justify-between items-center relative z-20 bg-surface-container-low mt-auto">
+                <div>
+                    <h3 class="font-display-lg text-body-lg uppercase tracking-tight">Stream_02.mp4</h3>
+                    <p class="font-mono-data text-[10px] text-on-surface-variant mt-1">DUR: 01:20 // RES: 4K</p>
+                </div>
+                <span class="font-mono-data text-label-caps text-primary-fixed">02</span>
+            </div>
+        </div>
+
+        <!-- Slot 3 -->
+        <div class="flex flex-col border border-outline-variant bg-surface-container-low overflow-hidden group cursor-pointer">
+            <div class="aspect-video relative overflow-hidden bg-black flex items-center justify-center">
+                <video autoplay="" class="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:opacity-80 transition-opacity" loop="" muted="" playsinline="" preload="auto">
+                    <source src="./assets/videos/video3.mp4" type="video/mp4"/>
+                </video>
+                <div class="absolute inset-0 flex items-center justify-center z-10"></div>
+            </div>
+            <div class="p-6 border-t border-outline-variant flex justify-between items-center relative z-20 bg-surface-container-low mt-auto">
+                <div>
+                    <h3 class="font-display-lg text-body-lg uppercase tracking-tight">Stream_03.mp4</h3>
+                    <p class="font-mono-data text-[10px] text-on-surface-variant mt-1">DUR: 00:30 // RES: 4K</p>
+                </div>
+                <span class="font-mono-data text-label-caps text-primary-fixed">03</span>
+            </div>
+        </div>
+
+        <!-- Slot 4 -->
+        <div class="flex flex-col border border-outline-variant bg-surface-container-low overflow-hidden group cursor-pointer">
+            <div class="aspect-video relative overflow-hidden bg-black flex items-center justify-center">
+                <video autoplay="" class="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:opacity-80 transition-opacity" loop="" muted="" playsinline="" preload="auto">
+                    <source src="./assets/videos/video4.mp4" type="video/mp4"/>
+                </video>
+                <div class="absolute inset-0 flex items-center justify-center z-10"></div>
+            </div>
+            <div class="p-6 border-t border-outline-variant flex justify-between items-center relative z-20 bg-surface-container-low mt-auto">
+                <div>
+                    <h3 class="font-display-lg text-body-lg uppercase tracking-tight">Stream_04.mp4</h3>
+                    <p class="font-mono-data text-[10px] text-on-surface-variant mt-1">DUR: 00:15 // RES: 4K</p>
+                </div>
+                <span class="font-mono-data text-label-caps text-primary-fixed">04</span>
+            </div>
+        </div>
+
+    </div>
 </section>
 <!-- Color Grade Comparison Section (Laboratory) -->
 <section class="mb-32" id="laboratory">
