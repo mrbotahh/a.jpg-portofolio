@@ -422,36 +422,78 @@
         }
 
         // Full-screen Loading Sequence Logic
-        document.addEventListener('DOMContentLoaded', () => {
-            const loaderOverlay = document.getElementById('loader-overlay');
-            const loaderCounter = document.getElementById('loader-counter');
-            const loaderWheel = document.getElementById('loader-wheel');
-            let count = 0;
-            
-            document.body.style.overflow = 'hidden';
+       document.addEventListener('DOMContentLoaded', () => {
+    const loaderOverlay = document.getElementById('loader-overlay');
+    const loaderCounter = document.getElementById('loader-counter');
+    const loaderWheel = document.getElementById('loader-wheel');
+    const videos = document.querySelectorAll('video');
+    
+    let currentCount = 0;
+    let targetCount = 0;
+    let totalVideos = videos.length;
+    let loadedVideos = 0;
 
-            const interval = setInterval(() => {
-                count += Math.floor(Math.random() * 3) + 1;
-                if (count > 100) count = 100;
+    document.body.style.overflow = 'hidden';
+
+    // 1. Instantly jump up to 25% on a quick interval so the page doesn't look stuck
+    const initialFakeProgress = setInterval(() => {
+        if (targetCount < 25) {
+            targetCount += Math.floor(Math.random() * 4) + 2;
+        } else {
+            clearInterval(initialFakeProgress);
+        }
+    }, 30);
+
+    // 2. Monitor real-time video buffer status
+    if (totalVideos === 0) {
+        targetCount = 100;
+    } else {
+        videos.forEach(video => {
+            const handleVideoLoaded = () => {
+                if (video.dataset.hasLoadedTrue) return; // Prevent duplicate counts
+                video.dataset.hasLoadedTrue = "true";
+                loadedVideos++;
                 
-                loaderCounter.textContent = count;
-                const duration = 2 - (count / 100) * 1.6;
-                loaderWheel.style.setProperty('--spin-duration', `${duration}s`);
+                // Distribute the remaining 75% across your total video count
+                targetCount = Math.floor(25 + ((loadedVideos / totalVideos) * 75));
+            };
 
-                if (count === 100) {
-                    clearInterval(interval);
-                    setTimeout(() => {
-                        loaderOverlay.style.opacity = '0';
-                        loaderOverlay.style.pointerEvents = 'none';
-                        document.body.style.overflow = 'auto';
-                        setTimeout(() => {
-                            loaderOverlay.remove();
-                        }, 1000);
-                    }, 500);
-                }
-            }, 40);
+            // If the browser already has enough cached data, trigger immediately
+            if (video.readyState >= 3) {
+                handleVideoLoaded();
+            } else {
+                // Otherwise, wait until it can play cleanly through without hitching
+                video.addEventListener('canplaythrough', handleVideoLoaded);
+                video.addEventListener('loadeddata', handleVideoLoaded); // Secondary fallback
+            }
         });
+    }
 
+    // 3. Smooth frame counter to make numbers fluidly tick up to the target value
+    const checkProgressLoop = setInterval(() => {
+        if (currentCount < targetCount) {
+            currentCount++;
+            loaderCounter.textContent = currentCount;
+            
+            // Sync your custom spinning wheel speed to progress updates
+            const duration = 2 - (currentCount / 100) * 1.6;
+            loaderWheel.style.setProperty('--spin-duration', `${duration}s`);
+        }
+
+        // 4. Once it safely clocks 100%, execute the clean fade out sequence
+        if (currentCount === 100) {
+            clearInterval(checkProgressLoop);
+            setTimeout(() => {
+                loaderOverlay.style.opacity = '0';
+                loaderOverlay.style.pointerEvents = 'none';
+                document.body.style.overflow = 'auto';
+                setTimeout(() => {
+                    loaderOverlay.remove();
+                }, 1000);
+            }, 500);
+        }
+    }, 25);
+});
         // Comparison Slider Logic
         document.querySelectorAll('.comparison-slider-input').forEach(slider => {
             const updateSlider = () => {
