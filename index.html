@@ -1,143 +1,162 @@
 <!DOCTYPE html>
 
-<html class="dark" lang="en"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<link href="https://lh3.googleusercontent.com/aida-public/AB6AXuB0DIzIX0KUwI-ctaKfAyigYBEmX0DXqCQ1PzUYglzsA6Drhon3oQaJ2Xr9M9y_5qcQIWIA7yl17E2Q4zjygSaMszkgXYkwVsGBibVwLZjscGwGr-LwlLIj0GiNQzO0SaKbewb2qD_PbuMUhexlK2hV_hAMnjefaMN-qzzgcZkqsqWcQX8XxGF3xlDs7AqAUw-brkPOHYBKsxm9DZuy3OBbGVVIrI4e1i-0J0o3_onePId2LbtsSjGWm1_q48ryxXL8ha6nVuCE3PM" rel="icon" type="image/png"/>
-<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&amp;family=Hanken+Grotesk:wght@300;400;500;700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=block" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@100..900&amp;family=Space+Mono:wght@100..900&amp;display=swap" rel="stylesheet"/>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<script id="tailwind-config">
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://lh3.googleusercontent.com/aida-public/AB6AXuB0DIzIX0KUwI-ctaKfAyigYBEmX0DXqCQ1PzUYglzsA6Drhon3oQaJ2Xr9M9y_5qcQIWIA7yl17E2Q4zjygSaMszkgXYkwVsGBibVwLZjscGwGr-LwlLIj0GiNQzO0SaKbewb2qD_PbuMUhexlK2hV_hAMnjefaMN-qzzgcZkqsqWcQX8XxGF3xlDs7AqAUw-brkPOHYBKsxm9DZuy3OBbGVVIrI4e1i-0J0o3_onePId2LbtsSjGWm1_q48ryxXL8ha6nVuCE3PM" rel="icon" type="image/png"/><link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&amp;family=Hanken+Grotesk:wght@300;400;500;700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=block" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@100..900&amp;family=Space+Mono:wght@100..900&amp;display=swap" rel="stylesheet"/><script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script><script id="tailwind-config">try{
         try {
             tailwind.config = {
                 darkMode: "class",
                 theme: {
                     extend: {
                         "colors": {
-                            "on-primary": "#283500",
-                            "tertiary-container": "#e2e2e2",
-                            "outline-variant": "#444933",
-                            "outline": "#8e9379",
-                            "on-primary-fixed": "#161e00",
-                            "on-surface": "#e5e2e1",
-                            "on-secondary-fixed": "#1b1b1b",
-                            "surface-container-high": "#2a2a2a",
-                            "primary": "#ffffff",
-                            "error": "#ffb4ab",
-                            "tertiary-fixed-dim": "#c6c6c7",
-                            "on-background": "#e5e2e1",
-                            "surface-container-highest": "#353535",
                             "on-tertiary-fixed-variant": "#454747",
-                            "tertiary": "#ffffff",
-                            "on-secondary-fixed-variant": "#474747",
-                            "error-container": "#93000a",
-                            "primary-container": "#c3f400",
                             "secondary-container": "#474747",
+                            "on-primary": "#283500",
                             "primary-fixed": "#c3f400",
-                            "on-primary-container": "#556d00",
-                            "inverse-surface": "#e5e2e1",
-                            "secondary-fixed-dim": "#c6c6c6",
-                            "surface": "#131313",
+                            "background": "#131313",
+                            "on-tertiary-container": "#636565",
+                            "error-container": "#93000a",
                             "surface-bright": "#393939",
-                            "secondary": "#c6c6c6",
+                            "outline": "#8e9379",
                             "surface-tint": "#abd600",
+                            "on-secondary-fixed": "#1b1b1b",
+                            "surface-container-lowest": "#0e0e0e",
+                            "on-secondary-container": "#b5b5b5",
+                            "primary": "#ffffff",
+                            "surface": "#131313",
+                            "inverse-surface": "#e5e2e1",
+                            "primary-container": "#c3f400",
+                            "tertiary-fixed": "#e2e2e2",
+                            "surface-container-low": "#1c1b1b",
+                            "secondary-fixed": "#e2e2e2",
+                            "secondary": "#c6c6c6",
                             "on-primary-fixed-variant": "#3c4d00",
-                            "inverse-on-surface": "#313030",
+                            "on-error": "#690005",
+                            "secondary-fixed-dim": "#c6c6c6",
+                            "on-surface": "#e5e2e1",
+                            "tertiary-container": "#e2e2e2",
+                            "on-secondary-fixed-variant": "#474747",
+                            "tertiary-fixed-dim": "#c6c6c7",
+                            "inverse-primary": "#506600",
+                            "on-secondary": "#303030",
+                            "on-tertiary-fixed": "#1a1c1c",
+                            "on-background": "#e5e2e1",
+                            "outline-variant": "#444933",
+                            "on-error-container": "#ffdad6",
+                            "error": "#ffb4ab",
                             "surface-variant": "#353535",
                             "surface-dim": "#131313",
-                            "on-error-container": "#ffdad6",
-                            "on-tertiary-fixed": "#1a1c1c",
-                            "surface-container": "#20201f",
-                            "tertiary-fixed": "#e2e2e2",
-                            "on-error": "#690005",
-                            "surface-container-lowest": "#0e0e0e",
-                            "on-tertiary-container": "#636565",
-                            "on-surface-variant": "#c4c9ac",
                             "on-tertiary": "#2f3131",
-                            "secondary-fixed": "#e2e2e2",
-                            "background": "#131313",
-                            "on-secondary-container": "#b5b5b5",
-                            "on-secondary": "#303030",
-                            "inverse-primary": "#506600",
-                            "surface-container-low": "#1c1b1b",
                             "primary-fixed-dim": "#abd600",
+                            "surface-container-highest": "#353535",
+                            "tertiary": "#ffffff",
+                            "on-primary-fixed": "#161e00",
+                            "on-primary-container": "#556d00",
+                            "surface-container-high": "#2a2a2a",
+                            "surface-container": "#20201f",
+                            "on-surface-variant": "#c4c9ac",
+                            "inverse-on-surface": "#313030",
                             "system-neon": "#ccff00"
                         },
                         "borderRadius": {
-                            "DEFAULT": "0px",
-                            "lg": "0px",
-                            "xl": "0px",
+                            "DEFAULT": "0.25rem",
+                            "lg": "0.5rem",
+                            "xl": "0.75rem",
                             "full": "9999px"
                         },
                         "spacing": {
-                            "margin-mobile": "20px",
-                            "margin-desktop": "64px",
                             "unit": "4px",
+                            "margin-mobile": "20px",
+                            "gutter": "24px",
                             "grid-columns": "12",
-                            "gutter": "24px"
+                            "margin-desktop": "64px"
                         },
                         "fontFamily": {
-                            "display-lg": ["Space Mono"],
-                            "headline-md": ["Space Mono"],
-                            "label-caps": ["Space Mono"],
-                            "body-md": ["Hanken Grotesk"],
-                            "body-lg": ["Hanken Grotesk"],
-                            "mono-data": ["Space Mono"]
+                            "body-lg": [
+                                "Hanken Grotesk"
+                            ],
+                            "body-md": [
+                                "Hanken Grotesk"
+                            ],
+                            "mono-data": [
+                                "Space Mono"
+                            ],
+                            "display-lg": [
+                                "Space Mono"
+                            ],
+                            "label-caps": [
+                                "Space Mono"
+                            ],
+                            "headline-md": [
+                                "Space Mono"
+                            ],
+                            "display-lg-mobile": [
+                                "Space Mono"
+                            ]
+                        },
+                        "fontSize": {
+                            "body-lg": [
+                                "18px",
+                                {
+                                    "lineHeight": "28px",
+                                    "fontWeight": "400"
+                                }
+                            ],
+                            "body-md": [
+                                "16px",
+                                {
+                                    "lineHeight": "24px",
+                                    "fontWeight": "400"
+                                }
+                            ],
+                            "mono-data": [
+                                "14px",
+                                {
+                                    "lineHeight": "20px",
+                                    "fontWeight": "400"
+                                }
+                            ],
+                            "display-lg": [
+                                "80px",
+                                {
+                                    "lineHeight": "80px",
+                                    "letterSpacing": "-0.04em",
+                                    "fontWeight": "700"
+                                }
+                            ],
+                            "label-caps": [
+                                "12px",
+                                {
+                                    "lineHeight": "16px",
+                                    "letterSpacing": "0.1em",
+                                    "fontWeight": "700"
+                                }
+                            ],
+                            "headline-md": [
+                                "32px",
+                                {
+                                    "lineHeight": "40px",
+                                    "letterSpacing": "-0.01em",
+                                    "fontWeight": "500"
+                                }
+                            ],
+                            "display-lg-mobile": [
+                                "48px",
+                                {
+                                    "lineHeight": "48px",
+                                    "letterSpacing": "-0.02em",
+                                    "fontWeight": "700"
+                                }
+                            ]
                         }
                     }
                 }
             }
         } catch (_e) {}
-    </script>
-<style>
-        @keyframes spin {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-        .wheel-animate {
-            animation: spin var(--spin-duration, 2s) linear infinite;
-        }
-        .system-neon-text {
-            color: #ccff00;
-            text-shadow: 0 0 10px rgba(204, 255, 0, 0.4);
-        }
-        /* Hide custom cursor by default for mobile/touch */
-        .custom-cursor, .custom-cursor-dot {
-            display: none;
-        }
-        @media (pointer: fine) {
-            .custom-cursor, .custom-cursor-dot {
-                display: block;
-                pointer-events: none;
-                position: fixed;
-                z-index: 9999;
-                transform: translate(-50%, -50%);
-                    opacity: 0; 
-        transition: opacity 0.2s ease, width 0.2s ease, height 0.2s ease, background-color 0.2s ease;
-            }
-        }
-        #shader-canvas-ANIMATION_1 {
-            filter: blur(1px); /* Slight softening for smoother transitions */
-        }
-        
-        /* Fix for scroll issues in Chrome/Edge */
-        html, body {
-            overflow-x: hidden;
-            overflow-y: auto;
-            min-height: 100vh;
-            scroll-behavior: smooth;
-        }
-    </style>
-</head>
-<body class="text-on-surface selection:bg-primary-fixed selection:text-on-primary-fixed bg-background">
+    }catch(_e){}</script></head><body class="text-on-surface selection:bg-primary-fixed selection:text-on-primary-fixed bg-background">
 <!-- Background Shader - Fixed and behind content -->
 <div class="fixed inset-0 z-0 pointer-events-none">
 <canvas class="absolute inset-0 w-full h-full" id="shader-canvas-ANIMATION_1"></canvas>
 <div class="absolute inset-0 grid-line opacity-20"></div>
 </div>
-<!-- Custom Cursor -->
-<div class="custom-cursor border border-primary-fixed" id="cursor" style="width: 24px; height: 24px; background-color: transparent;"></div>
-<div class="custom-cursor-dot bg-primary-fixed" id="cursor-dot" style="width: 4px; height: 4px; border-radius: 50%;"></div>
 <!-- Top Navigation Shell -->
 <header class="fixed top-0 w-full z-50 glass-header border-b border-outline-variant px-margin-mobile md:px-margin-desktop py-4 flex justify-between items-center backdrop-blur-md bg-black/40">
 <div class="flex flex-col">
@@ -172,7 +191,7 @@
 </div>
 </div>
 </section>
-<!-- Photography Carousel (Stills Section) -->
+<!-- Photography Carousel-->
 <section class="mb-32" id="archive">
 <div class="flex justify-between items-end mb-12">
 <div>
@@ -233,7 +252,6 @@
 <source src="./assets/videos/video1.mp4" type="video/mp4"/>
 </video>
 <div class="absolute inset-0 flex items-center justify-center z-10">
-<div class="w-16 h-16 rounded-full border border-primary-fixed flex items-center justify-center bg-black/40 backdrop-blur-sm group-hover:bg-primary-fixed group-hover:text-black transition-all">
 </div>
 </div>
 </div>
@@ -245,14 +263,12 @@
 <span class="font-mono-data text-label-caps text-primary-fixed">01</span>
 </div>
 </div>
-<!-- Slot 2 -->
+<!-- Slot-->
 <div class="relative group cursor-pointer border border-outline-variant bg-surface-container-low overflow-hidden">
 <div class="aspect-video relative overflow-hidden bg-black flex items-center justify-center">
 <video autoplay="" class="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:opacity-80 transition-opacity" loop="" muted="" playsinline="" preload="auto">
 <source src="./assets/videos/video2.mp4" type="video/mp4"/>
 </video>
-<div class="absolute inset-0 flex items-center justify-center z-10">
-<div class="w-16 h-16 rounded-full border border-primary-fixed flex items-center justify-center bg-black/40 backdrop-blur-sm group-hover:bg-primary-fixed group-hover:text-black transition-all">
 </div>
 </div>
 </div>
@@ -268,10 +284,11 @@
 <div class="relative group cursor-pointer border border-outline-variant bg-surface-container-low overflow-hidden">
 <div class="aspect-video relative overflow-hidden bg-black flex items-center justify-center">
 <video autoplay="" class="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:opacity-80 transition-opacity" loop="" muted="" playsinline="" preload="auto">
-<source src="./assets/videos/video3.mp4" type="video/mp4"/>
+<source src="./assets/videos/stream3.mp4" type="video/mp4"/>
 </video>
 <div class="absolute inset-0 flex items-center justify-center z-10">
 <div class="w-16 h-16 rounded-full border border-primary-fixed flex items-center justify-center bg-black/40 backdrop-blur-sm group-hover:bg-primary-fixed group-hover:text-black transition-all">
+<span class="material-symbols-outlined">play_arrow</span>
 </div>
 </div>
 </div>
@@ -287,10 +304,11 @@
 <div class="relative group cursor-pointer border border-outline-variant bg-surface-container-low overflow-hidden">
 <div class="aspect-video relative overflow-hidden bg-black flex items-center justify-center">
 <video autoplay="" class="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:opacity-80 transition-opacity" loop="" muted="" playsinline="" preload="auto">
-<source src="./assets/videos/video4.mp4" type="video/mp4"/>
+<source src="./assets/videos/stream4.mp4" type="video/mp4"/>
 </video>
 <div class="absolute inset-0 flex items-center justify-center z-10">
 <div class="w-16 h-16 rounded-full border border-primary-fixed flex items-center justify-center bg-black/40 backdrop-blur-sm group-hover:bg-primary-fixed group-hover:text-black transition-all">
+<span class="material-symbols-outlined">play_arrow</span>
 </div>
 </div>
 </div>
@@ -383,13 +401,13 @@
                     </p>
 </div>
 <div class="flex flex-col md:items-end justify-end gap-6 mt-12 md:mt-0">
-<a class="font-mono-data text-mono-data hover:system-neon-text transition-colors flex items-center gap-3" href="https://www.instagram.com/ammmar.jpg/" target="_blank">
+<a class="font-mono-data text-mono-data hover:text-system-neon transition-colors flex items-center gap-3" href="https://www.instagram.com/ammmar.jpg/" target="_blank">
 <span class="text-[10px] opacity-50">01</span> INSTAGRAM
                     </a>
-<a class="font-mono-data text-mono-data hover:system-neon-text transition-colors flex items-center gap-3" href="https://www.tiktok.com/@ammmar.jpg" target="_blank">
+<a class="font-mono-data text-mono-data hover:text-system-neon transition-colors flex items-center gap-3" href="https://www.tiktok.com/@ammmar.jpg" target="_blank">
 <span class="text-[10px] opacity-50">02</span> TIKTOK
                     </a>
-<a class="font-mono-data text-mono-data hover:system-neon-text transition-colors flex items-center gap-3" href="mailto:ammmar.jpg@gmail.com">
+<a class="font-mono-data text-mono-data hover:text-system-neon transition-colors flex items-center gap-3" href="mailto:ammmar.jpg@gmail.com">
 <span class="text-[10px] opacity-50">03</span> GMAIL
                     </a>
 </div>
@@ -400,46 +418,6 @@
 </footer>
 </main>
 <script>
-      // Custom Cursor Logic
-const cursor = document.getElementById('cursor');
-const dot = document.getElementById('cursor-dot');
-const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-
-if (!isTouchDevice && window.innerWidth > 768) {
-    let hasMoved = false; // Track if the mouse has moved yet
-
-    document.addEventListener('mousemove', (e) => {
-        const x = e.clientX;
-        const y = e.clientY;
-        
-        requestAnimationFrame(() => {
-            cursor.style.left = x + 'px';
-            cursor.style.top = y + 'px';
-            dot.style.left = x + 'px';
-            dot.style.top = y + 'px';
-            
-            // If this is the first movement, reveal the cursor elements
-            if (!hasMoved) {
-                cursor.style.opacity = '1';
-                dot.style.opacity = '1';
-                hasMoved = true;
-            }
-        });
-    });
-
-    document.querySelectorAll('a, button, input, [role="button"], .comparison-slider-input').forEach(el => {
-        el.addEventListener('mouseenter', () => {
-            cursor.style.width = '48px';
-            cursor.style.height = '48px';
-            cursor.style.backgroundColor = 'rgba(204, 255, 0, 0.1)';
-        });
-        el.addEventListener('mouseleave', () => {
-            cursor.style.width = '24px';
-            cursor.style.height = '24px';
-            cursor.style.backgroundColor = 'transparent';
-        });
-    });
-}
         // Comparison Slider Logic
         document.querySelectorAll('.comparison-slider-input').forEach(slider => {
             const updateSlider = () => {
@@ -521,21 +499,21 @@ if (!isTouchDevice && window.innerWidth > 768) {
                     vec2 uv = v_texCoord;
                     vec2 m = u_mouse / u_resolution;
                     
-                    float scale = 1.2; 
-                    float n = snoise(uv * scale + u_time * 0.03);
-                    n += snoise(uv * (scale * 2.1) - u_time * 0.01) * 0.5;
+                    float scale = 1.0; 
+                    float n = snoise(uv * scale + u_time * 0.035);
+                    n += snoise(uv * (scale * 2.1) - u_time * 0.015) * 0.5;
                     
                     float dist = distance(uv, m);
-                    float force = smoothstep(0.6, 0.0, dist) * 0.25;
+                    float force = smoothstep(0.7, 0.0, dist) * 0.35;
                     n += force;
 
-                    float line = sin(n * 18.0);
-                    line = smoothstep(0.0, 0.02, abs(line) - 0.005); 
+                    float line = sin(n * 22.0);
+                    line = smoothstep(0.0, 0.03, abs(line) - 0.012); 
                     
-                    vec3 neonColor = vec3(0.8, 1.0, 0.0); 
-                    vec3 color = mix(neonColor, vec3(0.0), line);
+                    vec3 neonColor = vec3(0.8, 1.0, 0.0); // Neon yellow/green (#ccff00)
+                    vec3 color = mix(neonColor, vec3(0.0, 0.0, 0.0), line);
                     
-                    gl_FragColor = vec4(color * 0.25, 1.0);
+                    gl_FragColor = vec4(color * 0.45, 1.0);
                 }
             `;
 
@@ -584,5 +562,4 @@ if (!isTouchDevice && window.innerWidth > 768) {
             }
             requestAnimationFrame(render);
         })();
-    </script>
-</body></html>
+    </script></body></html>
